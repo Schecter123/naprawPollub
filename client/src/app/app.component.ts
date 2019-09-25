@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from './shared/user.service';
+import { User } from './shared/user';
 
 @Component({
   selector: 'app-root',
@@ -13,6 +14,12 @@ export class AppComponent implements OnInit{
   constructor(private userService: UserService){}
   
   ngOnInit(){
-    this.userService.getUsers().subscribe( res => this.users = res);
+    const usersObservable = this.userService.getUsers();
+    usersObservable.subscribe((response) => {
+      this.users = response;
+      this.users = this.users.users;
+      console.log(this.users)
+    });
+       
   }
 }

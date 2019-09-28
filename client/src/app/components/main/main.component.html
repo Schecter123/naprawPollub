@@ -1,1 +1,12 @@
-<p>main works!</p>
+<div class="container">
+    <div class="row" style="margin-top: 30px">
+        <div class="col-md-3 col-xs-6" *ngFor="let user of users">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">{{ user.login }}</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+  

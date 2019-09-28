@@ -11,34 +11,8 @@
         </li>
     </ul>
     <form class="form-inline">
-        <button type="button" class="btn btn-success" routerLink="/rejestracja" (click)="!authService.show()">Zarejestruj się</button>
+        <button type="button" class="btn btn-success" routerLink="/rejestracja">Zarejestruj się</button>
         <span style="margin: auto 5px;"></span>
-        <button type="button" class="btn btn-success" routerLink="/logowanie" (click)="!authService.show()">Zaloguj się</button>
+        <button type="button" class="btn btn-success" routerLink="/logowanie">Zaloguj się</button>
     </form>
 </nav>
-
-<!--
- 
-<nav class="navbar navbar-expand-lg navbar-default">
-      <ul class="nav navbar-nav">
-        <li class="nav-item"><a class="nav-link" routerLink="/">Strona główna</a></li>
-        <li class="nav-item"><a class="nav-link" routerLink="/usterki">Usterki</a></li>
-        <li class="nav-item"><a class="nav-link" routerLink="/pytania">Pytania</a></li>
-        <li class="nav-item" *ngIf="authService.isLogged && userService.user.type === UserType.Standard"><a class="nav-link" routerLink="/zarzadzanie-uzytkownik">Zarządzaj</a></li>
-        <li *ngIf="authService.isLogged && userService.user.type === UserType.PlaceAdmnistator"><a routerLink="/zarzadzanie-administrator-budynku">Zarządzaj</a></li>
-      </ul>
-      <form class="nav navbar-form navbar-right">
-          <button type="button" class="btn btn-success" routerLink="/rejestracja" (click)="!authService.show()">Zarejestruj się</button>
-          <span style="margin: auto 10px;"></span>
-          <button type="button" class="btn btn-success" routerLink="/logowanie" (click)="!authService.show()">Zaloguj się</button>
-          <button type="button" class="btn btn-warning" routerLink="/dodaj-usterke" *ngIf="authService.isLogged">Dodaj usterkę</button>
-          <span style="margin: auto 10px;"></span>
-            <button class="btn btn-success dropdown-toggle" data-toggle="dropdown"  aria-haspopup="true" aria-expanded="false" *ngIf="authService.isLogged"><span class="glyphicon glyphicon-user"></span>{{userService.user.login}}</button>
-            <div class="dropdown-menu" *ngIf="authService.isLogged">
-              <button class="btn btn-link dropdown-item" routerLink="/konto">Konto</button>
-              <div class="dropdown-divider"></div>
-              <button class="btn btn-link dropdown-item" routerLink="/" (click)="authService.logout()">Wyloguj</button>
-            </div>
-      </form>
-  </nav>
--->

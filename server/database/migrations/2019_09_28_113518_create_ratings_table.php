@@ -15,8 +15,11 @@ class CreateRatingsTable extends Migration
     {
         Schema::create('ratings', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->integer('value');
             $table->unsignedBigInteger('idUser');
             $table->foreign('idUser')->references('id')->on('users')->onDelete('cascade');
+            $table->unsignedBigInteger('idDefect');
+            $table->foreign('idDefect')->references('id')->on('defects')->onDelete('cascade');
         });
     }
 

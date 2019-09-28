@@ -4,7 +4,10 @@ import { HttpClientModule } from "@angular/common/http";
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { UserService } from './shared/user.service';
+import { UserService } from './shared/services/user.service';
+import { PlaceService } from './shared/services/place.service';
+import { ComponentModule } from './components/component.module';
+
 
 @NgModule({
   declarations: [
@@ -13,9 +16,13 @@ import { UserService } from './shared/user.service';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    ComponentModule,
   ],
-  providers: [UserService],
+  providers: [
+    UserService,
+    PlaceService,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

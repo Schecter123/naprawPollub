@@ -15,10 +15,7 @@ class RatingController extends Controller
     public function index()
     {
         $ratings = DB::table('ratings')->get();
-        return response()->json([
-            'error' => false,
-            'ratings'  => $ratings,
-        ], 200);
+        return response()->json($ratings);
     }
 
     /**

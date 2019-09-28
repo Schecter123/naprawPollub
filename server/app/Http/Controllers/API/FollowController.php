@@ -15,10 +15,7 @@ class FollowController extends Controller
     public function index()
     {
         $follows = DB::table('follows')->get();
-        return response()->json([
-            'error' => false,
-            'follows'  => $follows,
-        ], 200);
+        return response()->json($follows);
     }
 
     /**

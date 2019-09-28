@@ -15,10 +15,7 @@ class RoomController extends Controller
     public function index()
     {
         $rooms = DB::table('rooms')->get();
-        return response()->json([
-            'error' => false,
-            'rooms' => $rooms,
-        ], 200);
+        return response()->json($rooms);
     }
 
     /**

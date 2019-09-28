@@ -22,8 +22,6 @@ class CreateDefectsTable extends Migration
             $table->foreign('idUser')->references('id')->on('users')->onDelete('cascade');
             $table->unsignedBigInteger('idRoom');
             $table->foreign('idRoom')->references('id')->on('rooms')->onDelete('cascade');
-            $table->unsignedBigInteger('idRating');
-            $table->foreign('idRating')->references('id')->on('ratings')->onDelete('cascade');
             $table->enum('defectState', ['ForRepair', 'Repaired', 'RepairInProgress', 'WontBeRepaired']);
             $table->string('description');
             $table->dateTime('date');

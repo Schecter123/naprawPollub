@@ -15,10 +15,7 @@ class CommentController extends Controller
     public function index()
     {
         $comments = DB::table('comments')->get();
-        return response()->json([
-            'error' => false,
-            'comments'  => $comments,
-        ], 200);
+        return response()->json($comments);
     }
 
     /**

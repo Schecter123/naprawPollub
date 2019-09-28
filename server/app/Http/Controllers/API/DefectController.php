@@ -15,10 +15,7 @@ class DefectController extends Controller
     public function index()
     {
         $defects = DB::table('defects')->get();
-        return response()->json([
-            'error' => false,
-            'defects'  => $defects,
-        ], 200);
+        return response()->json($defects);
     }
 
     /**

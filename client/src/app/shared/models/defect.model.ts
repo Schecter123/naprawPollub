@@ -4,7 +4,6 @@ export interface Defect{
     idPlace: number;
     idUser: number;
     idRoom: number;
-    rating: number;
     defectState: DefectState;
     description: string;
     date: any;

@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { UserService } from './shared/services/user.service';
 import { PlaceService } from './shared/services/place.service';
 import { ComponentModule } from './components/component.module';
+import { DefectService } from './shared/services/defect.service';
 
 
 @NgModule({
@@ -22,6 +23,7 @@ import { ComponentModule } from './components/component.module';
   providers: [
     UserService,
     PlaceService,
+    DefectService
   ],
   bootstrap: [AppComponent]
 })

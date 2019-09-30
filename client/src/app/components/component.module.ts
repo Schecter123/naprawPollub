@@ -8,6 +8,9 @@ import { RegisterComponent } from './register/register.component';
 import { FooterComponent } from './footer/footer.component';
 import { MainComponent } from './main/main.component';
 import { AppRoutingModule } from '../app-routing.module';
+import { DefectListComponent } from './defects/defect-list/defect-list.component';
+import { DefectItemComponent } from './defects/defect-item/defect-item.component';
+import { DefectFilterComponent } from './defects/defect-filter/defect-filter.component';
 
 
 
@@ -19,7 +22,7 @@ import { AppRoutingModule } from '../app-routing.module';
     LoginComponent, 
     RegisterComponent, 
     FooterComponent, 
-    MainComponent
+    MainComponent, DefectListComponent, DefectItemComponent, DefectFilterComponent
   ],
   imports: [CommonModule, AppRoutingModule],
   exports: [

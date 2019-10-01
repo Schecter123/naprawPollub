@@ -1,5 +1,8 @@
 .container-fluid{
-    background-image: url("../../../assets/background.jpg");
-    background-position: center top;
-    background-size: 100% auto;
+    background: url("../../../assets/background.jpg") no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    min-height: 83vh;
 }

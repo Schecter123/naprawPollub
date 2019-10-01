@@ -1,12 +1,13 @@
 .container-fluid{
-    margin: 5px 0 25px;
     background-color: rgba(56, 107, 96, 0.719);
     border-radius: 10px;
     box-shadow: 1px 1px 1em black;
     padding: 10px;
+    margin-bottom: 15px;
 }
 
 .content{
     border-radius: 10px;
     background: white;
+    min-height: 150px;
 }

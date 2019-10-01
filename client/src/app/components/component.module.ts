@@ -11,28 +11,37 @@ import { AppRoutingModule } from '../app-routing.module';
 import { DefectListComponent } from './defects/defect-list/defect-list.component';
 import { DefectItemComponent } from './defects/defect-item/defect-item.component';
 import { DefectFilterComponent } from './defects/defect-filter/defect-filter.component';
+import { MaterialModule } from '../material/material.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+const Components = [
+  NavigationComponent, 
+  DefectsComponent, 
+  QuestionsComponent, 
+  LoginComponent, 
+  RegisterComponent, 
+  FooterComponent, 
+  MainComponent, 
+  DefectListComponent, 
+  DefectItemComponent, 
+  DefectFilterComponent
+];
 
 
 @NgModule({
   declarations: [
-    NavigationComponent, 
-    DefectsComponent, 
-    QuestionsComponent, 
-    LoginComponent, 
-    RegisterComponent, 
-    FooterComponent, 
-    MainComponent, DefectListComponent, DefectItemComponent, DefectFilterComponent
+    Components
   ],
-  imports: [CommonModule, AppRoutingModule],
+  imports: [
+    CommonModule, 
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    MaterialModule
+  ],
   exports: [
-    NavigationComponent,
-    DefectsComponent, 
-    QuestionsComponent, 
-    LoginComponent, 
-    RegisterComponent, 
-    FooterComponent, 
-    MainComponent
+    Components,
+    BrowserAnimationsModule,
+    MaterialModule
   ]
 })
 export class ComponentModule { }

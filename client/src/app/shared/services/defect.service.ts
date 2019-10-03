@@ -16,6 +16,10 @@ export class DefectService {
     return this.http.get(environment.rootURL + '/defects');
   }
 
+  getParticularDefect(idDefect){
+    return this.http.get(environment.rootURL + '/defects/'+idDefect);
+  }
+
   getParticularDefectPlace(idDefect){
     return this.http.get(environment.rootURL + '/defects/'+idDefect+'/place');
   }

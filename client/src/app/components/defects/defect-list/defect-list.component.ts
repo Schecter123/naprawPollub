@@ -15,7 +15,7 @@ export class DefectListComponent implements OnInit, OnDestroy {
   constructor(private defectService: DefectService) { }
 
   ngOnInit() {
-    this.subscription = this.defectService.getDefects().subscribe( response => this.defects = response); 
+    this.subscription = this.defectService.getDefects().subscribe( response => this.defects = response);
   }
 
   ngOnDestroy(){

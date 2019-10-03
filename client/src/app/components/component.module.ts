@@ -13,6 +13,7 @@ import { DefectItemComponent } from './defects/defect-item/defect-item.component
 import { DefectFilterComponent } from './defects/defect-filter/defect-filter.component';
 import { MaterialModule } from '../material/material.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormsModule } from '@angular/forms';
 
 const Components = [
   NavigationComponent, 
@@ -36,12 +37,14 @@ const Components = [
     CommonModule, 
     AppRoutingModule,
     BrowserAnimationsModule,
-    MaterialModule
+    MaterialModule,
+    FormsModule
   ],
   exports: [
     Components,
     BrowserAnimationsModule,
-    MaterialModule
+    MaterialModule,
+    FormsModule
   ]
 })
 export class ComponentModule { }

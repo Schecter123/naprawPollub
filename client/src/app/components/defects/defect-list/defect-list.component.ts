@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { DefectService } from 'src/app/shared/services/defect.service';
 
 
@@ -7,15 +7,19 @@ import { DefectService } from 'src/app/shared/services/defect.service';
   templateUrl: './defect-list.component.html',
   styleUrls: ['./defect-list.component.css']
 })
-export class DefectListComponent implements OnInit {
+export class DefectListComponent implements OnInit, OnDestroy {
 
   defects;
-
+  subscription;
 
   constructor(private defectService: DefectService) { }
 
   ngOnInit() {
-    this.defectService.getDefects().subscribe( response => this.defects = response);
+    this.subscription = this.defectService.getDefects().subscribe( response => this.defects = response); 
+  }
+
+  ngOnDestroy(){
+    this.subscription.unsubscribe();
   }
 
 }

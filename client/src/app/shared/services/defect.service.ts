@@ -15,4 +15,12 @@ export class DefectService {
   getDefects(){
     return this.http.get(environment.rootURL + '/defects');
   }
+
+  getParticularDefectPlace(idDefect){
+    return this.http.get(environment.rootURL + '/defects/'+idDefect+'/place');
+  }
+
+  getParticularDefectRoom(idDefect){
+    return this.http.get(environment.rootURL + '/defects/'+idDefect+'/room');
+  }
 }

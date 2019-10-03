@@ -10,12 +10,10 @@ import { DefectType } from 'src/app/shared/models/defect.model';
 export class DefectItemComponent implements OnInit {
 
   @Input() defect;
-
   DefectType = DefectType;
 
   constructor() { }
 
   ngOnInit() {
-    
   }
 }

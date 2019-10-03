@@ -54,7 +54,8 @@ class DefectController extends Controller
      */
     public function show($id)
     {
-        //
+        $particularDefect = DB::table('defects')->where('id', $id)->first();
+        return response()->json($particularDefect);
     }
 
     /**

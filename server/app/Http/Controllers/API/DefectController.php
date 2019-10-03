@@ -29,7 +29,7 @@ class DefectController extends Controller
 
     public function getParticularPlace($id)
     {
-        $selectIdPlace = DB::table('defects')->where('id', $id)->value('idRoom');
+        $selectIdPlace = DB::table('defects')->where('id', $id)->value('idPlace');
         $particularPlace = DB::table('places')->where('id', $selectIdPlace)->first();
 
         return response()->json($particularPlace);

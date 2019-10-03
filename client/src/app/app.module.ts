@@ -8,6 +8,7 @@ import { UserService } from './shared/services/user.service';
 import { PlaceService } from './shared/services/place.service';
 import { ComponentModule } from './components/component.module';
 import { DefectService } from './shared/services/defect.service';
+import { RoomService } from './shared/services/room.service';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { DefectService } from './shared/services/defect.service';
   providers: [
     UserService,
     PlaceService,
-    DefectService
+    DefectService,
+    RoomService
   ],
   bootstrap: [AppComponent]
 })

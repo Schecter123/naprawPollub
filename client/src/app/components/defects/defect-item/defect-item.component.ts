@@ -24,12 +24,11 @@ export class DefectItemComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.subscriptionRoom = this.defectService.getParticularDefectRoom(this.defect.id).subscribe(response => {
       this.room = response;
-      this.room = this.room.name;
+
     });
 
     this.subscriptionPlace = this.defectService.getParticularDefectPlace(this.defect.id).subscribe(response => {
       this.place = response;
-      this.place = this.place.name;
     });
   }
 

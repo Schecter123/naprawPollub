@@ -1,0 +1,11 @@
+@media screen and (min-width: 991px){
+    .small-screen-nav{
+        display: none;
+    }
+
+}
+@media screen and (max-width: 991px){
+    .normal-nav{
+        display: none;
+    }
+}

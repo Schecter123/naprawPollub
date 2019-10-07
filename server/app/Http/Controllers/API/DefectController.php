@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
 
 class DefectController extends Controller
 {
@@ -15,16 +16,29 @@ class DefectController extends Controller
     public function index()
     {
         $defects = DB::table('defects')->get();
-        return response()->json([
-            'error' => false,
-            'defects'  => $defects,
-        ], 200);
+        return response()->json($defects);
+    }
+
+    public function getParticularRoom($id)
+    {
+        $selectIdRoom = DB::table('defects')->where('id', $id)->value('idRoom');
+        $particularRoom = DB::table('rooms')->where('id', $selectIdRoom)->first();
+
+        return response()->json($particularRoom);
+    }
+
+    public function getParticularPlace($id)
+    {
+        $selectIdPlace = DB::table('defects')->where('id', $id)->value('idPlace');
+        $particularPlace = DB::table('places')->where('id', $selectIdPlace)->first();
+
+        return response()->json($particularPlace);
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -35,19 +49,20 @@ class DefectController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-        //
+        $particularDefect = DB::table('defects')->where('id', $id)->first();
+        return response()->json($particularDefect);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -58,7 +73,7 @@ class DefectController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

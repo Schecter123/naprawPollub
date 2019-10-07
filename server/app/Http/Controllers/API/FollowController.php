@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
 
 class FollowController extends Controller
 {
@@ -15,10 +16,7 @@ class FollowController extends Controller
     public function index()
     {
         $follows = DB::table('follows')->get();
-        return response()->json([
-            'error' => false,
-            'follows'  => $follows,
-        ], 200);
+        return response()->json($follows);
     }
 
     /**

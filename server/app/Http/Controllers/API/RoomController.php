@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
 
 class RoomController extends Controller
 {
@@ -15,10 +16,7 @@ class RoomController extends Controller
     public function index()
     {
         $rooms = DB::table('rooms')->get();
-        return response()->json([
-            'error' => false,
-            'rooms' => $rooms,
-        ], 200);
+        return response()->json($rooms);
     }
 
     /**

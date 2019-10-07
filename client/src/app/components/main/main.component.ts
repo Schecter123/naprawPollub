@@ -16,8 +16,6 @@ export class MainComponent implements OnInit {
     const usersObservable = this.userService.getUsers();
     usersObservable.subscribe((response) => {
       this.users = response;
-      this.users = this.users.users;
-      console.log(this.users)
     });
        
   }

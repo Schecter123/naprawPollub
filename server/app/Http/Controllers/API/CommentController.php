@@ -4,7 +4,7 @@ namespace App\Http\Controllers\API;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-
+use Illuminate\Support\Facades\DB;
 class CommentController extends Controller
 {
     /**
@@ -15,10 +15,7 @@ class CommentController extends Controller
     public function index()
     {
         $comments = DB::table('comments')->get();
-        return response()->json([
-            'error' => false,
-            'comments'  => $comments,
-        ], 200);
+        return response()->json($comments);
     }
 
     /**

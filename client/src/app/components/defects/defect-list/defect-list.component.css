@@ -1,0 +1,16 @@
+.defects-list{
+    padding: 10px 0;
+}
+
+.container-fluid{
+    height: 75vh;
+    box-shadow: 1px 1px 1em black;
+    border-radius: 10px;
+    box-sizing: border-box;
+}
+
+/* width */
+::-webkit-scrollbar {
+    width: 0px;
+}
+  

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
 
 class PlaceController extends Controller
 {
@@ -15,10 +16,7 @@ class PlaceController extends Controller
     public function index()
     {
         $places = DB::table('places')->get();
-        return response()->json([
-            'error' => false,
-            'places'  => $places,
-        ], 200);
+        return response()->json($places);
     }
 
     /**

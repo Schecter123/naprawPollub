@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
 
 class RatingController extends Controller
 {
@@ -15,10 +16,7 @@ class RatingController extends Controller
     public function index()
     {
         $ratings = DB::table('ratings')->get();
-        return response()->json([
-            'error' => false,
-            'ratings'  => $ratings,
-        ], 200);
+        return response()->json($ratings);
     }
 
     /**

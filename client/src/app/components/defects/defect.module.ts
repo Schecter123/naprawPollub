@@ -8,7 +8,7 @@ import { DefectsComponent } from './defects.component';
 import { RouterModule } from '@angular/router';
 
 const routes = [
-  {path: '', component: DefectsComponent }
+  {path: '', component: DefectsComponent}
 ]
 
 @NgModule({

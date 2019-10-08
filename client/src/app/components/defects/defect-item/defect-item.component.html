@@ -1,12 +1,24 @@
 <div class="container-fluid">
+<div *ngIf="(defect && places && rooms); else loading">
     <div class="content">
         <div class="header">
-            <div class="defect-place"><span>Miejsce: {{place?.name}}</span></div>
-            <div class="defect-room"><span>Strefa/sala: {{room?.name}} </span></div>
-            <div class="defect-type"><span>Typ: {{defect.defectType}}</span></div>
+            <div class="defect-place">{{places[defect.idPlace-1].name}}</div>
+            <div class="defect-room">{{rooms[defect.idRoom-1].name}}</div>
+            <ng-container [ngSwitch]="DefectType[defect.defectType]">
+                <ng-container *ngSwitchCase="DefectType.Computers">Komputery</ng-container>
+                <ng-container *ngSwitchCase="DefectType.Infrastructure">Infrastruktura</ng-container>
+                <ng-container *ngSwitchCase="DefectType.Electronic">Elektryka</ng-container>
+                <ng-container *ngSwitchCase="DefectType.Hydraulic">Hydraulika</ng-container>
+                <ng-container *ngSwitchCase="DefectType.Mechanical">Mechanika</ng-container>
+                <ng-container *ngSwitchCase="DefectType.Others">Inne</ng-container>
+            </ng-container>
         </div>
         <div class="description">
             {{defect.description}}
-        </div>
+        </div>        
     </div>
+</div> 
+<ng-template #loading>
+        <div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
+</ng-template> 
 </div>

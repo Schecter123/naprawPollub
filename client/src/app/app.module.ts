@@ -29,7 +29,7 @@ import { MaterialModule } from './material/material.module';
     UserService,
     PlaceService,
     DefectService,
-    RoomService
+    RoomService,
   ],
   bootstrap: [AppComponent]
 })

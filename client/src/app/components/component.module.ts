@@ -9,6 +9,8 @@ import { MainComponent } from './main/main.component';
 import { AppRoutingModule } from '../app-routing.module';
 import { FormsModule } from '@angular/forms';
 import { DefectModule } from './defects/defect.module';
+import { AgmCoreModule } from '@agm/core';
+import { MapComponent } from './main/map/map.component';
 
 const Components = [
   NavigationComponent, 
@@ -16,7 +18,8 @@ const Components = [
   LoginComponent, 
   RegisterComponent, 
   FooterComponent, 
-  MainComponent, 
+  MainComponent,
+  MapComponent
 ];
 
 
@@ -28,7 +31,10 @@ const Components = [
     CommonModule, 
     AppRoutingModule,
     FormsModule,
-    DefectModule
+    DefectModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyAhTdbYebLKRDLZ4BMcI8MuHvagrn113Co'
+    })
   ],
   exports: [
     Components,

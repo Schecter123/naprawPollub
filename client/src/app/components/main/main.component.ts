@@ -7,17 +7,10 @@ import { UserService } from 'src/app/shared/services/user.service';
   styleUrls: ['./main.component.css']
 })
 export class MainComponent implements OnInit {
-
-  users;
-
-  constructor(private userService: UserService){}
+  
+  constructor(){}
   
   ngOnInit(){
-    const usersObservable = this.userService.getUsers();
-    usersObservable.subscribe((response) => {
-      this.users = response;
-    });
-       
   }
 
 }

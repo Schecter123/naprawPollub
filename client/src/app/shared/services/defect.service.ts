@@ -13,7 +13,7 @@ export class DefectService {
   constructor(private http: HttpClient) { }
 
   getDefects(){
-    return this.http.get(environment.rootURL + '/defects');
+    return this.http.get<Defect[]>(environment.rootURL + '/defects');
   }
 
   getParticularDefect(idDefect){

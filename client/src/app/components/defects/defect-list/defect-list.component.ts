@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, OnDestroy } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { DefectService } from 'src/app/shared/services/defect.service';
 
 
@@ -15,7 +16,9 @@ export class DefectListComponent implements OnInit, OnDestroy {
   constructor(private defectService: DefectService) { }
 
   ngOnInit() {
-    this.subscription = this.defectService.getDefects().subscribe( response => this.defects = response);
+   this.subscription = this.defectService.getDefects().subscribe(
+     (response) => this.defects = response
+   );
   }
 
   ngOnDestroy(){

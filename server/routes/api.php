@@ -26,5 +26,7 @@ Route::group(['prefix' => 'v1','namespace' => 'API'], function(){
     Route::get('/defects/{defect}/room', 'DefectController@getParticularRoom');
     Route::get('/defects/{defect}/place', 'DefectController@getParticularPlace');
     Route::apiResource('comments', 'CommentController');
+    Route::apiResource('markers', 'MarkerController');
+    Route::get('/markers/{marker}/count', 'MarkerController@getDefectCount');
 
 });

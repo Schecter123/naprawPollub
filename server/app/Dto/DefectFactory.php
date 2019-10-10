@@ -11,5 +11,17 @@ namespace App\Dto;
 
 class DefectFactory
 {
-
+    static function create(array $data): DefectClass
+    {
+        return new DefectClass(
+            $data['defectType'],
+            $data['idPLace'],
+            $data['idUser'],
+            $data['idRoom'],
+            $data['defectState'],
+            $data['description'],
+            $data['date'],
+            $data['photoURL']
+        );
+    }
 }

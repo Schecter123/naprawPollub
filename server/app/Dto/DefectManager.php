@@ -9,7 +9,22 @@
 namespace App\Dto;
 
 
+use App\Defect;
+
 class DefectManager
 {
+    public function add(DefectClass $defectClass)
+    {
+        $defect = new Defect;
+        $defect->defectType = $defectClass->getDefectType();
+        $defect->idPlace = $defectClass->getIdPlace();
+        $defect->idUser = $defectClass->getIdUser();
+        $defect->idRoom = $defectClass->getIdRoom();
+        $defect->defectState = $defectClass->getDefectState();
+        $defect->description = $defectClass->getDescription();
+        $defect->date = $defectClass->getDate();
+        $defect->photoURL = $defectClass->getPhotoURL();
 
+        $defect->save();
+    }
 }

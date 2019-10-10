@@ -9,7 +9,17 @@
 namespace App\Dto;
 
 
+use App\Room;
+
 class RoomManager
 {
+    public function add(RoomClass $roomClass)
+    {
+        $room = new Room;
+        $room->idPlace = $roomClass->getIdPlace();
+        $room->name = $roomClass->getName();
 
+        $room->save();
+
+    }
 }

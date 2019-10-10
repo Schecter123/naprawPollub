@@ -11,5 +11,13 @@ namespace App\Dto;
 
 class RoomFactory
 {
+    static function create(array $data): RoomClass
+    {
+        return new RoomClass(
+            $data['idPlace'],
+            $data['name']
+        );
+    }
+
 
 }

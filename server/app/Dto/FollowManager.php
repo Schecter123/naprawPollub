@@ -9,7 +9,16 @@
 namespace App\Dto;
 
 
+use App\Follow;
+
 class FollowManager
 {
+    public function add(FollowClass $followClass)
+    {
+        $follow = new Follow;
+        $follow->idPlace = $followClass->getIdPlace();
+        $follow->idUser = $followClass->getIdUser();
 
+        $follow->save();
+    }
 }

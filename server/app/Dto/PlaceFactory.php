@@ -11,5 +11,15 @@ namespace App\Dto;
 
 class PlaceFactory
 {
-
+    static function create(array $data): PlaceClass
+    {
+        return new PlaceClass(
+            $data['latitude'],
+            $data['langitude'],
+            $data['idUser'],
+            $data['name'],
+            $data['description'],
+            $data['phoneNr']
+        );
+    }
 }

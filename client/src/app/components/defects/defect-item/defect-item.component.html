@@ -4,14 +4,25 @@
         <div class="header">
             <div class="defect-place">{{places[defect.idPlace-1].name}}</div>
             <div class="defect-room">{{rooms[defect.idRoom-1].name}}</div>
-            <ng-container [ngSwitch]="DefectType[defect.defectType]">
-                <ng-container *ngSwitchCase="DefectType.Computers">Komputery</ng-container>
-                <ng-container *ngSwitchCase="DefectType.Infrastructure">Infrastruktura</ng-container>
-                <ng-container *ngSwitchCase="DefectType.Electronic">Elektryka</ng-container>
-                <ng-container *ngSwitchCase="DefectType.Hydraulic">Hydraulika</ng-container>
-                <ng-container *ngSwitchCase="DefectType.Mechanical">Mechanika</ng-container>
-                <ng-container *ngSwitchCase="DefectType.Others">Inne</ng-container>
-            </ng-container>
+            <div class="defect-type">
+                <ng-container [ngSwitch]="DefectType[defect.defectType]">
+                    <ng-container *ngSwitchCase="DefectType.Computers">Komputery</ng-container>
+                    <ng-container *ngSwitchCase="DefectType.Infrastructure">Infrastruktura</ng-container>
+                    <ng-container *ngSwitchCase="DefectType.Electronic">Elektryka</ng-container>
+                    <ng-container *ngSwitchCase="DefectType.Hydraulic">Hydraulika</ng-container>
+                    <ng-container *ngSwitchCase="DefectType.Mechanical">Mechanika</ng-container>
+                    <ng-container *ngSwitchCase="DefectType.Others">Inne</ng-container>
+                </ng-container>
+            </div>
+            <div class="defect-state">
+                <ng-container [ngSwitch]="DefectState[defect.defectState]">
+                    <ng-container *ngSwitchCase="DefectState.ForRepair"><p [style.color]="'red'">Do naprawy</p></ng-container>
+                    <ng-container *ngSwitchCase="DefectState.Repaired" ><p [style.color]="'green'">Naprawiona</p></ng-container>
+                    <ng-container *ngSwitchCase="DefectState.RepairInProgress"><p [style.color]="'#5659c0'">Trwają prace</p></ng-container>
+                    <ng-container *ngSwitchCase="DefectState.WontBeRepaired"><p [style.color]="'#948d0b'">Nie będzie naprawiana</p></ng-container>
+                    <ng-container *ngSwitchDefault>nieznany typ</ng-container>
+                </ng-container>
+            </div>
         </div>
         <div class="description">
             {{defect.description}}

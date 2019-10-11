@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, OnDestroy, Output, EventEmitter } from '@angular/core';
-import { DefectType } from 'src/app/shared/models/defect.model';
+import { DefectType, DefectState } from 'src/app/shared/models/defect.model';
 import { Subscription} from 'rxjs';
 import { PlaceService } from 'src/app/shared/services/place.service';
 import { RoomService } from 'src/app/shared/services/room.service';
@@ -19,6 +19,7 @@ export class DefectItemComponent implements OnInit, OnDestroy {
   subscriptionPlace: Subscription;
 
   DefectType = DefectType;
+  DefectState = DefectState;
 
   constructor(private placeService: PlaceService, private roomService: RoomService) { }
 

@@ -11,5 +11,12 @@ namespace App\Dto;
 
 class FollowFactory
 {
+    static function create(array $data): FollowClass
+    {
+        return new FollowClass(
+            $data['idPlace'],
+            $data['idUser']
+        );
+    }
 
 }

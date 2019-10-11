@@ -14,6 +14,8 @@ class CommentFactory
     static function create(array $data): CommentClass
     {
         return new CommentClass(
+            $data['idUser'],
+            $data['idDefect'],
             $data['content'],
             $data['date']
         );

@@ -16,6 +16,8 @@ class CommentManager
     public function add(CommentClass $commentClass)
     {
         $comment = new Comment;
+        $comment->idUser = $commentClass->getIdUser();
+        $comment->idDefect = $commentClass->getIdDefect();
         $comment->content = $commentClass->getContent();
         $comment->date = $commentClass->getDate();
 

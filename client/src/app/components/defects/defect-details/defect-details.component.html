@@ -1,0 +1,90 @@
+<!-- <div class="container-fluid">
+    <div class="header">
+        <div class="defect-place">{{place?.name}}</div>
+        <div class="defect-room">{{room?.name}}</div>
+        <ng-container [ngSwitch]="DefectType[defect?.defectType]">
+            <ng-container *ngSwitchCase="DefectType.Computers">Komputery</ng-container>
+            <ng-container *ngSwitchCase="DefectType.Infrastructure">Infrastruktura</ng-container>
+            <ng-container *ngSwitchCase="DefectType.Electronic">Elektryka</ng-container>
+            <ng-container *ngSwitchCase="DefectType.Hydraulic">Hydraulika</ng-container>
+            <ng-container *ngSwitchCase="DefectType.Mechanical">Mechanika</ng-container>
+            <ng-container *ngSwitchCase="DefectType.Others">Inne</ng-container>
+        </ng-container>
+    </div>
+    <div class="description">
+        {{defect?.description}}
+    </div>
+    <div class="photo" *ngIf="defect">
+        <img [src]="defect.photoURL" [alt]="defect.id">
+    </div>
+</div> -->
+<div class="container-fluid">
+<div class="defect-details">
+    <div class="btn-section">
+      <button type="button" class="btn custom" routerLink="/usterki">
+          <span class="glyphicon glyphicon-arrow-left"><i class="fas fa-arrow-left"></i></span> Powrót
+      </button>
+      <div style="float:right">
+          <button type="button" class="btn btn-link" (click)="editable=true" >
+              <span class="glyphicon glyphicon-pencil"><i class="fas fa-pencil-alt"></i></span>
+          </button>
+          <button type="button" class="btn btn-link" (click)="deleteDefect()">
+              <span class="glyphicon glyphicon-trash"><i class="fas fa-trash"></i></span>
+          </button>
+      </div>
+      <div style="clear:both"></div>
+    </div>
+  <div class="styleHeader">
+    <div class="defect-header">
+      <!-- <div class="defect-place-type"> -->
+        <div class="defect-place">{{ place?.name }}</div>
+        
+        <div class="defect-room">{{ room?.name }}</div>
+        <div class="defect-type">
+          <ng-container [ngSwitch]="DefectType[defect?.defectType]">
+            <ng-container *ngSwitchCase="DefectType.Computers">Komputery</ng-container>
+            <ng-container *ngSwitchCase="DefectType.Infrastructure">Infrastruktura</ng-container>
+            <ng-container *ngSwitchCase="DefectType.Electronic">Elektryka</ng-container>
+            <ng-container *ngSwitchCase="DefectType.Hydraulic">Hydraulika</ng-container>
+            <ng-container *ngSwitchCase="DefectType.Mechanical">Mechanika</ng-container>
+            <ng-container *ngSwitchCase="DefectType.Others">Inne</ng-container>
+          </ng-container>
+        </div>
+      <!-- </div> -->
+        <!-- <div class="defect-state-rating"> -->
+            <div class="defect-rating"><span>Ocena: </span></div>
+            <span class="spacer"></span>
+            <div class="defect-state">
+            <ng-container [ngSwitch]="DefectState[defect?.defectState]">
+                <ng-container *ngSwitchCase="DefectState.ForRepair"><p [style.color]="'red'">Do naprawy</p></ng-container>
+                <ng-container *ngSwitchCase="DefectState.Repaired" ><p [style.color]="'green'">Naprawiona</p></ng-container>
+                <ng-container *ngSwitchCase="DefectState.RepairInProgress"><p [style.color]="'#5659c0'">Trwają prace</p></ng-container>
+                <ng-container *ngSwitchCase="DefectState.WontBeRepaired"><p [style.color]="'#948d0b'">Nie będzie naprawiana</p></ng-container>
+                <ng-container *ngSwitchDefault>nieznany typ</ng-container>
+            </ng-container>
+            </div>
+        <!-- </div> -->
+      <div style="clear:both"></div>
+    </div>
+  </div>
+  <div class="styleDesc">
+    <div class="defect-description">
+      <ng-container *ngIf="!editable">{{defect?.description}}</ng-container>
+      <textarea type="text" [(ngModel)]="defectDescription" *ngIf="editable"></textarea>
+      <button class="btn btn-success" style="margin-right:10px" *ngIf="editable" (click)="makeChanges()">Zatwierdz zmiany</button>
+      <button class="btn btn-default" *ngIf="editable" (click)="cancelChanges()">Anuluj</button>
+    </div>
+    <div class="defect-photo" *ngIf="defect">
+        <img [src]="defect.photoURL" [alt]="defect.photoURL">
+    </div>
+   
+    <div class="defect-bottom">
+        <div class="defect-date">{{ defect?.date | date:'dd-MM-yyyy'}}</div>
+        <div class="defect-author"><span>Autor: </span></div>
+        <div style="clear:both"></div>
+    </div>
+  </div>
+</div>
+</div>
+<app-defect-comment></app-defect-comment>
+<div style="clear:both"></div>

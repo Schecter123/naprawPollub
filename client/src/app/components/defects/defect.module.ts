@@ -6,9 +6,13 @@ import { DefectFilterComponent } from './defect-filter/defect-filter.component';
 import {ScrollingModule} from '@angular/cdk/scrolling';
 import { DefectsComponent } from './defects.component';
 import { RouterModule } from '@angular/router';
+import { DefectDetailsComponent } from './defect-details/defect-details.component';
+import { FormsModule } from '@angular/forms';
+import { DefectCommentComponent } from './defect-comment/defect-comment.component';
 
 const routes = [
-  {path: '', component: DefectsComponent}
+  {path: '', component: DefectsComponent},
+  {path: 'defect', component: DefectDetailsComponent}
 ]
 
 @NgModule({
@@ -16,18 +20,20 @@ const routes = [
     DefectsComponent,
     DefectListComponent, 
     DefectItemComponent, 
-    DefectFilterComponent
+    DefectFilterComponent, DefectDetailsComponent, DefectCommentComponent
   ],
   imports: [
     CommonModule,
     ScrollingModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    FormsModule
   ],
   exports: [
     DefectsComponent,
     DefectListComponent, 
     DefectItemComponent, 
-    DefectFilterComponent
+    DefectFilterComponent,
+    DefectDetailsComponent
   ]
 })
 export class DefectModule { }

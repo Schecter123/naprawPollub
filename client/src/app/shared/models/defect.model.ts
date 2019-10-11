@@ -8,6 +8,8 @@ export interface Defect{
     description: string;
     date: any;
     photoURL: string;
+    latitude: number;
+    longitude: number;
   }
   
 export enum DefectType{

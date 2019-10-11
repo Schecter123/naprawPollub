@@ -1,6 +1,5 @@
 import { Component, OnInit, Input, OnDestroy, Output, EventEmitter } from '@angular/core';
-import { DefectType, Defect } from 'src/app/shared/models/defect.model';
-import { DefectService } from 'src/app/shared/services/defect.service';
+import { DefectType } from 'src/app/shared/models/defect.model';
 import { Subscription} from 'rxjs';
 import { PlaceService } from 'src/app/shared/services/place.service';
 import { RoomService } from 'src/app/shared/services/room.service';

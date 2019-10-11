@@ -11,6 +11,7 @@ import { FormsModule } from '@angular/forms';
 import { DefectModule } from './defects/defect.module';
 import { AgmCoreModule } from '@agm/core';
 import { MapComponent } from './main/map/map.component';
+import { MapMarkerComponent } from './main/map/map-marker/map-marker.component';
 
 const Components = [
   NavigationComponent, 
@@ -25,7 +26,8 @@ const Components = [
 
 @NgModule({
   declarations: [
-    Components
+    Components,
+    MapMarkerComponent
   ],
   imports: [
     CommonModule, 

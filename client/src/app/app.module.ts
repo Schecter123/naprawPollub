@@ -11,6 +11,7 @@ import { DefectService } from './shared/services/defect.service';
 import { RoomService } from './shared/services/room.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material/material.module';
+import { MarkerService } from './shared/services/marker.service';
 
 //import { AgmCoreModule } from '@agm/core';
 
@@ -34,6 +35,7 @@ import { MaterialModule } from './material/material.module';
     PlaceService,
     DefectService,
     RoomService,
+    MarkerService
   ],
   bootstrap: [AppComponent]
 })

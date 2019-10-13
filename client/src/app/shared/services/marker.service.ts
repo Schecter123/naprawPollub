@@ -9,6 +9,7 @@ import { environment } from 'src/environments/environment';
 export class MarkerService {
 
   list: Marker[];
+  markerID: number;
 
   constructor(private http: HttpClient) { }
 

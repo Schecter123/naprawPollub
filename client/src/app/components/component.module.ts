@@ -12,6 +12,7 @@ import { DefectModule } from './defects/defect.module';
 import { AgmCoreModule } from '@agm/core';
 import { MapComponent } from './main/map/map.component';
 import { MapMarkerComponent } from './main/map/map-marker/map-marker.component';
+import { AddDefectComponent } from './add-defect/add-defect.component';
 
 const Components = [
   NavigationComponent, 
@@ -20,14 +21,15 @@ const Components = [
   RegisterComponent, 
   FooterComponent, 
   MainComponent,
-  MapComponent
+  MapComponent,
+  MapMarkerComponent,
+  AddDefectComponent
 ];
 
 
 @NgModule({
   declarations: [
     Components,
-    MapMarkerComponent
   ],
   imports: [
     CommonModule, 

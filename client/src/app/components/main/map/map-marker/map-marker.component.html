@@ -1,7 +1,7 @@
 <div *ngIf="marker">
     <agm-marker [latitude]="marker.latitude" [longitude]="marker.longitude" [iconUrl]="iconUrl" *ngIf="iconUrl" >
         <agm-info-window>
-                {{marker.info}}
+            <button class="btn btn-outline-success" routerLink="/usterki" (click)="getMarkerId(marker.id)"> {{marker.info}}</button>
         </agm-info-window>
     </agm-marker>
 </div>

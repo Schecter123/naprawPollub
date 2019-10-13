@@ -70,4 +70,19 @@
       transform: translate(19px, 0);
     }
   }
-  
+  .btn:hover {
+    color: black;
+    text-decoration: none;
+  }
+  .btn-link {
+    font-weight: 400;
+    color: black;
+    text-decoration: none; 
+    padding: 5px;
+  }
+  .header{
+    
+  }
+  .headerItem{
+    display: inline-block;
+  }

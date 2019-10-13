@@ -2,9 +2,9 @@
 <div *ngIf="(defect && places && rooms); else loading">
     <div class="content">
         <div class="header">
-            <div class="defect-place">{{places[defect.idPlace-1].name}}</div>
-            <div class="defect-room">{{rooms[defect.idRoom-1].name}}</div>
-            <div class="defect-type">
+            <div class="defect-place headerItem">{{places[defect.idPlace-1].name}}</div>
+            <div class="defect-room headerItem">{{rooms[defect.idRoom-1].name}}</div>
+            <div class="defect-type headerItem">
                 <ng-container [ngSwitch]="DefectType[defect.defectType]">
                     <ng-container *ngSwitchCase="DefectType.Computers">Komputery</ng-container>
                     <ng-container *ngSwitchCase="DefectType.Infrastructure">Infrastruktura</ng-container>
@@ -14,7 +14,10 @@
                     <ng-container *ngSwitchCase="DefectType.Others">Inne</ng-container>
                 </ng-container>
             </div>
-            <div class="defect-state">
+            <div class="headerItem">
+                <span>Ocena: </span><span>0</span>
+            </div>
+            <div class="defect-state headerItem">
                 <ng-container [ngSwitch]="DefectState[defect.defectState]">
                     <ng-container *ngSwitchCase="DefectState.ForRepair"><p [style.color]="'red'">Do naprawy</p></ng-container>
                     <ng-container *ngSwitchCase="DefectState.Repaired" ><p [style.color]="'green'">Naprawiona</p></ng-container>
@@ -25,7 +28,7 @@
             </div>
         </div>
         <div class="description">
-            {{defect.description}}
+            <button type="button" class="btn btn-link">{{defect.description}}</button>
         </div>
     </div>
 </div> 

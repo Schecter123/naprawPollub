@@ -1,38 +1,73 @@
 <div class="container-fluid">
-<div *ngIf="(defect && places && rooms); else loading">
-    <div class="content">
-        <div class="header">
-            <div class="defect-place headerItem">{{places[defect.idPlace-1].name}}</div>
-            <div class="defect-room headerItem">{{rooms[defect.idRoom-1].name}}</div>
-            <div class="defect-type headerItem">
-                <ng-container [ngSwitch]="DefectType[defect.defectType]">
-                    <ng-container *ngSwitchCase="DefectType.Computers">Komputery</ng-container>
-                    <ng-container *ngSwitchCase="DefectType.Infrastructure">Infrastruktura</ng-container>
-                    <ng-container *ngSwitchCase="DefectType.Electronic">Elektryka</ng-container>
-                    <ng-container *ngSwitchCase="DefectType.Hydraulic">Hydraulika</ng-container>
-                    <ng-container *ngSwitchCase="DefectType.Mechanical">Mechanika</ng-container>
-                    <ng-container *ngSwitchCase="DefectType.Others">Inne</ng-container>
-                </ng-container>
+    <div *ngIf="(defect && places && rooms); else loading">
+        <div class="content">
+            <div class="header">
+                <div class="defect-place headerItem">
+                    Miejsce:
+                    <span class="headerDetail" tooltip-html-unsafe="Line 1<br />Line 2<br />Line 3">
+                        {{places[defect.idPlace-1].name}}
+                    </span>
+                </div>
+                <div class="defect-room headerItem">
+                    Strefa/sala:
+                    <span class="headerDetail">
+                        {{rooms[defect.idRoom-1].name}}
+                    </span>
+                </div>
+                <div class="defect-type headerItem">
+                    Typ:
+                    <span class="headerDetail">
+                        <ng-container [ngSwitch]="DefectType[defect.defectType]">
+                            <ng-container *ngSwitchCase="DefectType.Computers">Komputery</ng-container>
+                            <ng-container *ngSwitchCase="DefectType.Infrastructure">Infrastruktura</ng-container>
+                            <ng-container *ngSwitchCase="DefectType.Electronic">Elektryka</ng-container>
+                            <ng-container *ngSwitchCase="DefectType.Hydraulic">Hydraulika</ng-container>
+                            <ng-container *ngSwitchCase="DefectType.Mechanical">Mechanika</ng-container>
+                            <ng-container *ngSwitchCase="DefectType.Others">Inne</ng-container>
+                        </ng-container>
+                    </span>
+
+                </div>
+                <div class="headerItem">
+                    <span>Ocena: </span><span class="headerDetail">0</span>
+                </div>
+                <div class="defect-state headerItem headerDetail">
+                    <ng-container [ngSwitch]="DefectState[defect.defectState]">
+                        <ng-container *ngSwitchCase="DefectState.ForRepair">
+                            <p [style.color]="'red'">Do naprawy</p>
+                        </ng-container>
+                        <ng-container *ngSwitchCase="DefectState.Repaired">
+                            <p [style.color]="'green'">Naprawiona</p>
+                        </ng-container>
+                        <ng-container *ngSwitchCase="DefectState.RepairInProgress">
+                            <p [style.color]="'#5659c0'">Trwają prace</p>
+                        </ng-container>
+                        <ng-container *ngSwitchCase="DefectState.WontBeRepaired">
+                            <p [style.color]="'#948d0b'">Nie będzie naprawiana</p>
+                        </ng-container>
+                        <ng-container *ngSwitchDefault>nieznany typ</ng-container>
+                    </ng-container>
+                </div>
             </div>
-            <div class="headerItem">
-                <span>Ocena: </span><span>0</span>
+            <div class="description">
+                <button type="button" class="btn btn-link ">{{defect.description}}</button>
             </div>
-            <div class="defect-state headerItem">
-                <ng-container [ngSwitch]="DefectState[defect.defectState]">
-                    <ng-container *ngSwitchCase="DefectState.ForRepair"><p [style.color]="'red'">Do naprawy</p></ng-container>
-                    <ng-container *ngSwitchCase="DefectState.Repaired" ><p [style.color]="'green'">Naprawiona</p></ng-container>
-                    <ng-container *ngSwitchCase="DefectState.RepairInProgress"><p [style.color]="'#5659c0'">Trwają prace</p></ng-container>
-                    <ng-container *ngSwitchCase="DefectState.WontBeRepaired"><p [style.color]="'#948d0b'">Nie będzie naprawiana</p></ng-container>
-                    <ng-container *ngSwitchDefault>nieznany typ</ng-container>
-                </ng-container>
-            </div>
-        </div>
-        <div class="description">
-            <button type="button" class="btn btn-link">{{defect.description}}</button>
+            <!-- <div class="defect-action">
+                <div class="stranger" *ngIf="!authService.isLogged || vote" [innerHTML]="htmlContent"></div>
+                <button class="btn btn-link" (click)="check(1)"><span
+                        class="glyphicon glyphicon-thumbs-up"></span></button>
+                <button class="btn btn-link" (click)="check(-1)"><span
+                        class="glyphicon glyphicon-thumbs-down"></span></button>
+            </div> -->
+            <div class="defect-date">{{ defect.date | date:'dd-MM-yyyy'}}</div>
         </div>
     </div>
-</div> 
-<ng-template #loading>
-        <div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
-</ng-template> 
+    <ng-template #loading>
+        <div class="lds-ellipsis">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </ng-template>
 </div>

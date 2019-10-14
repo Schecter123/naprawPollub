@@ -8,6 +8,8 @@ import { UserService } from 'src/app/shared/services/user.service';
 })
 export class MainComponent implements OnInit {
   
+  title = "Usterki kampusu Politechniki Lubelskiej";
+
   constructor(){}
   
   ngOnInit(){

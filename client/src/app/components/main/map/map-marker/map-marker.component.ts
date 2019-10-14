@@ -26,4 +26,7 @@ export class MapMarkerComponent implements OnInit, OnDestroy {
     this.subscriber.unsubscribe();
   }
 
+  getMarkerId(markerID){
+    this.markerService.markerID = markerID;
+  }
 }

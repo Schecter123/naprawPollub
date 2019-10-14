@@ -17,8 +17,8 @@ export class DefectService {
     return this.http.get(environment.rootURL + '/defects');
   }
 
-  getDefectsRow(idPlace:number){
-    return this.http.get(environment.rootURL + '/defects').pipe(map ((defects:Defect[]) => defects.filter((defect:Defect) => defect.idPlace == idPlace )));
+  getDefectsByMarkerId(markerID){
+    return this.http.get(environment.rootURL + '/defects').pipe(map ((defects:Defect[]) => defects.filter((defect:Defect) => defect.idMarker == markerID )));
   }
 
   getParticularDefect(idDefect){

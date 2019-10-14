@@ -1,3 +1,9 @@
-<agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom">
+<agm-map 
+    [latitude]="lat" 
+    [longitude]="lng" 
+    [zoom]="zoom" 
+    [scrollwheel]="null" 
+    [zoomControl]="true" 
+    [gestureHandling]="'cooperative'">
     <app-map-marker *ngFor="let marker of markers" [marker]="marker" ></app-map-marker>   
 </agm-map>

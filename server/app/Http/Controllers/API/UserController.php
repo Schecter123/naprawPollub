@@ -42,7 +42,8 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //
+        $particularUser = DB::table('users')->where('id', $id)->first();
+        return response()->json($particularUser);
     }
 
     /**
@@ -65,6 +66,6 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        DB::table('users')->where('id', $id)->delete();
     }
 }

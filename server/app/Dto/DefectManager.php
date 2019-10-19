@@ -10,6 +10,7 @@ namespace App\Dto;
 
 
 use App\Defect;
+use Illuminate\Support\Facades\DB;
 
 class DefectManager
 {
@@ -20,11 +21,31 @@ class DefectManager
         $defect->idPlace = $defectClass->getIdPlace();
         $defect->idUser = $defectClass->getIdUser();
         $defect->idRoom = $defectClass->getIdRoom();
+        $defect->idMarker = $defectClass->getIdMarker();
         $defect->defectState = $defectClass->getDefectState();
         $defect->description = $defectClass->getDescription();
         $defect->date = $defectClass->getDate();
         $defect->photoURL = $defectClass->getPhotoURL();
 
         $defect->save();
+    }
+
+    public function update(DefectClass $defectClass, $id)
+    {
+
+        $defect = Defect::find($id);
+        $defect->defectType = $defectClass->getDefectType();
+        $defect->idPlace = $defectClass->getIdPlace();
+        $defect->idUser = $defectClass->getIdUser();
+        $defect->idRoom = $defectClass->getIdRoom();
+        $defect->idMarker = $defectClass->getIdMarker();
+        $defect->defectState = $defectClass->getDefectState();
+        $defect->description = $defectClass->getDescription();
+        $defect->date = $defectClass->getDate();
+        $defect->photoURL = $defectClass->getPhotoURL();
+
+        $defect->save();
+
+
     }
 }

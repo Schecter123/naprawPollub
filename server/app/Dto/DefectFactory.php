@@ -15,9 +15,10 @@ class DefectFactory
     {
         return new DefectClass(
             $data['defectType'],
-            $data['idPLace'],
+            $data['idPlace'],
             $data['idUser'],
             $data['idRoom'],
+            $data['idMarker'],
             $data['defectState'],
             $data['description'],
             $data['date'],

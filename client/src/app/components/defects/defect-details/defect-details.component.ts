@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { DefectService } from 'src/app/shared/services/defect.service';
 import { DefectType, DefectState } from 'src/app/shared/models/defect.model';
+import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-defect-details',
   templateUrl: './defect-details.component.html',
@@ -22,18 +23,15 @@ export class DefectDetailsComponent implements OnInit, OnDestroy {
   DefectType = DefectType;
   DefectState = DefectState;
 
-  constructor(private defectService: DefectService) { }
+  constructor(private defectService: DefectService, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
-    this.defectSubscriber = this.defectService.getParticularDefect(this.defectId).subscribe( response => this.defect = response);
-    this.placeSubscriber = this.defectService.getParticularDefectPlace(this.defectId).subscribe( response => this.place = response);
-    this.roomSubscriber = this.defectService.getParticularDefectRoom(this.defectId).subscribe( response => this.room = response);
+    this.activatedRoute.data.subscribe(data => this.defect = data.defect);
+    this.activatedRoute.data.subscribe(data => this.place = data.place);
+    this.activatedRoute.data.subscribe(data => this.room = data.room);
   }
 
   ngOnDestroy(){
-    this.defectSubscriber.unsubscribe();
-    this.placeSubscriber.unsubscribe();
-    this.roomSubscriber.unsubscribe();
   }
 
   makeChanges(){

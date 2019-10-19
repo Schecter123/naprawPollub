@@ -1,1 +1,51 @@
-<p>add-defect works!</p>
+<div class="container">
+    <form #addDefectForm="ngForm" (ngSubmit)="addDefect()">
+      <div class="form-group form-group-lg">
+        <label  class="control-label col-sm-4" for="place">Gdzie znajduje się usterka: </label>
+        <div class="col-sm-8">
+          <select class="form-control" name="place" [(ngModel)]="place" required #placeModel="ngModel" (ngModelChange)="onChange($event)">
+            <option *ngFor="let place of places" [ngValue]="place">{{place?.name}}</option>
+          </select>
+          <div class="help-block" *ngIf="placeModel.invalid && placeModel.touched">
+              Pole jest wymagane
+          </div>
+        </div>
+      </div>
+      <div class="form-group form-group-lg">
+        <label  class="control-label col-sm-4" for="room">W jakiej sali/strefie znajduje się usterka: </label>
+        <div class="col-sm-8">
+            <select class="form-control" name="room" required [(ngModel)]="room">
+                <option>Wybierz salę</option>
+                <ng-container *ngFor="let room of rooms" #show>
+                  <option [ngValue]="room">{{ room?.name }}</option>
+                </ng-container>
+            </select>
+        </div>
+      </div>
+      <div class="form-group form-group-lg">
+          <label class="control-label col-sm-4" for="type">Wybierz typ usterki: </label>
+          <div class="col-sm-8">
+              <select name="type" id="type" class="form-control input-lg" [(ngModel)]="type" required #typeModel="ngModel">
+                  <option value="{{ DefectType.Computers }}">Komputery</option>
+                  <option value="{{ DefectType.Electronic }}">Elektroniczny</option>
+                  <option value="{{ DefectType.Hydraulic }}">Hydrauliczny</option>
+                  <option value="{{ DefectType.Infrastructure }}">Infrastruktura</option>
+                  <option value="{{ DefectType.Mechanical }}">Mechaniczny</option>
+                  <option value="{{ DefectType.Others }}">Inny</option>
+              </select>
+              <div class="help-block" *ngIf="typeModel.invalid && typeModel.touched">
+                  Pole jest wymagane
+              </div>
+          </div>
+      </div>
+      <div class="form-group form-group-lg col-sm-12">
+            <label for="text">Opis usterki:</label>
+            <textarea class="form-control" name="text" id="text" rows="6" [(ngModel)]="text" required #textModel="ngModel"></textarea>
+            <div class="help-block" *ngIf="textModel.invalid && textModel.touched">
+                Pole jest wymagane
+            </div>
+      </div>
+      <button type="submit" class="btn btn-success" [disabled]="(!addDefectForm.form.valid)">Dodaj usterkę</button>
+    </form>
+    </div>
+    

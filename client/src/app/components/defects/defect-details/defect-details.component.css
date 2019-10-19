@@ -1,109 +1,67 @@
-.custom{
-    margin: 15px 18px -30px;
+  /* Tools */
+  mat-toolbar{
+    margin-top: 10px; 
+    max-height:45px !important;
+    min-height:45px !important;
+  }
+  .custom{
     outline: none;
     background-color: #7e9c7e;
     color: white;
   }
+  .custom:hover{
+    outline: none;
+    background-color: #7eae7e;
+    color: white;
+  }
   .btn.btn-link{
-    margin-bottom: -20px;
     outline: none;
   }
-  .styleHeader{
-    background-color: #99b999;
-    border-radius: 5px;
-    width: 98%;
-    margin: auto;
-    box-shadow: 1px 1px  #7e9c7e;
-    margin-top: 40px;
+  .fas.fa-trash{
+    color: red;
   }
-
-  
-
-  .defect-header{
-    margin-left: 1em;
-    margin-top: 2%;
-    font-size: 18px;
-    padding: 10px;
-    display: flex;
+  .example-icon {
+    padding: 0 14px;
   }
-
-  
-
-  .defect-place{
-    display: inline-flex;
-    font-weight: 600;
-    background-color: #fff;
-    border: 1px solid #7e9c7e;
-    box-shadow: 1px 1px #7e9c7e;
-    padding: 8px 10px;
-    border-radius: 5px;
-  }
-  
-  span{
-    font-weight: normal;
-  }
-  
-  .defect-room{
-    display: inline-flex;
-    margin-left: 10px;
-    font-weight: 600;
-    background-color: #fff;
-    border: 1px solid #7e9c7e;
-    box-shadow: 1px 1px #7e9c7e;
-    padding: 8px 10px;
-    border-radius: 5px;
-  }
-  
-  
-  .defect-type{
-    display: inline-flex;
-    margin-left: 10px;
-    font-weight: 600;
-    background-color: #fff;
-    border: 1px solid #7e9c7e;
-    box-shadow: 1px 1px #7e9c7e;
-    padding: 8px 10px;
-    border-radius: 5px;
-  }
- 
-
-  .defect-rating{
-    /* display: inline-block; */
-    font-weight: 600;
-    background-color: #fff;
-    border: 1px solid #7e9c7e;
-    box-shadow: 1px 1px #7e9c7e;
-    padding: 8px 10px;
-    border-radius: 5px;
-    max-width: 150px;
-    display: inline-flex;
-  }
-  
-  
-  .defect-state{
-    /* float:right; */
-    font-weight: 600;
-    background-color: #fff;
-    border: 1px solid #7e9c7e;
-    box-shadow: 1px 1px #7e9c7e;
-    padding: 8px 10px;
-    border-radius: 5px;
-    max-width: 150px;
-    max-height: 45px;
-    display: inline-flex;
-  }
-
-  .spacer{
+  .example-spacer {
     flex: 1 1 auto;
   }
-  
 
-  .styleDesc{
+  /* Defect details */
+
+  .defect-header{
+    background-color: #99b999;
+    box-shadow: 1px 1px #7e9c7e60;
+    margin: 0;
+  }
+
+  .defect-place,
+  .defect-room,
+  .defect-type,
+  .defect-rating,
+  .defect-state{
+    background-color: #fff;
+    border: 1px solid #7e9c7e;
+    box-shadow: 1px 1px #7e9c7e;
+    border-radius: 5px;
+    margin: 10px 5px;
+    padding: 5px 8px;
+    font-size: 18px;
+    text-align: center;
+  }
+  .defect-place{
+    margin-left: 15px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    width:250px;
+  }
+
+  .defect-style-content{
     background-color: #f2f9f3;
-    width: 98%;
     margin: auto;
     border: 1px solid #e8f5e9;
-    border-radius: 5px;
+    /* border-radius: 5px; */
     box-shadow: 1px 1px #7e9c7e60;
   }
   
@@ -117,59 +75,40 @@
   }
   
   .defect-description{
-    margin: 1em 1.5em 1.5em;
+    margin: 15px 10px;
     font-size: 21px;
-    padding: 10px 8px;
+    padding: 2px 8px;
   }
 
   .defect-photo{
-    margin: 1em 1.5em 1.5em;
     font-size: 21px;
-    padding: 10px 8px;
-    
+    padding: 2px 10px;
   }
 
   img{
-      max-width: 600px;
-      max-height: 400px;
-      border: 1px solid #e8f5e9;
+    border: 1px solid #e8f5e9;
     border-radius: 5px;
     box-shadow: 1px 1px #7e9c7e60;
+    width: 100%;
+    max-width: 850px;
+    height: auto;
   }
   
   .defect-bottom{
    font-size: 18px;
+   color: gray;
   }
   
   .defect-date{
-    margin: 1em 40px 1em;
-    float: left;
-    color: gray;
+    margin: 20px 0 20px 15px;
   }
   
   .defect-author{
-    margin: auto 2em 1em;
-    float: right;
-    font-weight: 600;
-  }
-  
-  .glyphicon-trash,
-  .glyphicon-pencil{
-    font-size: 20px;
-    margin: 8px 0px 0px;
-    padding: 8px 5px 0;
-  }
-  
-  .glyphicon.glyphicon-trash{
-    margin-right: 8px;
-    color: red;
-  }
-  .glyphicon.glyphicon-pencil{
-    margin-right: -20px;
+    margin: 20px 15px 20px 0;
+    text-align: right;
   }
 
-  .container-fluid{
-      float:left;
-      max-width: 50%;
-  }
+
+  
+
   

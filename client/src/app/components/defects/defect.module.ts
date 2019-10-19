@@ -9,10 +9,29 @@ import { RouterModule } from '@angular/router';
 import { DefectDetailsComponent } from './defect-details/defect-details.component';
 import { FormsModule } from '@angular/forms';
 import { DefectCommentComponent } from './defect-comment/defect-comment.component';
+import { DefectResolverService } from './defect-resolver.service';
+import { PlaceResolverService } from './place-resolver.service';
+import { RoomResolverService } from './room-resolver.service';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import { DefectListResolverService } from './defect-list-resolver.service';
 
 const routes = [
-  {path: '', component: DefectsComponent},
-  {path: 'defect', component: DefectDetailsComponent}
+  {
+    path: '', 
+    component: DefectsComponent,
+    resolve: {
+      defects: DefectListResolverService
+    }
+  },
+  {
+    path: ':id', 
+    component: DefectDetailsComponent,
+    resolve: {
+      defect: DefectResolverService,
+      place: PlaceResolverService,
+      room: RoomResolverService
+    }
+  }
 ]
 
 @NgModule({
@@ -26,8 +45,10 @@ const routes = [
     CommonModule,
     ScrollingModule,
     RouterModule.forChild(routes),
-    FormsModule
+    FormsModule,
+    MatToolbarModule
   ],
+  providers: [ DefectResolverService, PlaceResolverService, RoomResolverService, DefectListResolverService ],
   exports: [
     DefectsComponent,
     DefectListComponent, 

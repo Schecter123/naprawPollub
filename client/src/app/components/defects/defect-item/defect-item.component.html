@@ -50,7 +50,7 @@
                 </div>
             </div>
             <div class="description">
-                <button type="button" class="btn btn-link ">{{defect.description}}</button>
+                <button type="button" class="btn btn-link" routerLink="{{defect.id}}">{{defect.description}}</button>
             </div>
             <!-- <div class="defect-action">
                 <div class="stranger" *ngIf="!authService.isLogged || vote" [innerHTML]="htmlContent"></div>

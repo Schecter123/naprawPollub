@@ -14,7 +14,7 @@ export class DefectService {
   constructor(private http: HttpClient) { }
 
   getDefects(){
-    return this.http.get(environment.rootURL + '/defects');
+    return this.http.get<Defect[]>(environment.rootURL + '/defects');
   }
 
   getDefectsByMarkerId(markerID){
@@ -22,14 +22,7 @@ export class DefectService {
   }
 
   getParticularDefect(idDefect){
-    return this.http.get(environment.rootURL + '/defects/'+idDefect);
+    return this.http.get<Defect>(environment.rootURL + '/defects/'+idDefect);
   }
 
-  getParticularDefectPlace(idDefect){
-    return this.http.get(environment.rootURL + '/defects/'+idDefect+'/place');
-  }
-
-  getParticularDefectRoom(idDefect){
-    return this.http.get(environment.rootURL + '/defects/'+idDefect+'/room');
-  }
 }

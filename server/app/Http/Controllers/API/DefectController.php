@@ -73,9 +73,9 @@ class DefectController extends Controller
      */
     public function update(Request $request, $id)
     {
-        /*$updateDefect = DefectFactory::create($request->all());
+        $updateDefect = DefectFactory::create($request->all());
         $result = new DefectManager();
-        $result->update($updateDefect, $id); */
+        $result->update($updateDefect, $id);
 
     }
 

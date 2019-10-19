@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Dto\FollowFactory;
+use App\Dto\FollowManager;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
@@ -27,7 +29,10 @@ class FollowController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $newFollow = FollowFactory::create($request->all());
+        $result = new FollowManager();
+        $result->add($newFollow);
+        return response()->json($newFollow);
     }
 
     /**
@@ -38,7 +43,8 @@ class FollowController extends Controller
      */
     public function show($id)
     {
-        //
+        $particularFollow = DB::table('follows')->where('id', $id)->first();
+        return response()->json($particularFollow);
     }
 
     /**
@@ -50,7 +56,9 @@ class FollowController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $updateFollow = FollowFactory::create($request->all());
+        $result = new FollowManager();
+        $result->update($updateFollow, $id);
     }
 
     /**
@@ -61,6 +69,6 @@ class FollowController extends Controller
      */
     public function destroy($id)
     {
-        //
+        DB::table('follows')->where('id', $id)->delete();
     }
 }

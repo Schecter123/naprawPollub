@@ -24,4 +24,15 @@ class CommentManager
         $comment->save();
     }
 
+    public function update(CommentClass $commentClass, $id)
+    {
+        $comment = Comment::find($id);
+        $comment->idUser = $commentClass->getIdUser();
+        $comment->idDefect = $commentClass->getIdDefect();
+        $comment->content = $commentClass->getContent();
+        $comment->date = $commentClass->getDate();
+
+        $comment->save();
+    }
+
 }

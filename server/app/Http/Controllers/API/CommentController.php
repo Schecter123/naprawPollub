@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Dto\CommentFactory;
+use App\Dto\CommentManager;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
@@ -26,7 +28,10 @@ class CommentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $newComment = CommentFactory::create($request->all());
+        $result = new CommentManager();
+        $result->add($newComment);
+        return response()->json($newComment);
     }
 
     /**
@@ -37,7 +42,8 @@ class CommentController extends Controller
      */
     public function show($id)
     {
-        //
+        $particularComment = DB::table('comments')->where('id', $id)->first();
+        return response()->json($particularComment);
     }
 
     /**
@@ -49,7 +55,10 @@ class CommentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $updateComment = CommentFactory::create($request->all());
+        $result = new CommentManager();
+        $result->update($updateComment,$id);
+        return response()->json($updateComment);
     }
 
     /**
@@ -60,6 +69,6 @@ class CommentController extends Controller
      */
     public function destroy($id)
     {
-        //
+        DB::table('comments')->where('id', $id)->delete();
     }
 }

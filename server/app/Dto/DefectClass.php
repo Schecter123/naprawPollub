@@ -16,6 +16,7 @@ class DefectClass
     protected $idPlace;
     protected $idUser;
     protected $idRoom;
+    protected $idMarker;
     protected $defectState;
     protected $description;
     protected $date;
@@ -27,17 +28,19 @@ class DefectClass
      * @param $idPlace
      * @param $idUser
      * @param $idRoom
+     * @param $idMarker
      * @param $defectState
      * @param $description
      * @param $date
      * @param $photoURL
      */
-    public function __construct($defectType, $idPlace, $idUser, $idRoom, $defectState, $description, $date, $photoURL)
+    public function __construct($defectType, $idPlace, $idUser, $idRoom, $idMarker, $defectState, $description, $date, $photoURL)
     {
         $this->defectType = $defectType;
         $this->idPlace = $idPlace;
         $this->idUser = $idUser;
         $this->idRoom = $idRoom;
+        $this->idMarker = $idMarker;
         $this->defectState = $defectState;
         $this->description = $description;
         $this->date = $date;
@@ -74,6 +77,14 @@ class DefectClass
     public function getIdRoom()
     {
         return $this->idRoom;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getIdMarker()
+    {
+        return $this->idMarker;
     }
 
     /**

@@ -21,4 +21,13 @@ class FollowManager
 
         $follow->save();
     }
+
+    public function update(FollowClass $followClass, $id)
+    {
+        $follow = Follow::find($id);
+        $follow->idPlace = $followClass->getIdPlace();
+        $follow->idUser = $followClass->getIdUser();
+
+        $follow->save();
+    }
 }

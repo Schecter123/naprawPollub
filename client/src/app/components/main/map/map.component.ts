@@ -25,7 +25,6 @@ export class MapComponent implements OnInit, OnDestroy {
   ngOnInit() {  
     this.subscriberMarkers = this.markerService.getMarkers().subscribe(response => {
       this.markers = response
-      console.log(this.markers)
     });
   }
  

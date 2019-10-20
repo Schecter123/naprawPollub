@@ -1,2 +1,3 @@
 
 server/.rnd
+server/app/Http/Kernel.php

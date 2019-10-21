@@ -3,4 +3,8 @@
 server/app/Http/Kernel.php
 =======
 server/.rnd
+<<<<<<< HEAD
+server/app/Http/Kernel.php
+=======
 >>>>>>> 38a95aacda398709c9d9b808208f3353cb310993
+>>>>>>> werka

@@ -23,7 +23,13 @@ ORDER BY markers.id"));
 
         return response()->json($markers);
 
+    }
 
+    public function getAll()
+    {
+        echo('test');
+        $markers = DB::table('markers')->get();
+        return response()->json($markers);
     }
 
     public function getDefectCount($id)

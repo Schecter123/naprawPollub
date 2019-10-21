@@ -27,7 +27,6 @@ ORDER BY markers.id"));
 
     public function getAll()
     {
-        echo('test');
         $markers = DB::table('markers')->get();
         return response()->json($markers);
     }

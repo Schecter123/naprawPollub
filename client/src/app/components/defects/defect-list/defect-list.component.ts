@@ -12,27 +12,31 @@ import { ActivatedRoute } from '@angular/router';
 export class DefectListComponent implements OnInit, OnDestroy {
 
   defects;
-  subscription;
+  subscriptionMarker;
+  subscriptionDefect;
 
   constructor(private defectService: DefectService, private activatedRoute: ActivatedRoute, private markerService: MarkerService) { }
 
   ngOnInit() {
     
     if(this.markerService.markerID){
-      this.subscription = this.defectService.getDefectsByMarkerId(this.markerService.markerID).subscribe(
+      this.subscriptionMarker = this.defectService.getDefectsByMarkerId(this.markerService.markerID).subscribe(
         (response) => {this.defects = response},
         (err) => {console.log('Error result: ' + err)}
       );
       
       this.markerService.markerID = 0;
     } else{
-      this.subscription = this.activatedRoute.data.subscribe(data => this.defects = data.defects);
+      this.subscriptionDefect = this.activatedRoute.data.subscribe(data => this.defects = data.defects);
     }
-  
+
   }
 
   ngOnDestroy(){
-    this.subscription.unsubscribe();
+    if(this.subscriptionMarker)
+      this.subscriptionMarker.unsubscribe();
+    if(this.subscriptionDefect) 
+      this.subscriptionDefect.unsubscribe();
   }
 
 }

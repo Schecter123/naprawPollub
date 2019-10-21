@@ -6,6 +6,12 @@
     box-shadow: 1px 1px 0.5rem gray;
   
   }
+  .form-group.row{
+    margin: 0 2px;
+  }
+  .form-control-file{
+    margin: 0 15px;
+  }
   label{
     margin-top: 2%;
     font-size: 16px;

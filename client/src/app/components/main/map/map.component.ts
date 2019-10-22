@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy} from '@angular/core';
+import { Component, OnInit, OnDestroy, Input} from '@angular/core';
 import { DefectService } from 'src/app/shared/services/defect.service';
 import { MarkerService } from 'src/app/shared/services/marker.service';
 import { Marker } from 'src/app/shared/models/marker.model';
@@ -13,7 +13,9 @@ export class MapComponent implements OnInit, OnDestroy {
   defectsCount;
   markers;
   subscriberMarkers;
- 
+  
+  //Tryb dodawania markera przez użytkownika
+  @Input() userIsAddingDefect;
 
   //Zmienne potrzebne do mapy
   lat = 51.235869;
@@ -26,11 +28,22 @@ export class MapComponent implements OnInit, OnDestroy {
     this.subscriberMarkers = this.markerService.getMarkers().subscribe(response => {
       this.markers = response
     });
+
+    if(this.userIsAddingDefect)
+      this.getUserLocation();
   }
  
   ngOnDestroy(){
     this.subscriberMarkers.unsubscribe();
   }
 
+  getUserLocation(){
+    if(navigator.geolocation){
+      navigator.geolocation.getCurrentPosition(position => {
+        this.lat = position.coords.latitude;
+        this.lng = position.coords.longitude;
+      });
+    }
+  }
 
 }

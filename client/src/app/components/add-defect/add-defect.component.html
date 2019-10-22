@@ -14,15 +14,16 @@
       <div class="form-group row form-group-lg" *ngIf="place?.id!=17 && place?.id">
         <label class="control-label col-sm-4" for="room">W jakim pomieszczeniu znajduje się usterka: </label>
         <div class="col-sm-8">
-            <select class="form-control" name="room" required [(ngModel)]="room" #roomModel="ngModel">
-              <ng-container *ngIf="((placeModel.touched || placeModel.dirty) && specifiedRooms.length == 0) else show">
-                <option default>Nie ma dostępnych sal</option>
-              </ng-container> 
-              <ng-container *ngFor="let room of specifiedRooms" #show>
-                <option [ngValue]="room">{{ room?.name }}</option>
-              </ng-container>
+            <div class="help-block" *ngIf="((placeModel.touched || placeModel.dirty) && specifiedRooms.length == 0)">Nie ma dostępnych sal</div>
+            <select class="form-control" name="room" required [(ngModel)]="room" #roomModel="ngModel" *ngIf="specifiedRooms.length>0">
+                <option [selected]="true" disabled [ngValue]="-1">Wybierz salę</option>
+                <option *ngFor="let room of specifiedRooms" [ngValue]="room.id">{{ room?.name }}</option>
             </select>
         </div>
+      </div>
+      <div class="form-group form-group-lg" *ngIf="place?.id==17">
+          <label class="control-label col-sm-4" for="type">Wybierz miejsce na mapie: </label>
+          <app-map [userIsAddingDefect]="userIsAddingDefect"></app-map>
       </div>
       <div class="form-group row form-group-lg">
           <label class="control-label col-sm-4" for="type">Wybierz typ usterki: </label>

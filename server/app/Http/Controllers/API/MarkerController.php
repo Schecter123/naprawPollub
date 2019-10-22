@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Dto\MarkerFactory;
+use App\Dto\MarkerManager;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
@@ -24,7 +26,7 @@ ORDER BY markers.id"));
         return response()->json($markers);
 
     }
-
+    /*Funkcja zwracjąca wszystkie znaczniki*/
     public function getAll()
     {
         $markers = DB::table('markers')->get();
@@ -51,7 +53,10 @@ ORDER BY markers.id"));
      */
     public function store(Request $request)
     {
-        //
+        $newMarker = MarkerFactory::create($request->all());
+        $result = new MarkerManager();
+        $result->add($newMarker);
+        return response()->json($newMarker);
     }
 
     /**
@@ -74,7 +79,10 @@ ORDER BY markers.id"));
      */
     public function update(Request $request, $id)
     {
-        //
+        $updateMarker = MarkerFactory::create($request->all());
+        $result = new MarkerManager();
+        $result->update($updateMarker, $id);
+        return response()->json($updateMarker);
     }
 
     /**
@@ -85,6 +93,6 @@ ORDER BY markers.id"));
      */
     public function destroy($id)
     {
-        //
+        DB::table('markers')->where('id', $id)->delete();
     }
 }

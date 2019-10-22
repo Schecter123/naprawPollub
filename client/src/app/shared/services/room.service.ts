@@ -15,4 +15,8 @@ export class RoomService {
   getRooms(){
     return this.http.get(environment.rootURL + '/rooms');
   }
+
+  getParticularDefectRoom(idDefect){
+    return this.http.get<Room>(environment.rootURL + '/defects/'+idDefect+'/room');
+  }
 }

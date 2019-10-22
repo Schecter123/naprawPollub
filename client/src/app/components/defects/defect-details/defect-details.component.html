@@ -1,0 +1,87 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-7">
+      <div class="defect-details">
+        <mat-toolbar>
+          <mat-toolbar-row class="tools">
+            <button type="button" class="btn custom btn-sm" routerLink="/usterki">
+              <i class="fas fa-long-arrow-alt-left"></i> Powrót
+            </button>
+            <span class="example-spacer"></span>
+            <button type="button" class="btn btn-link btn-sm example-icon" (click)="editable=true">
+              <i class="fas fa-pencil-alt"></i>
+            </button>
+            <button type="button" class="btn btn-link btn-sm example-icon" (click)="deleteDefect()">
+              <i class="fas fa-trash"></i>
+            </button>
+          </mat-toolbar-row>
+        </mat-toolbar>
+      </div>
+      <div class="row defect-header">
+        <div class="col-md-9">
+          <div class="row inside-header">
+            <div class="defect-place example-icon"><span style="font-weight:bold;">{{ place.name }}</span>
+            </div>
+            <div class="defect-room example-icon">Sala: <span style="font-weight:bold;">{{ room?.name }}</span></div>
+            <div class="defect-type example-icon"><span style="font-weight:bold;">
+                <ng-container [ngSwitch]="DefectType[defect?.defectType]">
+                  <ng-container *ngSwitchCase="DefectType.Computers">Komputery</ng-container>
+                  <ng-container *ngSwitchCase="DefectType.Infrastructure">Infrastruktura</ng-container>
+                  <ng-container *ngSwitchCase="DefectType.Electronic">Elektryka</ng-container>
+                  <ng-container *ngSwitchCase="DefectType.Hydraulic">Hydraulika</ng-container>
+                  <ng-container *ngSwitchCase="DefectType.Mechanical">Mechanika</ng-container>
+                  <ng-container *ngSwitchCase="DefectType.Others">Inne</ng-container>
+                </ng-container>
+              </span>
+            </div>
+            <div class="defect-rating example-icon">Ocena: <span style="font-weight:bold;">0</span></div>
+          </div>
+        </div>
+        <div class="col-sm-3">
+          <div class="defect-state example-icon">
+            <span style="font-weight:bold;">
+              <ng-container [ngSwitch]="DefectState[defect?.defectState]">
+                <ng-container *ngSwitchCase="DefectState.ForRepair">
+                  <div [style.color]="'red'">Do naprawy</div>
+                </ng-container>
+                <ng-container *ngSwitchCase="DefectState.Repaired">
+                  <div [style.color]="'green'">Naprawiona</div>
+                </ng-container>
+                <ng-container *ngSwitchCase="DefectState.RepairInProgress">
+                  <div [style.color]="'#5659c0'">Trwają prace</div>
+                </ng-container>
+                <ng-container *ngSwitchCase="DefectState.WontBeRepaired">
+                  <div [style.color]="'#948d0b'">Nie będzie naprawiana</div>
+                </ng-container>
+                <ng-container *ngSwitchDefault>nieznany typ</ng-container>
+              </ng-container>
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="defect-style-content">
+        <div class="defect-description">
+          <ng-container *ngIf="!editable">{{defect?.description}}</ng-container>
+          <textarea type="text" [(ngModel)]="defectDescription" *ngIf="editable"></textarea>
+          <button class="btn btn-success" style="margin-right:10px" *ngIf="editable" (click)="makeChanges()">Zatwierdz
+            zmiany</button>
+          <button class="btn btn-default" *ngIf="editable" (click)="cancelChanges()">Anuluj</button>
+        </div>
+        <div class="defect-photo" *ngIf="defect.photoURL">
+          <img [src]="defect.photoURL" [alt]="defect.photoURL">
+        </div>
+        <div class="row defect-bottom">
+          <div class="col-md-6">
+            <div class="defect-date ">{{ defect?.date | date:'dd-MM-yyyy'}}</div>
+          </div>
+          <div class="col-md-6">
+            <div class="defect-author ">Autor: <span style="font-weight:bold;">Ty</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-5">
+      <app-defect-comment></app-defect-comment>
+    </div>
+  </div>
+</div>

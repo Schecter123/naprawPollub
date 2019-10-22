@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Defect } from '../models/defect.model';
 import { environment } from 'src/environments/environment';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -9,22 +10,31 @@ import { environment } from 'src/environments/environment';
 export class DefectService {
 
   list: Defect[];
-
   constructor(private http: HttpClient) { }
 
   getDefects(){
-    return this.http.get(environment.rootURL + '/defects');
+    return this.http.get<Defect[]>(environment.rootURL + '/defects');
+  }
+
+  getDefectsByMarkerId(markerID){
+    return this.http.get(environment.rootURL + '/defects').pipe(map ((defects:Defect[]) => defects.filter((defect:Defect) => defect.idMarker == markerID )));
   }
 
   getParticularDefect(idDefect){
-    return this.http.get(environment.rootURL + '/defects/'+idDefect);
+    return this.http.get<Defect>(environment.rootURL + '/defects/'+idDefect);
   }
 
-  getParticularDefectPlace(idDefect){
-    return this.http.get(environment.rootURL + '/defects/'+idDefect+'/place');
+  createDefect(defect:Defect){
+    console.log(defect);
+    return this.http.post(environment.rootURL + '/defects/', defect);
   }
 
-  getParticularDefectRoom(idDefect){
-    return this.http.get(environment.rootURL + '/defects/'+idDefect+'/room');
+  updateDefect(defect:Defect){
+    return this.http.put<Defect>(environment.rootURL + '/defects/'+defect.id, defect);
+  }
+
+  deleteDefect(defect:Defect){
+    console.log(defect.id);
+    return this.http.delete<Defect>(environment.rootURL + '/defects/'+defect.id);
   }
 }

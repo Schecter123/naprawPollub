@@ -1,7 +1,8 @@
 import { Component, OnInit, Input, OnDestroy, Output, EventEmitter } from '@angular/core';
-import { DefectType, Defect } from 'src/app/shared/models/defect.model';
-import { DefectService } from 'src/app/shared/services/defect.service';
+import { DefectType, DefectState } from 'src/app/shared/models/defect.model';
 import { Subscription} from 'rxjs';
+import { PlaceService } from 'src/app/shared/services/place.service';
+import { RoomService } from 'src/app/shared/services/room.service';
 
 
 @Component({
@@ -12,25 +13,25 @@ import { Subscription} from 'rxjs';
 export class DefectItemComponent implements OnInit, OnDestroy {
 
   @Input() defect;
-  room;
-  place;
+  rooms;
+  places;
   subscriptionRoom: Subscription;
   subscriptionPlace: Subscription;
 
   DefectType = DefectType;
+  DefectState = DefectState;
 
-  constructor(private defectService: DefectService) { }
+  constructor(private placeService: PlaceService, private roomService: RoomService) { }
 
   ngOnInit() {
-    this.subscriptionRoom = this.defectService.getParticularDefectRoom(this.defect.id).subscribe(response => {
-      this.room = response;
-      this.room = this.room.name;
+    this.subscriptionRoom = this.roomService.getRooms().subscribe(response => {
+      this.rooms = response;
     });
 
-    this.subscriptionPlace = this.defectService.getParticularDefectPlace(this.defect.id).subscribe(response => {
-      this.place = response;
-      this.place = this.place.name;
+    this.subscriptionPlace = this.placeService.getPlaces().subscribe(response => {
+      this.places = response;
     });
+
   }
 
   ngOnDestroy(){

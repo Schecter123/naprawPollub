@@ -15,4 +15,8 @@ export class PlaceService {
   getPlaces(){
     return this.http.get(environment.rootURL + '/places');
   }
+
+  getParticularDefectPlace(idDefect){
+    return this.http.get<Place>(environment.rootURL + '/defects/'+idDefect+'/place');
+  }
 }

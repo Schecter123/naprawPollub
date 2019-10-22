@@ -4,10 +4,13 @@ export interface Defect{
     idPlace: number;
     idUser: number;
     idRoom: number;
+    idMarker: number;
     defectState: DefectState;
     description: string;
     date: any;
     photoURL: string;
+    // latitude: number;
+    // longitude: number;
   }
   
 export enum DefectType{

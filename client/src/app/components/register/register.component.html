@@ -1,1 +1,66 @@
-<p>register works!</p>
+<div class="container">
+    <form #registerForm="ngForm" (ngSubmit)="addUser(); registerForm.reset()">
+        <div class="form-group form-group-lg">
+            <div class="control">
+                <label class="control-label col-sm-1" for="login">Login:</label>
+                <div class="control-input col-sm-11">
+                    <input type="text" class="form-control" id="login" name="login" [(ngModel)]="login" minlength="5"
+                        maxlength="45" required #loginModel="ngModel">
+                    <div class="help-block" *ngIf="loginModel.invalid && (loginModel.touched || loginModel.dirty)">
+                        <div *ngIf="loginModel?.errors.required">
+                            Login jest wymagany
+                        </div>
+                        <div *ngIf="loginModel?.errors.minlength">
+                            Login musi mieć minimum 5 znaków
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="control">
+                <label class="control-label col-sm-1" for="name">Imię:</label>
+                <div class="control-input col-sm-11">
+                    <input type="text" class="form-control" id="name" name="name" [(ngModel)]="name" maxlength="45">
+                </div>
+            </div>
+            <div class="control">
+                <label class="control-label col-sm-1" for="surname">Nazwisko:</label>
+                <div class="control-input col-sm-11">
+                    <input type="text" class="form-control" id="surname" name="surname" [(ngModel)]="surname"
+                        maxlength="45">
+                </div>
+            </div>
+
+            <div class="control"> 
+            <label class="control-label col-sm-1" for="email">E-mail:</label>
+            <div class="control-input col-sm-11">
+                <input type="email" class="form-control" id="email" name="email" [(ngModel)]="email" required
+                    #emailModel="ngModel" email>
+                <div class="help-block" *ngIf="emailModel.invalid && emailModel.touched">
+                    Wpisz poprawny email
+                </div>
+            </div>
+            </div>
+
+            <div class="control"> 
+            <label class="control-label col-sm-1" for="password">Hasło:</label>
+            <div class="control-input col-sm-11">
+                <input type="password" class="form-control" id="password" name="password" [(ngModel)]="password"
+                    required #passwordModel="ngModel">
+                <div class="help-block" *ngIf="passwordModel.invalid && passwordModel.touched">
+                    Hasło jest wymagane
+                </div>
+            </div>
+            </div>
+
+            <label class="control-label col-sm-3" for="place">Wybierz miejsca, które chcesz obserwować: </label>
+            <div class="control-input col-sm-9">
+                <select class="form-control form-select" name="place" multiple [(ngModel)]="selectedPlaces">
+                    <option *ngFor="let place of places" value="{{place.name}}">{{place.name}}</option>
+                </select>
+            </div>
+
+            <button type="submit" class="btn btn-success" [disabled]="!registerForm.form.valid">Zarejestruj się</button>
+        </div>
+    </form>
+</div>

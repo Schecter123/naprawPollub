@@ -1,5 +1,7 @@
-import { Component, OnInit, Input, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { DefectService } from 'src/app/shared/services/defect.service';
+import { MarkerService } from 'src/app/shared/services/marker.service';
+import { ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -10,16 +12,31 @@ import { DefectService } from 'src/app/shared/services/defect.service';
 export class DefectListComponent implements OnInit, OnDestroy {
 
   defects;
-  subscription;
+  subscriptionMarker;
+  subscriptionDefect;
 
-  constructor(private defectService: DefectService) { }
+  constructor(private defectService: DefectService, private activatedRoute: ActivatedRoute, private markerService: MarkerService) { }
 
   ngOnInit() {
-    this.subscription = this.defectService.getDefects().subscribe( response => this.defects = response);
+    
+    if(this.markerService.markerID){
+      this.subscriptionMarker = this.defectService.getDefectsByMarkerId(this.markerService.markerID).subscribe(
+        (response) => {this.defects = response},
+        (err) => {console.log('Error result: ' + err)}
+      );
+      
+      this.markerService.markerID = 0;
+    } else{
+      this.subscriptionDefect = this.activatedRoute.data.subscribe(data => this.defects = data.defects);
+    }
+
   }
 
   ngOnDestroy(){
-    this.subscription.unsubscribe();
+    if(this.subscriptionMarker)
+      this.subscriptionMarker.unsubscribe();
+    if(this.subscriptionDefect) 
+      this.subscriptionDefect.unsubscribe();
   }
 
 }

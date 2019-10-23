@@ -1,1 +1,21 @@
-<p>login works!</p>
+<div class="container">
+    <form #loginForm="ngForm" (ngSubmit)="loginUser(loginForm)">
+      <div class="form-group form-group-lg">
+        <label for="login">Login:</label>
+        <input type="text" class="form-control" id="login" name="login" required [(ngModel)]="login" #loginModel="ngModel">
+        <div class="help-block" *ngIf="loginModel.invalid && loginModel.touched">
+          Wpisz poprawnie login
+        </div>
+      </div>
+      <div class="form-group form-group-lg">
+        <label for="password">Hasło:</label>
+        <input type="password" class="form-control" id="password" name="password" required [(ngModel)]="password" #passwordModel="ngModel">
+        <div class="help-block" *ngIf="passwordModel.invalid && passwordModel.touched">
+          Wpisz hasło
+        </div>
+      </div>
+      <button type="submit" class="btn btn-success" [disabled]="!loginForm.form.valid">Zaloguj się</button>
+    </form>
+  </div>
+  
+  

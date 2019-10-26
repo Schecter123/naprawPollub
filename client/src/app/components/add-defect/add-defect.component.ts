@@ -6,6 +6,9 @@ import { PlaceService } from 'src/app/shared/services/place.service';
 import { MarkerService } from 'src/app/shared/services/marker.service';
 import {formatDate} from '@angular/common';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { Place } from 'src/app/shared/models/place.model';
+import { Marker } from 'src/app/shared/models/marker.model';
 
 @Component({
   selector: 'app-add-defect',
@@ -28,33 +31,33 @@ export class AddDefectComponent implements OnInit, OnDestroy {
   DefectType = DefectType;
   DefectState = DefectState;
   
-  place;
-  type;
-  text;
-  room;
+  place: Place;
+  type: string;
+  text: string;
+  room: number = -1; //domyślna wartość pokoju na "Wybierz salę"
   user;
-  marker;
-
-  currentDate;
+  marker: Marker;
   
   imageURL= "";
 
-  constructor(private defectService: DefectService, private roomService: RoomService, private placeService: PlaceService, private markerService: MarkerService, private router: Router) { }
+  userIsAddingDefect = true; //przełączanie trybu mapy dla osoby dodającej usterke
+
+  constructor(private defectService: DefectService, private roomService: RoomService, private placeService: PlaceService, private markerService: MarkerService, private router: Router, private toastrService: ToastrService) { }
 
   ngOnInit() {
     this.subscriberPlaces = this.placeService.getPlaces().subscribe( places => {
       this.places = places;
     });
-   
     this.subscriberRooms = this.roomService.getRooms().subscribe( rooms => {
       this.rooms = rooms;
     });
     this.subscriberDefects = this.defectService.getDefects().subscribe( defects => {
       this.defects = defects;
     });
-    this.subscriberMarker = this.markerService.getMarkers().subscribe( markers => {
+    this.subscriberMarker = this.markerService.getAllMarkers().subscribe( markers => {
       this.markers = markers;
-    })  
+    })
+
   }
   
   ngOnDestroy(){
@@ -69,16 +72,15 @@ export class AddDefectComponent implements OnInit, OnDestroy {
     this.marker = null;
     for(let room of this.rooms){
       if(selectedPlace.id == this.places[room.idPlace-1].id){
-        this.specifiedRooms.push(room);
+        this.specifiedRooms.push(room); //przypisywanie sali do wybranego miejsca
       }
     }
-
     for(let marker of this.markers){
       if(selectedPlace.id == marker.idPlace){
-        this.marker = marker;
+        this.marker = marker; //przypisywanie markerów na mapie do wybranego miejsca
       }
     }
-    console.log(this.marker);
+    this.room=-1; //ustawienie na "Wybierz salę", po każdej zmianie pokoju
   }
 
   onFileSelected(selectedFile){
@@ -87,12 +89,17 @@ export class AddDefectComponent implements OnInit, OnDestroy {
   }
 
   addDefect(){
+    if(this.room==-1){
+      this.toastrService.error("Musisz wybrać salę"); //Jeżeli użytkownik nie wybrał sali formularz nie może przejść dalej
+      return;
+    }
+
     this.defectService.createDefect({
     defectType: parseInt(this.type)+1,
     idPlace: this.place.id,
     idUser: 1,
-    idRoom: this.room.id,
-    idMarker: 2,
+    idRoom: this.room,
+    idMarker: this.marker.id,
     defectState: 1,
     description: this.text,
     date: formatDate(new Date(), 'yyyy-MM-dd HH:mm:ss', 'en'),

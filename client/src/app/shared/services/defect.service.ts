@@ -3,7 +3,6 @@ import { HttpClient } from '@angular/common/http';
 import { Defect } from '../models/defect.model';
 import { environment } from 'src/environments/environment';
 import { map } from 'rxjs/operators';
-import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +10,6 @@ import { Subject } from 'rxjs';
 export class DefectService {
 
   list: Defect[];
-  private updateLists = new Subject<Defect>();
   constructor(private http: HttpClient) { }
 
   getDefects(){

@@ -17,6 +17,10 @@ export class MarkerService {
     return this.http.get(environment.rootURL + '/markers');
   }
 
+  getAllMarkers(){
+    return this.http.get(environment.rootURL + '/all/markers');
+  }
+
   getDefectCount(markerId){
     return this.http.get(`${environment.rootURL}/markers/${markerId}/count`); 
   }

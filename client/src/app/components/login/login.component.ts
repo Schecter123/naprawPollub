@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit, OnDestroy {
       password: this.password,
       remember_me: false
     }).subscribe(
-      () => {
+      (result) => {
         this.messageService.success('Zostałeś zalogowany!');
         this.router.navigate(['/usterki/']);
       },

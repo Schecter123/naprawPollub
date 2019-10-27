@@ -1,7 +1,7 @@
-import { Component, OnInit, OnDestroy, Input} from '@angular/core';
+import { Component, OnInit, OnDestroy, Input, Output} from '@angular/core';
 import { DefectService } from 'src/app/shared/services/defect.service';
 import { MarkerService } from 'src/app/shared/services/marker.service';
-import { Marker } from 'src/app/shared/models/marker.model';
+
 
 @Component({
   selector: 'app-map',
@@ -16,12 +16,13 @@ export class MapComponent implements OnInit, OnDestroy {
   
   //Tryb dodawania markera przez użytkownika
   @Input() userIsAddingDefect;
-
+  userJustMarkedDefect: boolean = false;
+  latOfMarkedDefect;
+  lngOfMarkedDefect;
   //Zmienne potrzebne do mapy
   lat = 51.235869;
   lng = 22.548999;
   zoom = 17;
-
   constructor(private defectService: DefectService, private markerService: MarkerService) { }
 
   ngOnInit() {  
@@ -45,5 +46,36 @@ export class MapComponent implements OnInit, OnDestroy {
       });
     }
   }
+
+  addMarker(lat, lng){
+    if(this.userIsAddingDefect){
+      //  this.markerService.createMarker({
+      //   latitude: lat,
+      //   longitude: lng,
+      //   idPlace: 17,
+      //   info: 'Szczegóły usterki'
+      // }).subscribe(
+      //   marker => console.log(marker),
+      //   error => console.log(error)
+      // );
+    
+      this.latOfMarkedDefect = lat;
+      this.lngOfMarkedDefect = lng;
+      console.log(this.latOfMarkedDefect, this.lngOfMarkedDefect);
+      console.log(lat,lng);
+      this.userJustMarkedDefect = true;
+
+    }
+  }
+
+  markerDragEnd(lat,lng){
+    this.latOfMarkedDefect = lat;
+    this.lngOfMarkedDefect = lng;
+    console.log(this.latOfMarkedDefect, this.lngOfMarkedDefect);
+    console.log( lat,lng);
+    this.userJustMarkedDefect = true;
+  }
+
+
 
 }

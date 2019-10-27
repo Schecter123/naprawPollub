@@ -17,7 +17,6 @@ import { ToastrModule } from 'ngx-toastr';
 import { AuthInterceptor } from 'src/app/components/login/AuthInterceptor';
 
 //import { AgmCoreModule } from '@agm/core';
-
 @NgModule({
   declarations: [
     AppComponent

@@ -14,9 +14,7 @@ import { MaterialModule } from './material/material.module';
 import { MarkerService } from './shared/services/marker.service';
 import { MessageService } from 'src/app/shared/services/message.service';
 import {ToastrModule} from 'ngx-toastr';
-
 //import { AgmCoreModule } from '@agm/core';
-
 @NgModule({
   declarations: [
     AppComponent
@@ -39,7 +37,7 @@ import {ToastrModule} from 'ngx-toastr';
     DefectService,
     RoomService,
     MarkerService,
-    MessageService
+    MessageService,
   ],
   bootstrap: [AppComponent]
 })

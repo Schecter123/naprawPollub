@@ -29,16 +29,16 @@ export class RegisterComponent implements OnInit {
   UserType = UserType;
   subscriptionPlace: Subscription;
 
-
   constructor(private authService: AuthService,
     private messageService: MessageService,
     private router: Router,
     private placeService: PlaceService,
-    private registerService: RegisterService) { }
+    private registerService: RegisterService) {
+      authService.showLogin = true;
+      authService.showRegister = false;
+     }
 
   ngOnInit() {
-    this.authService.showRegister = false;
-
     this.subscriptionPlace = this.placeService.getPlaces().subscribe(response => {
       this.places = response;
     });
@@ -47,23 +47,6 @@ export class RegisterComponent implements OnInit {
   ngOnDestroy() {
     this.subscriptionPlace.unsubscribe();
   }
-
-  // changeNameToId(items) {
-  //   for (let item of items) {
-  //     for (let place of this.places) {
-  //       if (item == place.name) {
-  //         this.selectedPlacesId.push(place.id);
-  //       }
-  //     }
-  //   }
-  // }
-
-  // checkIfUserExist(login) {
-  //   if (this.authService.loginExist(login)) {
-  //     this.messageService.error('Taki użytkownik już istnieje');
-  //     return;
-  //   }
-  // }
 
   // addFollows(user) {
   //   for (let i = 0; i < this.selectedPlacesId.length; i++) {

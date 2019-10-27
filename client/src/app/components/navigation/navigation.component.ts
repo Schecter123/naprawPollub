@@ -9,8 +9,12 @@ import { AuthService } from 'src/app/shared/services/auth.service';
   styleUrls: ['./navigation.component.css']
 })
 export class NavigationComponent implements OnInit {
+  isLoginVisible: boolean;
 
-  constructor() { }
+  constructor(private authService: AuthService) {
+    authService.showRegister = true; 
+    authService.showLogin = true; 
+  }
 
   ngOnInit() {
    

@@ -11,10 +11,6 @@ export class QuestionsComponent implements OnInit {
   constructor(public authService: AuthService) { }
 
   ngOnInit() {
-    if(!this.authService.isLogged)
-    {
-      this.authService.show();
-    }
   }
 
 }

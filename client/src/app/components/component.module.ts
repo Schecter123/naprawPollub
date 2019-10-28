@@ -13,6 +13,7 @@ import { AgmCoreModule } from '@agm/core';
 import { MapComponent } from './main/map/map.component';
 import { MapMarkerComponent } from './main/map/map-marker/map-marker.component';
 import { AddDefectComponent } from './add-defect/add-defect.component';
+import { AgmJsMarkerClustererModule } from '@agm/js-marker-clusterer';
 
 const Components = [
   NavigationComponent, 
@@ -38,7 +39,8 @@ const Components = [
     DefectModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyAhTdbYebLKRDLZ4BMcI8MuHvagrn113Co'
-    })
+    }),
+    AgmJsMarkerClustererModule
   ],
   exports: [
     Components,

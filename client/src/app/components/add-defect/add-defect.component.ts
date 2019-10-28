@@ -1,5 +1,5 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { DefectType, DefectState } from 'src/app/shared/models/defect.model';
+import { Component, OnInit, OnDestroy, Output } from '@angular/core';
+import { DefectType, DefectState, Defect } from 'src/app/shared/models/defect.model';
 import { DefectService } from 'src/app/shared/services/defect.service';
 import { RoomService } from 'src/app/shared/services/room.service';
 import { PlaceService } from 'src/app/shared/services/place.service';
@@ -38,9 +38,11 @@ export class AddDefectComponent implements OnInit, OnDestroy {
   user;
   marker: Marker;
   
+
   imageURL= "";
 
   userIsAddingDefect = true; //przełączanie trybu mapy dla osoby dodającej usterke
+  defectID;
 
   constructor(private defectService: DefectService, private roomService: RoomService, private placeService: PlaceService, private markerService: MarkerService, private router: Router, private toastrService: ToastrService) { }
 
@@ -105,7 +107,9 @@ export class AddDefectComponent implements OnInit, OnDestroy {
     date: formatDate(new Date(), 'yyyy-MM-dd HH:mm:ss', 'en'),
     photoURL: ''
     }).subscribe( 
-      () => {this.router.navigate(['/usterki/']);},
+      (data:Defect) => {
+        this.router.navigate(['/usterki/']);
+      },
       err => {console.log(err)}
     );  
     

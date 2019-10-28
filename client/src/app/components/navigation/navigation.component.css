@@ -1,11 +1,60 @@
-@media screen and (min-width: 991px){
-    .small-screen-nav{
+@media screen and (min-width: 991px) {
+    .small-screen-nav {
         display: none;
     }
-
 }
-@media screen and (max-width: 991px){
-    .normal-nav{
+
+@media screen and (max-width: 991px) {
+    .normal-nav {
         display: none;
     }
+}
+
+nav {
+    font-size: 150%;
+    margin: 0 auto;
+}
+
+li {
+    margin: 5px auto;
+}
+
+button {
+    font-size: 18px;
+    color: #fff;
+}
+
+.btn.btn-success {
+    min-width: 140px !important;
+    min-height: 48px !important;
+}
+
+.btn.btn-warning {
+    width: 140px !important;
+    height: 48px !important;
+}
+
+.icon {
+    margin-right: 20px;
+}
+
+.dropdown-toggle {
+    min-width: 140px;
+    height: 48px !important;
+    margin-right: 15px;
+}
+
+.dropdown-menu {
+    margin-top: -8px;
+    right: 10px;
+}
+
+.dropdown-item {
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.btn.btn-link {
+    background-color: transparent;
+    text-decoration: none;
 }

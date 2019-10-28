@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Marker } from '@agm/core/services/google-maps-types';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
+import { Marker } from '../models/marker.model';
 
 @Injectable({
   providedIn: 'root'
@@ -23,5 +23,10 @@ export class MarkerService {
 
   getDefectCount(markerId){
     return this.http.get(`${environment.rootURL}/markers/${markerId}/count`); 
+  }
+
+  createMarker(marker: Marker){
+    console.log(marker);
+    return this.http.post(environment.rootURL + '/markers/', marker);
   }
 }

@@ -10,6 +10,7 @@ export class MarkerService {
 
   list: Marker[];
   markerID: number;
+  marker: Marker;
 
   constructor(private http: HttpClient) { }
 
@@ -26,7 +27,8 @@ export class MarkerService {
   }
 
   createMarker(marker: Marker){
-    console.log(marker);
+    this.marker = marker;
     return this.http.post(environment.rootURL + '/markers/', marker);
   }
+
 }

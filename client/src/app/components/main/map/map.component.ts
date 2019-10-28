@@ -13,16 +13,17 @@ export class MapComponent implements OnInit, OnDestroy {
   defectsCount;
   markers;
   subscriberMarkers;
+
+  //Zmienne potrzebne do mapy (lat i lng - środek kampusu Politechniki Lubelskiej)
+  lat = 51.235869;
+  lng = 22.548999;
+  zoom = 17;  //Mapa dobrze wygląda w takim przybliżeniu
   
   //Tryb dodawania markera przez użytkownika
   @Input() userIsAddingDefect;
-  userJustMarkedDefect: boolean = false;
   latOfMarkedDefect;
   lngOfMarkedDefect;
-  //Zmienne potrzebne do mapy
-  lat = 51.235869;
-  lng = 22.548999;
-  zoom = 17;
+
   constructor(private defectService: DefectService, private markerService: MarkerService) { }
 
   ngOnInit() {  
@@ -43,37 +44,34 @@ export class MapComponent implements OnInit, OnDestroy {
       navigator.geolocation.getCurrentPosition(position => {
         this.lat = position.coords.latitude;
         this.lng = position.coords.longitude;
+        this.latOfMarkedDefect = position.coords.latitude;
+        this.lngOfMarkedDefect = position.coords.longitude;
+        console.log(this.latOfMarkedDefect, this.lngOfMarkedDefect);
       });
     }
   }
-
-  addMarker(lat, lng){
-    if(this.userIsAddingDefect){
-      //  this.markerService.createMarker({
-      //   latitude: lat,
-      //   longitude: lng,
-      //   idPlace: 17,
-      //   info: 'Szczegóły usterki'
-      // }).subscribe(
-      //   marker => console.log(marker),
-      //   error => console.log(error)
-      // );
     
-      this.latOfMarkedDefect = lat;
-      this.lngOfMarkedDefect = lng;
-      console.log(this.latOfMarkedDefect, this.lngOfMarkedDefect);
-      console.log(lat,lng);
-      this.userJustMarkedDefect = true;
-
+  markerDragEnd(lat,lng){
+    if(this.userIsAddingDefect){   
+    this.latOfMarkedDefect = lat;
+    this.lngOfMarkedDefect = lng;
+    this.addMarekr();
     }
   }
 
-  markerDragEnd(lat,lng){
-    this.latOfMarkedDefect = lat;
-    this.lngOfMarkedDefect = lng;
-    console.log(this.latOfMarkedDefect, this.lngOfMarkedDefect);
-    console.log( lat,lng);
-    this.userJustMarkedDefect = true;
+  addMarekr(){
+    console.log(this.latOfMarkedDefect,  this.lngOfMarkedDefect);
+    this.markerService.createMarker({
+      latitude: this.latOfMarkedDefect,
+      longitude: this.lngOfMarkedDefect,
+      idPlace: 17,
+      info: 'Szczegóły usterki'
+    }).subscribe(
+      data => {
+        console.log(data)
+      },
+      error => {console.log(error)}
+    )
   }
 
 

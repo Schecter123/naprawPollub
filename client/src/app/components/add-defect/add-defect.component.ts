@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, Output } from '@angular/core';
+import { Component, OnInit, OnDestroy, Output, ViewChild } from '@angular/core';
 import { DefectType, DefectState, Defect } from 'src/app/shared/models/defect.model';
 import { DefectService } from 'src/app/shared/services/defect.service';
 import { RoomService } from 'src/app/shared/services/room.service';
@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Place } from 'src/app/shared/models/place.model';
 import { Marker } from 'src/app/shared/models/marker.model';
+
 
 @Component({
   selector: 'app-add-defect',
@@ -42,7 +43,7 @@ export class AddDefectComponent implements OnInit, OnDestroy {
   imageURL= "";
 
   userIsAddingDefect = true; //przełączanie trybu mapy dla osoby dodającej usterke
-  defectID;
+
 
   constructor(private defectService: DefectService, private roomService: RoomService, private placeService: PlaceService, private markerService: MarkerService, private router: Router, private toastrService: ToastrService) { }
 
@@ -59,9 +60,8 @@ export class AddDefectComponent implements OnInit, OnDestroy {
     this.subscriberMarker = this.markerService.getAllMarkers().subscribe( markers => {
       this.markers = markers;
     })
-
   }
-  
+
   ngOnDestroy(){
     this.subscriberPlaces.unsubscribe();
     this.subscriberRooms.unsubscribe();
@@ -90,12 +90,17 @@ export class AddDefectComponent implements OnInit, OnDestroy {
     console.log(this.selectedFile);
   }
 
-  addDefect(){
+  chceckIfUserSelectedARoom(){ //Jeżeli użytkownik nie wybrał sali formularz nie może przejść dalej
     if(this.room==-1){
-      this.toastrService.error("Musisz wybrać salę"); //Jeżeli użytkownik nie wybrał sali formularz nie może przejść dalej
+      this.toastrService.error("Musisz wybrać salę"); 
       return;
     }
+  }
 
+  addDefect(){
+    this.room = 1  //test do usunięcia
+    this.chceckIfUserSelectedARoom();
+    
     this.defectService.createDefect({
     defectType: parseInt(this.type)+1,
     idPlace: this.place.id,
@@ -107,7 +112,7 @@ export class AddDefectComponent implements OnInit, OnDestroy {
     date: formatDate(new Date(), 'yyyy-MM-dd HH:mm:ss', 'en'),
     photoURL: ''
     }).subscribe( 
-      (data:Defect) => {
+      () => {
         this.router.navigate(['/usterki/']);
       },
       err => {console.log(err)}

@@ -5,10 +5,10 @@
     [scrollwheel]="null" 
     [zoomControl]="true" 
     [gestureHandling]="'cooperative'"
-    (mapClick)="addMarker($event.coords.lat, $event.coords.lng)"
+   
     >
     <agm-marker-cluster  imagePath="https://raw.githubusercontent.com/googlemaps/v3-utility-library/master/markerclustererplus/images/m">
         <app-map-marker *ngFor="let marker of markers" [marker]="marker"></app-map-marker>   
     </agm-marker-cluster>
-    <agm-marker *ngIf="latOfMarkedDefect && lngOfMarkedDefect && userJustMarkedDefect" [markerDraggable]="true" (dragEnd)="markerDragEnd($event.coords.lat, $event.coords.lng)" [latitude]="latOfMarkedDefect" [longitude]="lngOfMarkedDefect" ></agm-marker>
+    <agm-marker *ngIf="latOfMarkedDefect && lngOfMarkedDefect" [markerDraggable]="true" (dragEnd)="markerDragEnd($event.coords.lat, $event.coords.lng)" [latitude]="latOfMarkedDefect" [longitude]="lngOfMarkedDefect" ></agm-marker>
 </agm-map>

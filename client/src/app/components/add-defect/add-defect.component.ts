@@ -38,12 +38,12 @@ export class AddDefectComponent implements OnInit, OnDestroy {
   room: number = -1; //domyślna wartość pokoju na "Wybierz salę"
   user;
   marker: Marker;
-  
-
   imageURL= "";
 
   userIsAddingDefect = true; //przełączanie trybu mapy dla osoby dodającej usterke
-
+  markerLatitude: number;
+  markerLongitude: number;
+  markerIDAddedByUser;
 
   constructor(private defectService: DefectService, private roomService: RoomService, private placeService: PlaceService, private markerService: MarkerService, private router: Router, private toastrService: ToastrService) { }
 
@@ -59,7 +59,9 @@ export class AddDefectComponent implements OnInit, OnDestroy {
     });
     this.subscriberMarker = this.markerService.getAllMarkers().subscribe( markers => {
       this.markers = markers;
-    })
+    });
+   
+    
   }
 
   ngOnDestroy(){
@@ -91,34 +93,56 @@ export class AddDefectComponent implements OnInit, OnDestroy {
   }
 
   chceckIfUserSelectedARoom(){ //Jeżeli użytkownik nie wybrał sali formularz nie może przejść dalej
-    if(this.room==-1){
+    if(this.room==-1 && this.place.id!=17){
       this.toastrService.error("Musisz wybrać salę"); 
       return;
     }
   }
 
-  addDefect(){
-    this.room = 1  //test do usunięcia
+  addDefectButtonClick(){
     this.chceckIfUserSelectedARoom();
-    
-    this.defectService.createDefect({
-    defectType: parseInt(this.type)+1,
-    idPlace: this.place.id,
-    idUser: 1,
-    idRoom: this.room,
-    idMarker: this.marker.id,
-    defectState: 1,
-    description: this.text,
-    date: formatDate(new Date(), 'yyyy-MM-dd HH:mm:ss', 'en'),
-    photoURL: ''
-    }).subscribe( 
-      () => {
-        this.router.navigate(['/usterki/']);
-      },
-      err => {console.log(err)}
-    );  
-    
+    if(this.place.id!=17) //Id miejsca, do którego nie pojawia się mapa
+      this.addDefect(this.place.id, this.room, this.marker.id, this.text)
+    else
+        this.addMarker(this.place.id, this.text);
   }
 
+
+  addMarker(place, description){
+    this.markerLatitude = this.markerService.markerLatitudeAndLongitude[0];
+    this.markerLongitude = this.markerService.markerLatitudeAndLongitude[1];
+    this.markerService.createMarker({
+      latitude: this.markerLatitude,
+      longitude: this.markerLongitude,
+      idPlace: 17,
+      info: 'Szczegóły usterki'
+    }).subscribe(
+      data => {
+        this.markerIDAddedByUser = data[0].lastIdMarker;
+        this.addDefect(place, null, this.markerIDAddedByUser, description);
+      },
+      error => {console.log(error)}
+    )
+  }
+
+  addDefect(place, room, marker, description){
+    this.defectService.createDefect({
+      defectType: parseInt(this.type)+1,
+      idPlace: place,
+      idUser: 1,
+      idRoom: room,
+      idMarker: marker,
+      defectState: 1,
+      description: description,
+      date: formatDate(new Date(), 'yyyy-MM-dd HH:mm:ss', 'en'),
+      photoURL: ''
+      }).subscribe( 
+        (data) => {
+          console.log(data)
+          this.router.navigate(['/usterki/']);
+        },
+        err => {console.log(err)}
+      );  
+  }
 
 }

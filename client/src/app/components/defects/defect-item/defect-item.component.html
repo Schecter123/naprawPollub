@@ -5,13 +5,13 @@
                 <div class="defect-place headerItem">
                     Miejsce:
                     <span class="headerDetail" tooltip-html-unsafe="Line 1<br />Line 2<br />Line 3">
-                        {{places[defect.idPlace-1].name}}
+                        {{places[defect.idPlace-1]?.name}}
                     </span>
                 </div>
                 <div class="defect-room headerItem">
                     Strefa/sala:
                     <span class="headerDetail">
-                        {{rooms[defect.idRoom-1].name}}
+                        {{rooms[defect.idRoom-1]?.name}}
                     </span>
                 </div>
                 <div class="defect-type headerItem">

@@ -42,8 +42,10 @@ export class MapComponent implements OnInit, OnDestroy {
   getUserLocation(){
     if(navigator.geolocation){
       navigator.geolocation.getCurrentPosition(position => {
+        //lokalizacja użytkownika
         this.lat = position.coords.latitude;
         this.lng = position.coords.longitude;
+        //umiejscowienie markera
         this.latOfMarkedDefect = position.coords.latitude;
         this.lngOfMarkedDefect = position.coords.longitude;
         console.log(this.latOfMarkedDefect, this.lngOfMarkedDefect);
@@ -55,24 +57,12 @@ export class MapComponent implements OnInit, OnDestroy {
     if(this.userIsAddingDefect){   
     this.latOfMarkedDefect = lat;
     this.lngOfMarkedDefect = lng;
-    this.addMarekr();
+    console.log(this.latOfMarkedDefect,  this.lngOfMarkedDefect);
+    this.markerService.markerLatitudeAndLongitude = [this.latOfMarkedDefect, this.lngOfMarkedDefect];
     }
   }
 
-  addMarekr(){
-    console.log(this.latOfMarkedDefect,  this.lngOfMarkedDefect);
-    this.markerService.createMarker({
-      latitude: this.latOfMarkedDefect,
-      longitude: this.lngOfMarkedDefect,
-      idPlace: 17,
-      info: 'Szczegóły usterki'
-    }).subscribe(
-      data => {
-        console.log(data)
-      },
-      error => {console.log(error)}
-    )
-  }
+  
 
 
 

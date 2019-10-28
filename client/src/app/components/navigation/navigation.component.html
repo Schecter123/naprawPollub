@@ -28,10 +28,20 @@
         <button type="button" class="btn btn-success" *ngIf="authService.showLogin && !authService.isLoggedIn()" routerLink="/logowanie">Zaloguj się</button>
     </form>
 
-    <button class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" *ngIf="authService.isLoggedIn()"><i class="fas fa-user icon"></i>nazwaUsera</button>
+    <!-- <button class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" *ngIf="authService.isLoggedIn()"><i class="fas fa-user icon"></i>nazwaUsera</button>
     <div class="dropdown-menu" *ngIf="authService.isLoggedIn()">
       <button class="btn btn-link dropdown-item" routerLink="/konto">Konto</button>
       <div class="dropdown-divider"></div>
       <button class="btn btn-link dropdown-item" routerLink="/" (click)="authService.logout()">Wyloguj</button>
-    </div>
+    </div> -->
+
+    <div class="dropdown" *ngIf="authService.isLoggedIn()">
+        <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fas fa-user icon"></i>nazwaUsera
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" routerLink="/konto">Konto</a>
+          <a class="dropdown-item" routerLink="/" (click)="authService.logout()">Wyloguj</a>
+        </div>
+      </div>
 </nav>

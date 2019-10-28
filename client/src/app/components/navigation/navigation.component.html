@@ -23,8 +23,15 @@
             </div>
     </div>
     <form class="form-inline">
-        <button type="button" class="btn btn-success" routerLink="/rejestracja">Zarejestruj się</button>
+        <button type="button" class="btn btn-success" *ngIf="authService.showRegister && !authService.isLoggedIn()" routerLink="/rejestracja">Zarejestruj się</button>
         <span style="margin: auto 5px;"></span>
-        <button type="button" class="btn btn-success" routerLink="/logowanie">Zaloguj się</button>
+        <button type="button" class="btn btn-success" *ngIf="authService.showLogin && !authService.isLoggedIn()" routerLink="/logowanie">Zaloguj się</button>
     </form>
+
+    <button class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" *ngIf="authService.isLoggedIn()"><i class="fas fa-user icon"></i>nazwaUsera</button>
+    <div class="dropdown-menu" *ngIf="authService.isLoggedIn()">
+      <button class="btn btn-link dropdown-item" routerLink="/konto">Konto</button>
+      <div class="dropdown-divider"></div>
+      <button class="btn btn-link dropdown-item" routerLink="/" (click)="authService.logout()">Wyloguj</button>
+    </div>
 </nav>

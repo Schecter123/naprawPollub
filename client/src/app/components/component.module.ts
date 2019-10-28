@@ -14,6 +14,7 @@ import { MapComponent } from './main/map/map.component';
 import { MapMarkerComponent } from './main/map/map-marker/map-marker.component';
 import { AddDefectComponent } from './add-defect/add-defect.component';
 import { AgmJsMarkerClustererModule } from '@agm/js-marker-clusterer';
+import { AccountDetailsComponent } from './account-details/account-details.component';
 
 const Components = [
   NavigationComponent, 
@@ -31,6 +32,7 @@ const Components = [
 @NgModule({
   declarations: [
     Components,
+    AccountDetailsComponent,
   ],
   imports: [
     CommonModule, 

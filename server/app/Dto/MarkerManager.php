@@ -16,7 +16,7 @@ class MarkerManager
     public function add(MarkerClass $markerClass)
     {
         $marker = new Marker;
-        $marker->latitude = $markerClass->getLongitude();
+        $marker->latitude = $markerClass->getLatitude();
         $marker->longitude = $markerClass->getLongitude();
         $marker->idPlace = $markerClass->getIdPlace();
         $marker->info = $markerClass->getInfo();
@@ -27,7 +27,7 @@ class MarkerManager
     public function update(MarkerClass $markerClass, $id)
     {
         $marker = Marker::find($id);
-        $marker->latitude = $markerClass->getLongitude();
+        $marker->latitude = $markerClass->getLatitude();
         $marker->longitude = $markerClass->getLongitude();
         $marker->idPlace = $markerClass->getIdPlace();
         $marker->info = $markerClass->getInfo();

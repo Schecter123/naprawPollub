@@ -20,7 +20,7 @@ class CreateDefectsTable extends Migration
             $table->foreign('idPlace')->references('id')->on('places')->onDelete('cascade');
             $table->unsignedBigInteger('idUser');
             $table->foreign('idUser')->references('id')->on('users')->onDelete('cascade');
-            $table->unsignedBigInteger('idRoom');
+            $table->unsignedBigInteger('idRoom')->nullable();
             $table->foreign('idRoom')->references('id')->on('rooms')->onDelete('cascade');
             $table->unsignedBigInteger('idMarker');
             $table->foreign('idMarker')->references('id')->on('markers')->onDelete('cascade');

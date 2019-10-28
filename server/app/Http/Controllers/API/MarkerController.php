@@ -26,6 +26,7 @@ ORDER BY markers.id"));
         return response()->json($markers);
 
     }
+
     /*Funkcja zwracjąca wszystkie znaczniki*/
     public function getAll()
     {
@@ -47,16 +48,15 @@ ORDER BY markers.id"));
 
     /**
      * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
         $newMarker = MarkerFactory::create($request->all());
         $result = new MarkerManager();
         $result->add($newMarker);
-        return response()->json($newMarker);
+        //return response()->json($newMarker);
+        $lastIdMarker = DB::select(DB::raw("SELECT MAX(id) AS lastIdMarker FROM markers"));
+        return $lastIdMarker;
     }
 
     /**

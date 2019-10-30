@@ -18,9 +18,10 @@ class UserController extends Controller
         return response()->json($users);
     }
 
-    public function getAll()
+    public function getUserByLogin($login)
     {
-
+        $particularUser = DB::table('users')->where('login', $login)->first();
+        return response()->json($particularUser);
     }
 
     /**

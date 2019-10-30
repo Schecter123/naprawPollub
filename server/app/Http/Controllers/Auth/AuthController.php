@@ -13,7 +13,7 @@ class AuthController extends Controller
     public function signup(Request $request)
     {
         $request->validate([
-            'login' =>'required',
+            'login' => 'required',
             'password' => 'required',
             'email' => 'required|string|email|unique:users',
             'name' => 'nullable|string',
@@ -52,6 +52,7 @@ class AuthController extends Controller
             $token->expires_at = Carbon::now()->addWeeks(1);
         $token->save();
         return response()->json([
+            'user' => auth()->user(),
             'access_token' => $tokenResult->accessToken,
             'token_type' => 'Bearer',
             'expires_at' => Carbon::parse(

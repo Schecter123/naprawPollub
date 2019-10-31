@@ -20,6 +20,11 @@ export class UserService {
   }
 
   getUser(userLogin: string){
-    return this.http.get<User>(environment.rootURL + '/users/'+userLogin);
+    return this.http.get<User>(environment.rootURL + '/users/'+userLogin+'/login');
+  }
+
+  getUserById(userId: number){
+    console.log(userId);
+    return this.http.get<User>(environment.rootURL + '/users/'+ userId);
   }
 }

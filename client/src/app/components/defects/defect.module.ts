@@ -14,6 +14,7 @@ import { PlaceResolverService } from './place-resolver.service';
 import { RoomResolverService } from './room-resolver.service';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import { DefectListResolverService } from './defect-list-resolver.service';
+import { UserResolverService } from './user-resolver.service';
 
 const routes = [
   {
@@ -29,7 +30,8 @@ const routes = [
     resolve: {
       defect: DefectResolverService,
       place: PlaceResolverService,
-      room: RoomResolverService
+      room: RoomResolverService,
+      user: UserResolverService
     }
   }
 ]

@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { AccountDetailsComponent } from './account-details.component';
 import { RouterModule } from '@angular/router';
 import { AccountDetailsResolverService } from './account-details-resolver.service';
-import { NotFoundComponent } from '../not-found/not-found.component';
 
 const routes = [
   {
@@ -11,7 +10,7 @@ const routes = [
     component: AccountDetailsComponent,
     resolve: {
       user: AccountDetailsResolverService
-    }
+    },
   }
  
 ]

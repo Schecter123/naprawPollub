@@ -18,19 +18,22 @@ export class AuthService {
   constructor(private http: HttpClient, private messageService: MessageService, private router: Router) {}
 
   loginUser(userLogin:UserLogin){
-    console.log(userLogin);
-    this.loggedUser = userLogin;
     return this.http.post(environment.authURL + '/login/', userLogin).subscribe(
       (result) => {
+        this.loggedUser = userLogin;
         this.messageService.success('Zostałeś zalogowany!');
         this.setSession(result);
         this.router.navigate(['/usterki/']);
       },
-      err => { this.messageService.error('Błąd logowania!'); }
+      err => { 
+        this.messageService.error('Błąd logowania!');
+        this.loggedUser = null;
+      }
     );
   }
 
   setSession(result) {
+    localStorage.setItem('loggedUser', result.user.login);
     localStorage.setItem('access_token', result.access_token);
     localStorage.setItem("expires_at", JSON.stringify(result.expires_at.valueOf()));
   }
@@ -38,6 +41,7 @@ export class AuthService {
   logout() {
     localStorage.removeItem("access_token");
     localStorage.removeItem("expires_at");
+    localStorage.removeItem("loggedUser");
   }
 
   public isLoggedIn() {

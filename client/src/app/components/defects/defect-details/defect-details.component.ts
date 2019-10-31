@@ -13,9 +13,11 @@ export class DefectDetailsComponent implements OnInit, OnDestroy {
   defect;
   place;
   room;
+  user;
   editable = false;
   defectDescription;
-  users;
+  loggedUser;
+
   //subskrybcje
   defectSubscriber;
   placeSubscriber;
@@ -32,13 +34,24 @@ export class DefectDetailsComponent implements OnInit, OnDestroy {
     this.defectSubscriber= this.activatedRoute.data.subscribe(data => this.defect = data.defect);
     this.placeSubscriber = this.activatedRoute.data.subscribe(data => this.place = data.place);
     this.roomSubscriber = this.activatedRoute.data.subscribe(data => this.room = data.room);
-    this.userSubscriber = this.userService.getUsers().subscribe( data => this.users = data);
+    this.userSubscriber = this.activatedRoute.data.subscribe(data => {
+      this.user = data.user
+      console.log(this.user);
+      console.log(data.user);
+    });
+    // this.userService.getUserById(6).subscribe(data => {
+    //   this.user = data
+    //   console.log(this.user);
+    // });;
+    this.loggedUser = localStorage.getItem("loggedUser");
+    console.log(this.loggedUser)
   }
 
   ngOnDestroy(){
     this.defectSubscriber.unsubscribe();
     this.placeSubscriber.unsubscribe();
     this.roomSubscriber.unsubscribe();
+    this.userSubscriber.unsubscribe();
   }
 
   makeChanges(){

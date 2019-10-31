@@ -6,12 +6,13 @@ import { UserService } from 'src/app/shared/services/user.service';
 @Injectable({
   providedIn: 'root'
 })
-export class AccountDetailsResolverService implements Resolve<User>{
+export class UserResolverService implements Resolve<User>{
  
+
   constructor(private userService: UserService) { }
 
   resolve(route: import("@angular/router").ActivatedRouteSnapshot, state: import("@angular/router").RouterStateSnapshot): User | import("rxjs").Observable<User> | Promise<User> {
-    const login = route.params['login'];
-    return this.userService.getUser(localStorage.getItem("loggedUser"));
+    const id = parseInt(route.params['id']);
+    return this.userService.getUserById(id);
   }
 }

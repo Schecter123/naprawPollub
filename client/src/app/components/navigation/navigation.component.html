@@ -39,9 +39,10 @@
         <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <i class="fas fa-user icon"></i>nazwaUsera
         </button>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <a class="dropdown-item" routerLink="konto/userTest">Konto</a>
+        <app-dropdown-button *ngIf="authService.isLoggedIn()"></app-dropdown-button>
+        <!-- <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" routerLink="/{{user?.login}}">Konto</a>
           <a class="dropdown-item" routerLink="/" (click)="authService.logout()">Wyloguj</a>
-        </div>
+        </div> -->
       </div>
 </nav>

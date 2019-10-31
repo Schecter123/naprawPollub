@@ -17,8 +17,12 @@ const routes: Routes = [
   {path: 'dodaj-usterke', component: AddDefectComponent, canActivate: [AuthGuard]},
   {path: 'usterki', loadChildren: () => import('./components/defects/defect.module').then(mod => mod.DefectModule)},
   {path: 'pytania', component: QuestionsComponent},
-  {path: 'konto', loadChildren: () => import('./components/account-details/account-details.module').then(mod => mod.AccountDetailsModule)},
   {path: '', redirectTo: 'strona-glowna', pathMatch: 'full' },
+  {
+    path: '', 
+    loadChildren: () => import('./components/account-details/account-details.module').then(mod => mod.AccountDetailsModule), 
+    canActivate: [AuthGuard]
+  },
   {path: '**', component: NotFoundComponent}
 ];
 

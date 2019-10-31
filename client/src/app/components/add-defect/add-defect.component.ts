@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Place } from 'src/app/shared/models/place.model';
 import { Marker } from 'src/app/shared/models/marker.model';
+import { UserService } from 'src/app/shared/services/user.service';
 
 
 @Component({
@@ -45,7 +46,7 @@ export class AddDefectComponent implements OnInit, OnDestroy {
   markerLongitude: number;
   markerIDAddedByUser;
 
-  constructor(private defectService: DefectService, private roomService: RoomService, private placeService: PlaceService, private markerService: MarkerService, private router: Router, private toastrService: ToastrService) { }
+  constructor(private defectService: DefectService, private roomService: RoomService, private placeService: PlaceService, private markerService: MarkerService, private router: Router, private toastrService: ToastrService, private userService: UserService) { }
 
   ngOnInit() {
     this.subscriberPlaces = this.placeService.getPlaces().subscribe( places => {
@@ -61,7 +62,7 @@ export class AddDefectComponent implements OnInit, OnDestroy {
       this.markers = markers;
     });
    
-    
+    this.userService.getUser(localStorage.getItem("loggedUser")).subscribe( user => this.user = user);
   }
 
   ngOnDestroy(){
@@ -129,7 +130,7 @@ export class AddDefectComponent implements OnInit, OnDestroy {
     this.defectService.createDefect({
       defectType: parseInt(this.type)+1,
       idPlace: place,
-      idUser: 1,
+      idUser: this.user.id,
       idRoom: room,
       idMarker: marker,
       defectState: 1,

@@ -18,4 +18,8 @@ export class UserService {
   getUsers(){
     return this.http.get(environment.rootURL + '/users');
   }
+
+  getUser(userLogin: string){
+    return this.http.get<User>(environment.rootURL + '/users/'+userLogin);
+  }
 }

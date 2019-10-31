@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { DefectService } from 'src/app/shared/services/defect.service';
 import { DefectType, DefectState } from 'src/app/shared/models/defect.model';
 import { ActivatedRoute, Router } from '@angular/router';
+import { UserService } from 'src/app/shared/services/user.service';
 @Component({
   selector: 'app-defect-details',
   templateUrl: './defect-details.component.html',
@@ -14,21 +15,24 @@ export class DefectDetailsComponent implements OnInit, OnDestroy {
   room;
   editable = false;
   defectDescription;
+  users;
   //subskrybcje
   defectSubscriber;
   placeSubscriber;
   roomSubscriber;
+  userSubscriber;
   subscription;
   //enum
   DefectType = DefectType;
   DefectState = DefectState;
 
-  constructor(private defectService: DefectService, private activatedRoute: ActivatedRoute, private router: Router) { }
+  constructor(private defectService: DefectService, private activatedRoute: ActivatedRoute, private router: Router, private userService: UserService) { }
 
   ngOnInit() {
     this.defectSubscriber= this.activatedRoute.data.subscribe(data => this.defect = data.defect);
     this.placeSubscriber = this.activatedRoute.data.subscribe(data => this.place = data.place);
     this.roomSubscriber = this.activatedRoute.data.subscribe(data => this.room = data.room);
+    this.userSubscriber = this.userService.getUsers().subscribe( data => this.users = data);
   }
 
   ngOnDestroy(){

@@ -15,8 +15,8 @@ import { MarkerService } from './shared/services/marker.service';
 import { MessageService } from 'src/app/shared/services/message.service';
 import { ToastrModule } from 'ngx-toastr';
 import { AuthInterceptor } from 'src/app/components/login/AuthInterceptor';
+import { AuthGuard } from './shared/auth-guard.service';
 
-//import { AgmCoreModule } from '@agm/core';
 @NgModule({
   declarations: [
     AppComponent
@@ -29,9 +29,6 @@ import { AuthInterceptor } from 'src/app/components/login/AuthInterceptor';
     MaterialModule,
     ComponentModule,
     ToastrModule.forRoot()
-    // AgmCoreModule.forRoot({
-    //   apiKey: 'AIzaSyD7V_B_3KdjW6_cZrU3x3DxOS1SU_BMD20'
-    // })
   ],
   providers: [
     UserService,
@@ -40,7 +37,8 @@ import { AuthInterceptor } from 'src/app/components/login/AuthInterceptor';
     RoomService,
     MarkerService,
     MessageService,
-    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    AuthGuard
   ],
   bootstrap: [AppComponent]
 })

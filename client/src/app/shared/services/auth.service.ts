@@ -13,10 +13,13 @@ export class AuthService {
   showRegister;
   showLogin;
 
+  loggedUser;
+
   constructor(private http: HttpClient, private messageService: MessageService, private router: Router) {}
 
   loginUser(userLogin:UserLogin){
     console.log(userLogin);
+    this.loggedUser = userLogin;
     return this.http.post(environment.authURL + '/login/', userLogin).subscribe(
       (result) => {
         this.messageService.success('Zostałeś zalogowany!');

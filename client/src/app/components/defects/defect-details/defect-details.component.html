@@ -7,15 +7,13 @@
             <button type="button" class="btn custom btn-sm" routerLink="/usterki">
               <i class="fas fa-long-arrow-alt-left"></i> Powrót
             </button>
-            <div class="edit-tools" *ngIf="user?.login==loggedUser">
               <span class="example-spacer"></span>
-              <button type="button" class="btn btn-link btn-sm example-icon" (click)="editable=true">
+              <button type="button" class="btn btn-link btn-sm example-icon" (click)="editable=true"  *ngIf="user?.login==loggedUser">
                 <i class="fas fa-pencil-alt"></i>
               </button>
-              <button type="button" class="btn btn-link btn-sm example-icon" (click)="deleteDefect()">
+              <button type="button" class="btn btn-link btn-sm example-icon" (click)="deleteDefect()"  *ngIf="user?.login==loggedUser">
                 <i class="fas fa-trash"></i>
               </button>
-            </div>
           </mat-toolbar-row>
         </mat-toolbar>
       </div>

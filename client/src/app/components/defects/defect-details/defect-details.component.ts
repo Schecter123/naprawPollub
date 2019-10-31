@@ -35,8 +35,8 @@ export class DefectDetailsComponent implements OnInit, OnDestroy {
     this.placeSubscriber = this.activatedRoute.data.subscribe(data => this.place = data.place);
     this.roomSubscriber = this.activatedRoute.data.subscribe(data => this.room = data.room);
     this.userSubscriber = this.activatedRoute.data.subscribe(data => {
-      this.user = data.user
-      console.log(this.user);
+      this.user = data.user[0];
+      console.log(this.user[0]);
       console.log(data.user);
     });
     // this.userService.getUserById(6).subscribe(data => {

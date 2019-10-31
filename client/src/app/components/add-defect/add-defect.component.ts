@@ -46,7 +46,14 @@ export class AddDefectComponent implements OnInit, OnDestroy {
   markerLongitude: number;
   markerIDAddedByUser;
 
-  constructor(private defectService: DefectService, private roomService: RoomService, private placeService: PlaceService, private markerService: MarkerService, private router: Router, private toastrService: ToastrService, private userService: UserService) { }
+  constructor(
+    private defectService: DefectService, 
+    private roomService: RoomService, 
+    private placeService: PlaceService, 
+    private markerService: MarkerService, 
+    private router: Router, 
+    private toastrService: ToastrService, 
+    private userService: UserService) { }
 
   ngOnInit() {
     this.subscriberPlaces = this.placeService.getPlaces().subscribe( places => {
@@ -140,9 +147,13 @@ export class AddDefectComponent implements OnInit, OnDestroy {
       }).subscribe( 
         (data) => {
           console.log(data)
+          this.toastrService.success('Dodano usterkę!');
           this.router.navigate(['/usterki/']);
         },
-        err => {console.log(err)}
+        err => {
+          this.toastrService.error("Wystapił błąd"); 
+          console.log(err)
+        }
       );  
   }
 

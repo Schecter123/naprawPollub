@@ -27,4 +27,8 @@ export class UserService {
     console.log(userId);
     return this.http.get<User>(environment.rootURL + '/users/'+ userId);
   }
+
+  getUserByDefectId(defectId: number){
+    return this.http.get<User>(environment.rootURL + '/users/'+ defectId + '/defect');
+  }
 }

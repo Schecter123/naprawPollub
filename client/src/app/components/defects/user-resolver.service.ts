@@ -13,6 +13,6 @@ export class UserResolverService implements Resolve<User>{
 
   resolve(route: import("@angular/router").ActivatedRouteSnapshot, state: import("@angular/router").RouterStateSnapshot): User | import("rxjs").Observable<User> | Promise<User> {
     const id = parseInt(route.params['id']);
-    return this.userService.getUserById(id);
+    return this.userService.getUserByDefectId(id);
   }
 }

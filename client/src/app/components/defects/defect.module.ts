@@ -50,7 +50,7 @@ const routes = [
     FormsModule,
     MatToolbarModule
   ],
-  providers: [ DefectResolverService, PlaceResolverService, RoomResolverService, DefectListResolverService ],
+  providers: [ DefectResolverService, PlaceResolverService, RoomResolverService, DefectListResolverService, UserResolverService ],
   exports: [
     DefectsComponent,
     DefectListComponent, 

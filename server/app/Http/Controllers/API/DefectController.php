@@ -49,7 +49,8 @@ class DefectController extends Controller
         $newDefect = DefectFactory::create($request->all());
         $result = new DefectManager();
         $result->add($newDefect);
-        return response()->json($newDefect);
+        $lastIdDefect = DB::select(DB::raw("SELECT MAX(id) AS lastIdDefect FROM defects"));
+        return response()->json($lastIdDefect);
     }
 
     /**

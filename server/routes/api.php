@@ -18,6 +18,7 @@ use Illuminate\Http\Request;
 });*/
 Route::group(['prefix' => 'v1', 'namespace' => 'API'], function () {
     Route::apiResource('users', 'UserController');
+    Route::get('/users/{user}/login', 'UserController@getUserByLogin');
     Route::apiResource('rooms', 'RoomController');
     Route::apiResource('ratings', 'RatingController');
     Route::apiResource('places', 'PlaceController');

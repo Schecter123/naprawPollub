@@ -1,0 +1,12 @@
+<div class="admin">
+    <ng-container *ngIf="user.type === UserType[UserType.PlaceAdministrator] then show else noShow"></ng-container>
+    <ng-template #show>
+        <ul class="list-group title"> Miejsca, którymi zarządzasz: </ul>
+        <li class="list-group-item" *ngFor="let place of places"> {{ place.name }}</li>
+    </ng-template>
+    <ng-template #noShow>
+        <p>Jesteś zarządcą budynku?</p>
+        <span>Skontaktuj się z nami: email@email.com</span>
+    </ng-template>
+    <hr>
+</div>

@@ -16,8 +16,6 @@ export class AccountAdministationComponent implements OnInit {
   constructor(private placeService: PlaceService) { }
 
   ngOnInit() {
-    console.log(this.user.type);
-    console.log(UserType[UserType.PlaceAdministrator])
     this.placeService.getBuildingAdministatorPlaces(this.user.id).subscribe( places => this.places = places);
   }
 

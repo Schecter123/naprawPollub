@@ -10,6 +10,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Place } from 'src/app/shared/models/place.model';
 import { Marker } from 'src/app/shared/models/marker.model';
 import { UserService } from 'src/app/shared/services/user.service';
+import { UploadImageService } from 'src/app/shared/services/upload-image.service';
 
 
 @Component({
@@ -40,6 +41,7 @@ export class AddDefectComponent implements OnInit, OnDestroy {
   user;
   marker: Marker;
   imageURL= "";
+  defectID;
 
   userIsAddingDefect = true; //przełączanie trybu mapy dla osoby dodającej usterke
   markerLatitude: number;
@@ -50,7 +52,8 @@ export class AddDefectComponent implements OnInit, OnDestroy {
     private defectService: DefectService, 
     private roomService: RoomService, 
     private placeService: PlaceService, 
-    private markerService: MarkerService, 
+    private markerService: MarkerService,
+    private uploadImageService: UploadImageService,
     private router: Router, 
     private toastrService: ToastrService, 
     private userService: UserService) { }
@@ -68,7 +71,6 @@ export class AddDefectComponent implements OnInit, OnDestroy {
     this.subscriberMarker = this.markerService.getAllMarkers().subscribe( markers => {
       this.markers = markers;
     });
-   
     this.userService.getUser(localStorage.getItem("loggedUser")).subscribe( user => this.user = user);
   }
 
@@ -96,8 +98,7 @@ export class AddDefectComponent implements OnInit, OnDestroy {
   }
 
   onFileSelected(selectedFile){
-    this.selectedFile = selectedFile.target.files[0];
-    console.log(this.selectedFile);
+    this.selectedFile = <File>selectedFile.target.files[0];
   }
 
   chceckIfUserSelectedARoom(){ //Jeżeli użytkownik nie wybrał sali formularz nie może przejść dalej
@@ -112,7 +113,7 @@ export class AddDefectComponent implements OnInit, OnDestroy {
     if(this.place.id!=17) //Id miejsca, do którego nie pojawia się mapa
       this.addDefect(this.place.id, this.room, this.marker.id, this.text)
     else
-        this.addMarker(this.place.id, this.text);
+      this.addMarker(this.place.id, this.text);
   }
 
 
@@ -146,7 +147,8 @@ export class AddDefectComponent implements OnInit, OnDestroy {
       photoURL: ''
       }).subscribe( 
         (data) => {
-          console.log(data)
+          this.defectID = data[0].lastIdDefect;
+          this.uploadImageService.postFile(this.selectedFile, this.defectID);
           this.toastrService.success('Dodano usterkę!');
           this.router.navigate(['/usterki/']);
         },

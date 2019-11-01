@@ -16,7 +16,6 @@ export class AccountDetailsComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
       this.loggedUser = localStorage.getItem("loggedUser");
-      console.log(this.loggedUser)
       this.subscribtion = this.activatedRoute.data.subscribe( data => {
         this.user = data.user
       });

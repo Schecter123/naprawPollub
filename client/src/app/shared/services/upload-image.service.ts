@@ -11,6 +11,7 @@ export class UploadImageService {
 
   postFile(fileToUpload: File, defectId: number){
     const fd = new FormData();
+    console.log(fileToUpload);
     fd.append('Image', fileToUpload, fileToUpload.name)
     fd.append('DefectID', defectId.toString());
 

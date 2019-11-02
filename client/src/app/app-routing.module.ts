@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { Routes, RouterModule,Router, NavigationEnd } from '@angular/router';
 import { MainComponent } from './components/main/main.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
@@ -8,7 +8,7 @@ import { CommonModule } from '@angular/common';
 import { AddDefectComponent } from './components/add-defect/add-defect.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { AuthGuard } from './shared/auth-guard.service';
-
+import {AuthService } from 'src/app/shared/services/auth.service'
 
 const routes: Routes = [
   {path: 'strona-glowna', component: MainComponent},
@@ -30,4 +30,11 @@ const routes: Routes = [
   imports: [CommonModule, RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule { constructor(private router: Router, private authService: AuthService) {
+  this.router.events.subscribe((ev) => {
+    if (ev instanceof NavigationEnd && (ev.url !== '/rejestracja' && ev.url !== '/logowanie')) {
+      authService.showRegister = true;
+      authService.showLogin = true;
+    }
+  });
+}}

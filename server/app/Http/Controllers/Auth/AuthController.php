@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use App\User;
+use Illuminate\Support\Facades\DB;
 
 class AuthController extends Controller
 {
@@ -28,9 +29,10 @@ class AuthController extends Controller
             'surname' => $request->surname,
         ]);
         $user->save();
-        return response()->json([
-            'message' => 'Successfully created user!'
-        ], 201);
+
+        $lastIdUser = DB::select(DB::raw("SELECT MAX(id) AS lastIdUser FROM users"));
+
+        return response()->json($lastIdUser);
     }
 
     public function login(Request $request)

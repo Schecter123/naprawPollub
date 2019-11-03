@@ -17,6 +17,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { AuthInterceptor } from 'src/app/components/login/AuthInterceptor';
 import { AuthGuard } from './shared/auth-guard.service';
 import { UploadImageService } from './shared/services/upload-image.service';
+import { ManageUserGuard } from './shared/manage-user-guard.service';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { UploadImageService } from './shared/services/upload-image.service';
     MessageService,
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
     AuthGuard,
+    ManageUserGuard,
     UploadImageService
   ],
   bootstrap: [AppComponent]

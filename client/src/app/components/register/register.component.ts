@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
 import { PlaceService } from 'src/app/shared/services/place.service';
 import { RegisterService } from 'src/app/shared/services/register.service';
+import { FollowService } from 'src/app/shared/services/follow.service';
 import { Subscription } from 'rxjs';
 
 
@@ -33,12 +34,14 @@ export class RegisterComponent implements OnInit {
     private messageService: MessageService,
     private router: Router,
     private placeService: PlaceService,
-    private registerService: RegisterService) {
-      authService.showLogin = true;
-      authService.showRegister = false;
-     }
+    private registerService: RegisterService,
+    private followService: FollowService) {
+  }
 
   ngOnInit() {
+    this.authService.showLogin = true;
+    this.authService.showRegister = false;
+
     this.subscriptionPlace = this.placeService.getPlaces().subscribe(response => {
       this.places = response;
     });
@@ -47,17 +50,6 @@ export class RegisterComponent implements OnInit {
   ngOnDestroy() {
     this.subscriptionPlace.unsubscribe();
   }
-
-  // addFollows(user) {
-  //   for (let i = 0; i < this.selectedPlacesId.length; i++) {
-  //     this.follow = {
-  //       id: this.follows.length + i,
-  //       idPlace: this.selectedPlacesId[i],
-  //       idUser: user.id
-  //     }
-  //     this.follows.push(this.follow);
-  //   }
-  // }
 
   addUser() {
     this.registerService.registerUser({
@@ -69,12 +61,37 @@ export class RegisterComponent implements OnInit {
       name: this.name,
       surname: this.surname
     }).subscribe(
-      () => {
+      (result) => {
         this.messageService.success('Zostałeś zarejestrowany!');
+        this.addFollows();
         this.router.navigate(['/usterki/']);
+
       },
       err => { this.messageService.error('Błąd rejestracji!'); }
     );
+  }
+
+  addFollows() {
+    for (let item of this.selectedPlaces) {
+      for (let place of this.places) {
+        if (item == place.name) {
+          this.selectedPlacesId.push(place.id);
+        }
+      }
+    }
+
+    for (let i = 0; i < this.selectedPlacesId.length; i++) {
+      this.followService.addFollow({
+        id: null,
+        idPlace: this.selectedPlacesId[i],
+        idUser: 12
+      }).subscribe(
+        res => {
+        },
+        err => {
+        }
+      );
+    }
   }
 
 }

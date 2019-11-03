@@ -1,7 +1,6 @@
 import { Component, OnInit, OnDestroy, OnChanges, SimpleChanges } from '@angular/core';
-import { UserService } from 'src/app/shared/services/user.service';
-import { User, UserType } from 'src/app/shared/models/user.model';
 import { AuthService } from 'src/app/shared/services/auth.service';
+import { Router, NavigationEnd } from '@angular/router';
 
 @Component({
   selector: 'app-navigation',
@@ -12,12 +11,19 @@ export class NavigationComponent implements OnInit, OnDestroy {
   
   isLoginVisible: boolean;
 
-  constructor(private authService: AuthService) {
-    authService.showRegister = true; 
-    authService.showLogin = true;
+  constructor(private authService: AuthService, private router: Router) {
   }
 
   ngOnInit() {
+    this.authService.showRegister = true; 
+    this.authService.showLogin = true;
+
+    this.router.events.subscribe((ev) => {
+      if (ev instanceof NavigationEnd && (ev.url !== '/rejestracja' && ev.url !== '/logowanie')) {
+        this.authService.showRegister = true;
+        this.authService.showLogin = true;
+      }
+    });
   }
 
   ngOnDestroy(){

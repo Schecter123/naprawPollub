@@ -21,7 +21,7 @@ export class DefectService {
   }
 
   getParticularDefect(idDefect){
-    return this.http.get<Defect>(environment.rootURL + '/defects/'+idDefect);
+    return this.http.get<Defect>(environment.rootURL + '/defects/' + idDefect);
   }
 
   createDefect(defect:Defect){

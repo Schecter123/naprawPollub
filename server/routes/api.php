@@ -20,6 +20,7 @@ Route::group(['prefix' => 'v1', 'namespace' => 'API'], function () {
     Route::apiResource('users', 'UserController');
     Route::get('/users/{user}/login', 'UserController@getUserByLogin');
     Route::get('/users/{defect}/defect', 'UserController@getUserByDefect');
+    Route::put('/users/{user}/password/update', 'UserController@updatePassword');
     Route::apiResource('rooms', 'RoomController');
     Route::apiResource('ratings', 'RatingController');
     Route::apiResource('places', 'PlaceController');
@@ -31,6 +32,7 @@ Route::group(['prefix' => 'v1', 'namespace' => 'API'], function () {
     Route::apiResource('markers', 'MarkerController');
     Route::get('/all/markers', 'MarkerController@getAll');
     Route::get('/markers/{marker}/count', 'MarkerController@getDefectCount');
+    Route::apiResource('images', 'ImageController');
 });
 
 Route::group([

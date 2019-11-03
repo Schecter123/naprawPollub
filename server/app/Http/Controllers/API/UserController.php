@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\API;
 
+use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
@@ -66,6 +67,22 @@ WHERE defects.id = $idDefect AND defects.idUser = users.id"));
     public function update(Request $request, $id)
     {
         //
+    }
+
+    public function updatePassword(Request $request, $id)
+    {
+        $user = User::find($id);
+        $hash = $user->password;
+        $oldPassword = $request->input('oldPassword');
+        if (password_verify($oldPassword,$hash))
+        {
+            $user->password = bcrypt($request->input('newPassword'));
+            $user->save();
+        }
+        else
+        {
+            return response()->json("nieprawidłowe hasło");
+        }
     }
 
     /**

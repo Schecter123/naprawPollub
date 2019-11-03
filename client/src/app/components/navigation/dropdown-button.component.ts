@@ -1,6 +1,7 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Output, EventEmitter } from '@angular/core';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { UserService } from 'src/app/shared/services/user.service';
+
 
 @Component({
   selector: 'app-dropdown-button',
@@ -15,16 +16,20 @@ import { UserService } from 'src/app/shared/services/user.service';
 export class DropdownButtonComponent implements OnInit, OnDestroy {
 
   loggedUser;
-
+  userType;
+  @Output() userTypeOutput = new EventEmitter<string>();
+  
   constructor(private authService: AuthService,  private userService: UserService) { }
 
   ngOnInit() {
     this.loggedUser = localStorage.getItem("loggedUser");
-   
+    this.userType = localStorage.getItem("userType");
+    this.userTypeOutput.emit(this.userType);
   }
 
   ngOnDestroy(){
-    
   }
+
+  
 
 }

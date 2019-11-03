@@ -1,4 +1,5 @@
-import { Component, OnInit, OnDestroy, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { UserType } from 'src/app/shared/models/user.model';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { Router, NavigationEnd } from '@angular/router';
 
@@ -9,25 +10,33 @@ import { Router, NavigationEnd } from '@angular/router';
 })
 export class NavigationComponent implements OnInit, OnDestroy {
   
+  
   isLoginVisible: boolean;
-
-  constructor(private authService: AuthService, private router: Router) {
+  UserType = UserType;
+  // loggedUserType = localStorage.getItem('userType');
+  userType;
+  isManageVisible: boolean;
+  constructor(private authService: AuthService) {
+    authService.showRegister = true; 
+    authService.showLogin = true;
   }
 
   ngOnInit() {
-    this.authService.showRegister = true; 
-    this.authService.showLogin = true;
-
-    this.router.events.subscribe((ev) => {
-      if (ev instanceof NavigationEnd && (ev.url !== '/rejestracja' && ev.url !== '/logowanie')) {
-        this.authService.showRegister = true;
-        this.authService.showLogin = true;
-      }
-    });
+    console.log(localStorage.getItem("loggedUser"))
   }
 
-  ngOnDestroy(){
-    
+  
+  ngOnDestroy(){}
+
+  getUserType($event){
+    this.userType = $event;
+    setTimeout(()=> this.checkUserType(), 0);
+  }
+
+  checkUserType(){
+    if(this.userType === UserType[UserType.Standard]){
+      this.isManageVisible = true;
+    } else this.isManageVisible = false;
   }
 
 }

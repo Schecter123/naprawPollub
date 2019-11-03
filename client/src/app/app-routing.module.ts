@@ -8,6 +8,7 @@ import { CommonModule } from '@angular/common';
 import { AddDefectComponent } from './components/add-defect/add-defect.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { AuthGuard } from './shared/auth-guard.service';
+import { ManageUserGuard } from './shared/manage-user-guard.service';
 
 
 const routes: Routes = [
@@ -17,6 +18,7 @@ const routes: Routes = [
   {path: 'dodaj-usterke', component: AddDefectComponent, canActivate: [AuthGuard]},
   {path: 'usterki', loadChildren: () => import('./components/defects/defect.module').then(mod => mod.DefectModule)},
   {path: 'pytania', component: QuestionsComponent},
+  {path: 'zarzadzanie-uzytkownik', loadChildren: () => import('./components/manage-page-user/manage-page-user.module').then(mod => mod.ManagePageUserModule), canActivate: [AuthGuard, ManageUserGuard]},
   {path: '', redirectTo: 'strona-glowna', pathMatch: 'full' },
   {
     path: '', 

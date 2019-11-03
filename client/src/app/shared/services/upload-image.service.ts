@@ -13,7 +13,7 @@ export class UploadImageService {
     const fd = new FormData();
     console.log(fileToUpload);
     fd.append('Image', fileToUpload, fileToUpload.name)
-    fd.append('DefectID', defectId.toString());
+    fd.append('idDefect', defectId.toString());
 
     return this.http.post(environment.rootURL, fd);
   }

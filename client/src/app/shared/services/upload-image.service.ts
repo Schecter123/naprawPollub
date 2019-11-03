@@ -15,6 +15,6 @@ export class UploadImageService {
     fd.append('Image', fileToUpload, fileToUpload.name)
     fd.append('idDefect', defectId.toString());
 
-    return this.http.post(environment.rootURL, fd);
+    return this.http.post(environment.rootURL + '/images', fd);
   }
 }

@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { User } from '../models/user.model';
+import { ChangePassword } from '../models/change-password.model';
 
 
 @Injectable({
@@ -30,5 +31,9 @@ export class UserService {
 
   getUserByDefectId(defectId: number){
     return this.http.get<User>(environment.rootURL + '/users/'+ defectId + '/defect');
+  }
+
+  changePasssword(data: ChangePassword, userId: number){
+    return this.http.put(environment.rootURL + '/users/' + userId + '/password/update', data);
   }
 }

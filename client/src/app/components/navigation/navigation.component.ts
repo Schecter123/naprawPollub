@@ -14,7 +14,7 @@ export class NavigationComponent implements OnInit, OnDestroy {
   UserType = UserType;
   // loggedUserType = localStorage.getItem('userType');
   userType;
-
+  isManageVisible: boolean;
   constructor(private authService: AuthService) {
     authService.showRegister = true; 
     authService.showLogin = true;
@@ -29,6 +29,13 @@ export class NavigationComponent implements OnInit, OnDestroy {
 
   getUserType($event){
     this.userType = $event;
+    setTimeout(()=> this.checkUserType(), 0);
+  }
+
+  checkUserType(){
+    if(this.userType === UserType[UserType.Standard]){
+      this.isManageVisible = true;
+    } else this.isManageVisible = false;
   }
 
 }

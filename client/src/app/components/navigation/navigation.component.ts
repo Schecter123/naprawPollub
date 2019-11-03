@@ -16,12 +16,21 @@ export class NavigationComponent implements OnInit, OnDestroy {
   // loggedUserType = localStorage.getItem('userType');
   userType;
   isManageVisible: boolean;
-  constructor(private authService: AuthService) {
-    authService.showRegister = true; 
-    authService.showLogin = true;
+  constructor(private authService: AuthService, private router:Router) {
+    
   }
 
   ngOnInit() {
+    this.authService.showRegister = true; 
+    this.authService.showLogin = true;
+
+    this.router.events.subscribe((ev) => {
+      if (ev instanceof NavigationEnd && (ev.url !== '/rejestracja' && ev.url !== '/logowanie')) {
+        this.authService.showRegister = true;
+        this.authService.showLogin = true;
+      }
+    });
+
     console.log(localStorage.getItem("loggedUser"))
   }
 

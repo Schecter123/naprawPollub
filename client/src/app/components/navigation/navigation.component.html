@@ -28,11 +28,11 @@
             <a class="dropdown-item" routerLink="/zarzadzanie-uzytkownik" *ngIf="isManageVisible">Zarządzanie</a>
         </div>
     </div>
-    <form class="form-inline">
-        <button type="button" class="btn btn-success" *ngIf="authService.showRegister && !authService.isLoggedIn()"
+    <form class="form-inline" *ngIf="!authService.isLoggedIn()">
+        <button type="button" class="btn btn-success" *ngIf="authService.showRegister"
             routerLink="/rejestracja">Zarejestruj się</button>
         <span style="margin: auto 5px;"></span>
-        <button type="button" class="btn btn-success" *ngIf="authService.showLogin && !authService.isLoggedIn()"
+        <button type="button" class="btn btn-success" *ngIf="authService.showLogin"
             routerLink="/logowanie">Zaloguj się</button>
     </form>
 
@@ -42,6 +42,8 @@
       <div class="dropdown-divider"></div>
       <button class="btn btn-link dropdown-item" routerLink="/" (click)="authService.logout()">Wyloguj</button>
     </div> -->
+
+    <button type="button" class="btn btn-warning" routerLink="/dodaj-usterke" *ngIf="authService.isLoggedIn()">Dodaj usterkę</button>
 
     <div class="dropdown" *ngIf="authService.isLoggedIn()">
         <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"

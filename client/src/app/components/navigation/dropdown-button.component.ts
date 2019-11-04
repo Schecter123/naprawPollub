@@ -6,10 +6,8 @@ import { UserService } from 'src/app/shared/services/user.service';
 @Component({
   selector: 'app-dropdown-button',
   template: `
-  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
     <a class="dropdown-item" routerLink="/{{loggedUser}}">Konto</a>
     <a class="dropdown-item" routerLink="/" (click)="authService.logout()">Wyloguj</a>
-  </div>
   `,
   styles: []
 })

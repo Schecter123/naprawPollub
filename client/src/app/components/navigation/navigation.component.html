@@ -11,25 +11,29 @@
                 <a class="nav-link navbar-brand" routerLink="/pytania" routerLinkActive="active">Pytania</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link navbar-brand" routerLink="/zarzadzanie-uzytkownik" routerLinkActive="active" *ngIf="isManageVisible">Zarządzanie</a>
+                <a class="nav-link navbar-brand" routerLink="/zarzadzanie-uzytkownik" routerLinkActive="active"
+                    *ngIf="isManageVisible">Zarządzanie</a>
             </li>
         </ul>
     </div>
     <div class="small-screen-nav">
-            <button class="btn btn-lg btn-light" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <i class="fas fa-bars"></i>
-            </button>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" routerLink="/strona-glowna">Strona główna</a>
-                <a class="dropdown-item" routerLink="/usterki">Usterki</a>
-                <a class="dropdown-item" routerLink="/pytania">Pytania</a>
-                <a class="dropdown-item" routerLink="/zarzadzanie-uzytkownik" *ngIf="isManageVisible">Zarządzanie</a>
-            </div>
+        <button class="btn btn-lg btn-light" type="button" data-toggle="dropdown" aria-haspopup="true"
+            aria-expanded="false">
+            <i class="fas fa-bars"></i>
+        </button>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" routerLink="/strona-glowna">Strona główna</a>
+            <a class="dropdown-item" routerLink="/usterki">Usterki</a>
+            <a class="dropdown-item" routerLink="/pytania">Pytania</a>
+            <a class="dropdown-item" routerLink="/zarzadzanie-uzytkownik" *ngIf="isManageVisible">Zarządzanie</a>
+        </div>
     </div>
-    <form class="form-inline">
-        <button type="button" class="btn btn-success" *ngIf="authService.showRegister && !authService.isLoggedIn()" routerLink="/rejestracja">Zarejestruj się</button>
+    <form class="form-inline" *ngIf="!authService.isLoggedIn()">
+        <button type="button" class="btn btn-success" *ngIf="authService.showRegister"
+            routerLink="/rejestracja">Zarejestruj się</button>
         <span style="margin: auto 5px;"></span>
-        <button type="button" class="btn btn-success" *ngIf="authService.showLogin && !authService.isLoggedIn()" routerLink="/logowanie">Zaloguj się</button>
+        <button type="button" class="btn btn-success" *ngIf="authService.showLogin"
+            routerLink="/logowanie">Zaloguj się</button>
     </form>
 
     <!-- <button class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" *ngIf="authService.isLoggedIn()"><i class="fas fa-user icon"></i>nazwaUsera</button>
@@ -39,14 +43,18 @@
       <button class="btn btn-link dropdown-item" routerLink="/" (click)="authService.logout()">Wyloguj</button>
     </div> -->
 
+    <button type="button" class="btn btn-warning" routerLink="/dodaj-usterke" *ngIf="authService.isLoggedIn()">Dodaj usterkę</button>
+
     <div class="dropdown" *ngIf="authService.isLoggedIn()">
-        <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <i class="fas fa-user icon"></i>nazwaUsera
+        <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            <i class="fas fa-user icon"></i>{{loggedUser}}
         </button>
-        <app-dropdown-button *ngIf="authService.isLoggedIn()" (userTypeOutput)="getUserType($event)"></app-dropdown-button>
+        <app-dropdown-button *ngIf="authService.isLoggedIn()" (userTypeOutput)="getUserType($event)">
+        </app-dropdown-button>
         <!-- <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
           <a class="dropdown-item" routerLink="/{{user?.login}}">Konto</a>
           <a class="dropdown-item" routerLink="/" (click)="authService.logout()">Wyloguj</a>
         </div> -->
-      </div>
+    </div>
 </nav>

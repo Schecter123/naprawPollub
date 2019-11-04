@@ -16,11 +16,11 @@ export class LoginComponent implements OnInit, OnDestroy {
   user: User;
 
   constructor(private authService: AuthService) {
-    authService.showLogin = false;
-    authService.showRegister = true;
   }
 
   ngOnInit() {
+    this.authService.showLogin = false;
+    this.authService.showRegister = true;
   }
 
   loginUser() {

@@ -34,6 +34,7 @@ export class AuthService {
   setSession(result) {
     localStorage.setItem('userType', result.user.type);
     localStorage.setItem('loggedUser', result.user.login);
+    localStorage.setItem('loggedUserId', result.user.id);
     localStorage.setItem('access_token', result.access_token);
     localStorage.setItem("expires_at", JSON.stringify(result.expires_at.valueOf()));
   }

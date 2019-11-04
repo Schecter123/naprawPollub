@@ -87,7 +87,6 @@ export class RegisterComponent implements OnInit {
         idUser: idUsr
       }).subscribe(
         res => {
-          var a = 1;
         },
         err => {
         }

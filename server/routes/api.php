@@ -25,6 +25,7 @@ Route::group(['prefix' => 'v1', 'namespace' => 'API'], function () {
     Route::apiResource('ratings', 'RatingController');
     Route::apiResource('places', 'PlaceController');
     Route::apiResource('follows', 'FollowController');
+    Route::get('/follows/{follow}/user', 'FollowController@getFollowByIdUser');
     Route::apiResource('defects', 'DefectController');
     Route::get('/defects/{defect}/room', 'DefectController@getParticularRoom');
     Route::get('/defects/{defect}/place', 'DefectController@getParticularPlace');

@@ -15,7 +15,14 @@ class ImageController extends Controller
      */
     public function index()
     {
-        //
+        $images = DB::table('images')->get();
+        return response()->json($images);
+    }
+
+    public function getImageByIdDefect($idDefect)
+    {
+        $particularImage = DB::table('images')->select('id', 'name', 'type')->where('idDefect', $idDefect)->get();
+        return response()->json($particularImage);
     }
 
     /**

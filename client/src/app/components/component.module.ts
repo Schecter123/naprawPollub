@@ -27,7 +27,8 @@ const Components = [
   MapComponent,
   MapMarkerComponent,
   AddDefectComponent,
-  NotFoundComponent
+  NotFoundComponent,
+  
 ];
 
 
@@ -35,6 +36,7 @@ const Components = [
   declarations: [
     Components,
     DropdownButtonComponent,
+    
     
   ],
   imports: [

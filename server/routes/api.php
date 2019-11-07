@@ -45,6 +45,7 @@ Route::group(['prefix' => 'v1', 'namespace' => 'API'], function () {
     Route::get('/markers/{marker}/count', 'MarkerController@getDefectCount');
 
     Route::apiResource('images', 'ImageController');
+    Route::get('/images/{images}/defect', 'ImageController@getImageByIdDefect');
 });
 
 Route::group([

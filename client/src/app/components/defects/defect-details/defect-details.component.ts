@@ -3,6 +3,7 @@ import { DefectService } from 'src/app/shared/services/defect.service';
 import { DefectType, DefectState } from 'src/app/shared/models/defect.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from 'src/app/shared/services/user.service';
+import { UploadImageService } from 'src/app/shared/services/upload-image.service';
 @Component({
   selector: 'app-defect-details',
   templateUrl: './defect-details.component.html',
@@ -17,6 +18,7 @@ export class DefectDetailsComponent implements OnInit, OnDestroy {
   editable = false;
   defectDescription;
   loggedUser;
+  photo;
 
   //subskrybcje
   defectSubscriber;
@@ -28,7 +30,7 @@ export class DefectDetailsComponent implements OnInit, OnDestroy {
   DefectType = DefectType;
   DefectState = DefectState;
 
-  constructor(private defectService: DefectService, private activatedRoute: ActivatedRoute, private router: Router, private userService: UserService) { }
+  constructor(private defectService: DefectService, private activatedRoute: ActivatedRoute, private router: Router, private userService: UserService, private uploadImageService: UploadImageService) { }
 
   ngOnInit() {
     this.defectSubscriber= this.activatedRoute.data.subscribe(data => {
@@ -41,6 +43,11 @@ export class DefectDetailsComponent implements OnInit, OnDestroy {
       this.user = data.user[0];
     });
     this.loggedUser = localStorage.getItem("loggedUser");
+
+    this.uploadImageService.getFile().subscribe(data => {
+      this.photo = data;
+      console.log(data);
+    })
   }
 
   ngOnDestroy(){

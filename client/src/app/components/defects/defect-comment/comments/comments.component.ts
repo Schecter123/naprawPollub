@@ -18,7 +18,7 @@ export class CommentsComponent implements OnInit, OnDestroy {
   constructor(private commentService: CommentService, private defectService: DefectService) { }
 
   ngOnInit() {
-  this.defect = this.defectService.defect;
+    this.defect = this.defectService.defect;
     this.subscriberComments = this.commentService.getCommentsByDefectId(this.defect.id).subscribe( data => {
       this.comments = data;
       console.log(this.comments)

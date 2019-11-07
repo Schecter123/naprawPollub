@@ -32,8 +32,8 @@ export class AddCommentComponent implements OnInit {
       content: this.text,
       date: formatDate(new Date(), 'yyyy-MM-dd HH:mm:ss', 'en'),
     }).subscribe(
-      data => { console.log(data)},
-      error => { console.log(error)}
+      data => { },
+      error => { }
     );
     
   }

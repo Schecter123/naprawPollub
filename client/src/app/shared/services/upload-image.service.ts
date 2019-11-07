@@ -17,4 +17,8 @@ export class UploadImageService {
 
     return this.http.post(environment.rootURL + '/images', fd);
   }
+
+  getFile(){
+    return this.http.get(environment.rootURL+'/images');
+  }
 }

@@ -13,4 +13,5 @@ export class FollowService {
   addFollow(follow: Follow) {
     return this.http.post(environment.rootURL + "/follows/", follow);
   }
+
 }

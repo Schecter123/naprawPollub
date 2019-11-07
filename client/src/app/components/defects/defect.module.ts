@@ -15,6 +15,9 @@ import { RoomResolverService } from './room-resolver.service';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import { DefectListResolverService } from './defect-list-resolver.service';
 import { UserResolverService } from './user-resolver.service';
+import { CommentsComponent } from './defect-comment/comments/comments.component';
+import { AddCommentComponent } from './defect-comment/add-comment/add-comment.component';
+import { CommentItemComponent } from './defect-comment/comments/comment-item/comment-item.component';
 
 const routes = [
   {
@@ -41,7 +44,7 @@ const routes = [
     DefectsComponent,
     DefectListComponent, 
     DefectItemComponent, 
-    DefectFilterComponent, DefectDetailsComponent, DefectCommentComponent
+    DefectFilterComponent, DefectDetailsComponent, DefectCommentComponent, CommentsComponent, AddCommentComponent, CommentItemComponent
   ],
   imports: [
     CommonModule,

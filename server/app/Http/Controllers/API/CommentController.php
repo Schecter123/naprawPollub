@@ -7,6 +7,7 @@ use App\Dto\CommentManager;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
+
 class CommentController extends Controller
 {
     /**
@@ -20,10 +21,22 @@ class CommentController extends Controller
         return response()->json($comments);
     }
 
+    public function getCommentByIdUser($idUser)
+    {
+        $particularComment = DB::table('comments')->select('id', 'idDefect', 'content', 'date')->where('idUser', $idUser)->first();
+        return response()->json($particularComment);
+    }
+
+    public function getFollowByIdDefect($idDefect)
+    {
+        $particularComment = DB::table('comments')->select('id', 'content', 'idUser', 'date')->where('idDefect', $idDefect)->first();
+        return response()->json($particularComment);
+    }
+
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -37,7 +50,7 @@ class CommentController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -49,22 +62,22 @@ class CommentController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
         $updateComment = CommentFactory::create($request->all());
         $result = new CommentManager();
-        $result->update($updateComment,$id);
+        $result->update($updateComment, $id);
         return response()->json($updateComment);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

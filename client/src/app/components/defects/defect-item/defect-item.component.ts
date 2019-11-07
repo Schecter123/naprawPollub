@@ -31,7 +31,6 @@ export class DefectItemComponent implements OnInit, OnDestroy {
     this.subscriptionPlace = this.placeService.getPlaces().subscribe(response => {
       this.places = response;
     });
-
   }
 
   ngOnDestroy(){

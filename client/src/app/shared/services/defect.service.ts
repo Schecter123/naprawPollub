@@ -10,6 +10,8 @@ import { map } from 'rxjs/operators';
 export class DefectService {
 
   list: Defect[];
+  defect: Defect;
+  
   constructor(private http: HttpClient) { }
 
   getDefects(){

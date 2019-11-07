@@ -31,7 +31,10 @@ export class DefectDetailsComponent implements OnInit, OnDestroy {
   constructor(private defectService: DefectService, private activatedRoute: ActivatedRoute, private router: Router, private userService: UserService) { }
 
   ngOnInit() {
-    this.defectSubscriber= this.activatedRoute.data.subscribe(data => this.defect = data.defect);
+    this.defectSubscriber= this.activatedRoute.data.subscribe(data => {
+      this.defect = data.defect
+      this.defectService.defect = this.defect;
+    });
     this.placeSubscriber = this.activatedRoute.data.subscribe(data => this.place = data.place);
     this.roomSubscriber = this.activatedRoute.data.subscribe(data => this.room = data.room);
     this.userSubscriber = this.activatedRoute.data.subscribe(data => {

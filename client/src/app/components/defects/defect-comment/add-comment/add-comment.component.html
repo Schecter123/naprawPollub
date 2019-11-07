@@ -1,1 +1,7 @@
-<p>add-comment works!</p>
+<form #commentForm="ngForm" (ngSubmit)="addComment()">
+    <textarea class="form-control" name="text" id="text" rows="3" placeholder="Tutaj wpisz swój komentarz..." required
+        [(ngModel)]="text"></textarea>
+    <button type="submit" class="btn btn-success" *ngIf="authService.isLoggedIn()">Dodaj komentarz</button>
+    <button type="submit" class="btn btn-success" disabled *ngIf="!authService.isLoggedIn()">Zaloguj się, aby dodać
+        komentarz</button>
+</form>

@@ -23,7 +23,7 @@ class FollowController extends Controller
 
     public function getFollowByIdUser($idUser)
     {
-        $particularFollow = DB::table('follows')->select('id', 'idPlace')->where('idUser', $idUser);
+        $particularFollow = DB::table('follows')->select('id', 'idPlace')->where('idUser', $idUser)->get();
         return response()->json($particularFollow);
     }
 

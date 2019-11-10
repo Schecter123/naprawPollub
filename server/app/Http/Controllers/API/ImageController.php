@@ -39,7 +39,7 @@ class ImageController extends Controller
             'name' => $request->file('Image')->getClientOriginalName(),
             'type' => $request->file('Image')->extension(),
             'size' => $request->file('Image')->getClientSize(),
-            'idDefect' => "20"
+            'idDefect' => $request->idDefect
         ]);
 
         $request->file('Image')->move(__DIR__ . '/../../../../../client/src/assets/images_upload', $file->name . '.' . $file->type);

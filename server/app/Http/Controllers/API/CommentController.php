@@ -29,7 +29,7 @@ class CommentController extends Controller
 
     public function getFollowByIdDefect($idDefect)
     {
-        $particularComment = DB::table('comments')->select('id', 'content', 'idUser', 'date')->where('idDefect', $idDefect)->get();
+        $particularComment = DB::table('comments')->select('id', 'idDefect', 'content', 'idUser', 'date')->where('idDefect', $idDefect)->get();
         return response()->json($particularComment);
     }
 

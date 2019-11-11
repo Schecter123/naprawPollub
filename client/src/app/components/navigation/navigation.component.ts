@@ -31,8 +31,6 @@ export class NavigationComponent implements OnInit, OnDestroy {
         }
       }
     });
-
-    console.log(localStorage.getItem("loggedUser"))
   }
 
 

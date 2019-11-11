@@ -36,7 +36,6 @@ export class DefectService {
   }
 
   deleteDefect(defect:Defect){
-    console.log(defect.id);
     return this.http.delete<Defect>(environment.rootURL + '/defects/'+defect.id);
   }
 }

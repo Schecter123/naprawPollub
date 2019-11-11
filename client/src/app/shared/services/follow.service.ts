@@ -14,4 +14,20 @@ export class FollowService {
     return this.http.post(environment.rootURL + "/follows/", follow);
   }
 
+  getFollows(){
+    return this.http.get(environment.rootURL + "/follows");
+  }
+
+  getFollowsByUserId(userID){
+    return this.http.get(environment.rootURL + "/follows/" + userID + '/user');
+  }
+
+  getPlacesWhichAreNotFollowedByUser(userID){
+    return this.http.get(environment.rootURL + "/follows/" + userID + '/user/no');
+  }
+
+  deleteFollow(followID){
+    return this.http.delete(environment.rootURL + '/follows/'+ followID);
+  }
+
 }

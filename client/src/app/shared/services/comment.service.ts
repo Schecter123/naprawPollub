@@ -21,4 +21,12 @@ export class CommentService {
   addComment(comment: Comment){
     return this.http.post(environment.rootURL + '/comments', comment);
   }
+
+  updateComment(comment: Comment){
+    return this.http.put<Comment>(environment.rootURL + '/comments/'+ comment.id, comment);
+  }
+
+  deleteComment(comment: Comment){
+    return this.http.delete<Comment>(environment.rootURL + '/comments/'+comment.id);
+  }
 }

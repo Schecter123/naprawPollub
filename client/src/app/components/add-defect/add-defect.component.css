@@ -44,3 +44,8 @@
     border: 1px solid red;
   }
   
+  img{
+    width: 100%;
+    max-width: 850px;
+    height: auto;
+  }

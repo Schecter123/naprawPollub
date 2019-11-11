@@ -43,7 +43,8 @@
       </div>
       <div class="form-group row form-group-lg">
         <label class="control-label col-sm-4" for="file">Dodaj zdjęcie usterki</label>
-        <input class="form-control-file" type="file" id="file" (change)="onFileSelected($event)">
+        <span class="col-sm-12"><img [src]="imageURL" alt="podgląd" *ngIf="imageURL"></span>
+        <input class="form-control-file" type="file" id="file" (change)="onFileSelected($event)"> 
       </div>
       <div class="form-group form-group-lg col-sm-12">
             <label for="text">Opis usterki:</label>

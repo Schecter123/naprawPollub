@@ -6,7 +6,7 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class UploadImageService {
-
+  
   constructor(private http: HttpClient) { }
 
   postFile(fileToUpload: File, defectId: number){
@@ -20,5 +20,9 @@ export class UploadImageService {
 
   getFile(){
     return this.http.get(environment.rootURL+'/images');
+  }
+
+  getFileByDefectId(defectId){
+    return this.http.get(environment.rootURL + '/images/' + defectId + '/defect');
   }
 }

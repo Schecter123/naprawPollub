@@ -37,6 +37,7 @@ Route::group(['prefix' => 'v1', 'namespace' => 'API'], function () {
     Route::get('/defects/{defect}/room', 'DefectController@getParticularRoom');
     Route::get('/defects/{defect}/place', 'DefectController@getParticularPlace');
     Route::get('/defects/{defect}/login', 'DefectController@getDefectByLogin');
+    Route::get('/defects/{defect}/admin', 'DefectController@getDefectForAdministrator');
 
     Route::apiResource('comments', 'CommentController');
     Route::get('/comments/{comment}/user', 'CommentController@getCommentByIdUser');

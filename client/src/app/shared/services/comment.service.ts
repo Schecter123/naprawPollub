@@ -18,6 +18,10 @@ export class CommentService {
     return this.http.get<Comment[]>(environment.rootURL + '/comments/' + defectId + '/defect');
   }
 
+  getCommentsByUserLogin(userLogin: string){
+    return this.http.get(environment.rootURL + '/comments/' + userLogin + '/login');
+  }
+
   addComment(comment: Comment){
     return this.http.post(environment.rootURL + '/comments', comment);
   }

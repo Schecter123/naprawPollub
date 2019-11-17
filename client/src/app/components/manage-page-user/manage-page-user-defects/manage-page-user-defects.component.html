@@ -1,0 +1,76 @@
+<div class="container">
+    <form class="form">
+        <div class="row">
+            <label for="place" class="col-sm-2 col-form-label">Filtry</label>
+            <div class="col">
+                <select class="form-control" name="place" [(ngModel)]="place" required #placeModel="ngModel" *ngIf="places">
+                    <option [selected]="true" disabled [ngValue]="-1">Miejsce</option>
+                    <option *ngFor="let place of places" [ngValue]="place">{{place?.name}}</option>
+                </select>
+            </div>
+            <div class="col">
+                <select name="room" id="room" class="form-control input-lg" [(ngModel)]="room" required
+                    #typeModel="ngModel" *ngIf="rooms">
+                    <option [selected]="true" disabled [ngValue]="-1">Sala/strefa</option>
+                    <option *ngFor="let room of rooms" [ngValue]="room">{{room?.name}}</option>
+                </select>
+            </div>
+            <div class="col">
+                <select name="type" id="type" class="form-control input-lg" [(ngModel)]="type" required
+                    #typeModel="ngModel">
+                    <option [selected]="true" disabled [ngValue]="-1">Typ usterki</option>
+                    <option value="{{ DefectType.Computers }}">Komputery</option>
+                    <option value="{{ DefectType.Electronic }}">Elektroniczny</option>
+                    <option value="{{ DefectType.Hydraulic }}">Hydrauliczny</option>
+                    <option value="{{ DefectType.Infrastructure }}">Infrastruktura</option>
+                    <option value="{{ DefectType.Mechanical }}">Mechaniczny</option>
+                    <option value="{{ DefectType.Others }}">Inny</option>
+                </select>
+            </div>
+            <div class="col">
+                <select name="state" id="state" class="form-control input-lg" [(ngModel)]="state" required
+                    #typeModel="ngModel">
+                    <option [selected]="true" disabled [ngValue]="-1">Stan usterki</option>
+                    <option value="{{ DefectState.ForRepair }}">Do naprawy</option>
+                    <option value="{{ DefectState.Repaired }}">Naprawiona</option>
+                    <option value="{{ DefectState.RepairInProgress }}">Trwają prace</option>
+                    <option value="{{ DefectState.WontBeRepaired }}">Nie będzie naprawiana</option>
+                </select>
+            </div>
+        </div>
+    </form>
+    <button [disabled]="!showButton" style="float:right;" type="button" class="btn btn-warning" (click)="delete()">
+        <i class="fas fa-trash"></i> Usuń wybrane
+    </button>
+    <table class="table">
+        <thead class="table-success">
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Data</th>
+                <th scope="col">Miejsce</th>
+                <th scope="col">Stefa/sala</th>
+                <th scope="col">Stan usterki</th>
+                <th scope="col">Podgląd</th>
+                <th scope="col">Zaznacz</th>
+            </tr>
+        </thead>
+        <tbody *ngFor="let defect of defects">
+                <tr *ngIf="defect && rooms && places">
+                    <td> {{defect?.id}}</td>
+                        <td>{{defect?.date | date:'dd-MM-yyyy'}} </td>
+                        <td>{{places[defect?.idPlace-1]?.name}}</td>
+                        <td *ngIf="defect?.idPlace === 17"> Nieokreślona </td>
+                        <td *ngIf="defect?.idPlace !== 17">{{rooms[defect?.idRoom-1]?.name}}</td>
+                        <td> <ng-container [ngSwitch]="defect.defectState">
+                            <ng-container *ngSwitchCase="DefectState.ForRepair">Do naprawy</ng-container>
+                            <ng-container *ngSwitchCase="DefectState.Repaired" >Naprawiona</ng-container>
+                            <ng-container *ngSwitchCase="DefectState.RepairInProgress">Trwają prace</ng-container>
+                            <ng-container *ngSwitchCase="DefectState.WontBeRepaired">Nie będzie naprawiana</ng-container>
+                            <ng-container *ngSwitchDefault>Nieznany typ</ng-container>
+                        </ng-container></td>
+                        <td><button class="btn btn-link" (click)="loadDefectItemPage(defect)">Przejdź do usterki</button></td>
+                        <td><input type="checkbox" value={{defect?.id}} (change)="change($event, defect)"></td>
+                      </tr>
+        </tbody>
+    </table>
+</div>

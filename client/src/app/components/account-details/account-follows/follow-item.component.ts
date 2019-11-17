@@ -32,7 +32,7 @@ export class FollowItemComponent implements OnInit, OnDestroy {
   }
 
   deleteFollow(){
-    if(confirm("Jesteś pewnien, że chcesz usunąć tą usterkę?")){
+    if(confirm("Jesteś pewnien, że chcesz usunąć tą obserwację?")){
       this.followSubscribtion = this.followService.deleteFollow(this.follow.id).subscribe( () => {
         this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
           this.router.navigate([`${this.user.login}`]);

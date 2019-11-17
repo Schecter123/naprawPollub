@@ -1,0 +1,28 @@
+<div class="container">
+    <button [disabled]="!showButton" style="float:right;" type="button" class="btn btn-warning" (click)="delete()">
+        <i class="fas fa-trash"></i> Usuń wybrane
+    </button>
+    <table class="table" *ngIf="defects && comments">
+        <thead class="table-success">
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Data</th>
+                <th scope="col">ID usterki</th>
+                <th scope="col">Treść</th>
+                <th scope="col">Podgląd</th>
+                <th scope="col">Zaznacz</th>
+            </tr>
+        </thead>
+        <tbody *ngFor="let comment of comments">
+            <tr>
+                <td> {{comment?.id}}</td>
+                <td>{{comment?.date | date:'dd-MM-yyyy'}} </td>
+                <td>{{defects[comment?.idDefect-1]?.id}}</td>
+                <td>{{comment?.content}}</td>
+                <td><button class="btn btn-link" (click)="loadDefectItemPage(comment.idDefect)">Przejdź do
+                        komentarza</button></td>
+                <td><input type="checkbox" value={{comment?.id}} (change)="change($event, comment)"></td>
+            </tr>
+        </tbody>
+    </table>
+</div>

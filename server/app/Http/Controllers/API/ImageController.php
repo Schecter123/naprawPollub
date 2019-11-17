@@ -42,7 +42,7 @@ class ImageController extends Controller
             'idDefect' => $request->idDefect
         ]);
 
-        $request->file('Image')->move(__DIR__ . '/../../../../../client/src/assets/images_upload', $file->id . '.' . $file->type);
+        $request->file('Image')->move(__DIR__ . '/../../../../../client/src/app/shared/images_upload', $file->id . '.' . $file->type);
 
         return response()->json($file);
     }

@@ -154,13 +154,16 @@ export class AddDefectComponent implements OnInit, OnDestroy {
           this.defectID = data[0].lastIdDefect;
           if(this.selectedFile){
             this.uploadImageService.postFile(this.selectedFile, this.defectID).subscribe(
-              (data) => {},
+              () => {
+                localStorage.setItem('photo' + this.defectID, this.imageURL)
+
+              },
               (error) => {console.log(error)}
             );
           }
           
           this.toastrService.success('Dodano usterkę!');
-          this.router.navigate(['/usterki/']);
+          this.router.navigate(['/usterki/' + this.defectID]);
         },
         err => {
           this.toastrService.error("Wystapił błąd"); 

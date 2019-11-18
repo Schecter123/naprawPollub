@@ -68,7 +68,8 @@
           <button class="btn btn-default" *ngIf="editable" (click)="cancelChanges()">Anuluj</button>
         </div>
         <div class="defect-photo" *ngIf="image">
-           <img [src]="imageSource" [alt]="image.name"> 
+           <img [src]="imageSource" [alt]="image.name" (error)="errorHandler($event)" *ngIf="imageSource">
+           <!-- <img [src]="photoURL" [alt]="image.name"> -->
         </div>
         <div class="row defect-bottom">
           <div class="col-md-6">

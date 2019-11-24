@@ -26,6 +26,14 @@ export class DefectService {
     return this.http.get<Defect>(environment.rootURL + '/defects/' + idDefect);
   }
 
+  getDefectsByLogin(login){
+    return this.http.get<Defect[]>(environment.rootURL + '/defects/' + login + '/login');
+  }
+
+  getDefectsForPlaceAdmin(idUser){
+    return this.http.get<Defect[]>(environment.rootURL + '/defects/' + idUser + '/admin');
+  }
+
   createDefect(defect:Defect){
     console.log(defect);
     return this.http.post(environment.rootURL + '/defects/', defect);

@@ -1,10 +1,9 @@
-import { Component, OnInit, Input, OnDestroy, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy, Output, EventEmitter, Inject } from '@angular/core';
 import { DefectType, DefectState } from 'src/app/shared/models/defect.model';
 import { Subscription} from 'rxjs';
 import { PlaceService } from 'src/app/shared/services/place.service';
 import { RoomService } from 'src/app/shared/services/room.service';
 import { UploadImageService } from 'src/app/shared/services/upload-image.service';
-
 
 @Component({
   selector: 'app-defect-item',

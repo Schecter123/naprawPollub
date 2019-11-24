@@ -1,1 +1,13 @@
-<p>manage-page-user works!</p>
+<hr>
+<mat-tab-group mat-align-tabs="start">
+    <mat-tab label="Usterki">
+        <ng-template matTabContent>
+            <app-manage-page-user-defects></app-manage-page-user-defects>
+        </ng-template>
+    </mat-tab>
+    <mat-tab label="Komentarze">
+        <ng-template matTabContent>
+            <app-manage-page-user-comments></app-manage-page-user-comments>
+        </ng-template>
+    </mat-tab>
+</mat-tab-group>

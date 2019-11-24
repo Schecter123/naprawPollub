@@ -9,6 +9,7 @@ import { Room } from 'src/app/shared/models/room.model';
 import { User } from 'src/app/shared/models/user.model';
 import { Image } from 'src/app/shared/models/image.model';
 import { Subscription } from 'rxjs';
+import { element, browser } from 'protractor';
 
 @Component({
   selector: 'app-defect-details',
@@ -26,6 +27,8 @@ export class DefectDetailsComponent implements OnInit, OnDestroy {
   editable = false;
   defectDescription: string;
   loggedUser;
+  photoURL;
+  errorHandlerIsCalled: boolean = false;
 
   //subskrybcje
   defectSubscriber: Subscription;
@@ -53,8 +56,10 @@ export class DefectDetailsComponent implements OnInit, OnDestroy {
     this.subscriptionImage = this.uploadImageService.getFileByDefectId(this.defect.id).subscribe(
       (data) => { 
             this.image = data[0]
-            if(this.image)
+            if(this.image){
               this.imageSource = '/assets/images_upload/' + this.image.id + '.' + this.image.type;
+            }
+              
       }
     )
   }
@@ -65,6 +70,15 @@ export class DefectDetailsComponent implements OnInit, OnDestroy {
     this.roomSubscriber.unsubscribe();
     this.userSubscriber.unsubscribe();
     this.subscriptionImage.unsubscribe();
+    if(!this.errorHandlerIsCalled){
+      localStorage.removeItem("photo"+this.defect.id);
+    }
+  }
+
+  errorHandler(event){
+    this.errorHandlerIsCalled = true;
+    this.photoURL = localStorage.getItem("photo"+this.defect.id);
+    event.target.src = this.photoURL;
   }
 
   makeChanges(){

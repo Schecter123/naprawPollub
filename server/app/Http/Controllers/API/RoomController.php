@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Dto\MarkerManager;
+use App\Dto\RoomFactory;
+use App\Dto\RoomManager;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
@@ -27,7 +30,11 @@ class RoomController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $newRoom = RoomFactory::create($request->all());
+        $result = new RoomManager();
+        $result->add($newRoom);
+        $lastIdRoom = DB::select(DB::raw("SELECT MAX(id) AS lastIdRoom FROM rooms"));
+        return response()->json($lastIdRoom);
     }
 
     /**
@@ -50,7 +57,9 @@ class RoomController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $newRoom = RoomFactory::create($request->all());
+        $result = new RoomManager();
+        $result->update($newRoom, $id);
     }
 
     /**
@@ -61,6 +70,6 @@ class RoomController extends Controller
      */
     public function destroy($id)
     {
-        //
+        DB::table('rooms')->where('id', $id)->delete();
     }
 }

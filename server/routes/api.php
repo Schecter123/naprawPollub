@@ -22,6 +22,7 @@ Route::group(['prefix' => 'v1', 'namespace' => 'API'], function () {
     Route::get('/users/{user}/login', 'UserController@getUserByLogin');
     Route::get('/users/{defect}/defect', 'UserController@getUserByDefect');
     Route::put('/users/{user}/password/update', 'UserController@updatePassword');
+    Route::put('/users/{user}/type/update', 'UserController@updateType');
 
     Route::apiResource('rooms', 'RoomController');
 

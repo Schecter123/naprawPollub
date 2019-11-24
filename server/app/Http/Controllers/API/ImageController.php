@@ -5,6 +5,8 @@ namespace App\Http\Controllers\API;
 use App\Image;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
+
 
 class ImageController extends Controller
 {
@@ -15,7 +17,14 @@ class ImageController extends Controller
      */
     public function index()
     {
-        //
+        $images = DB::table('images')->get();
+        return response()->json($images);
+    }
+
+    public function getImageByIdDefect($idDefect)
+    {
+        $particularImage = DB::table('images')->select('id', 'name', 'type')->where('idDefect', $idDefect)->get();
+        return response()->json($particularImage);
     }
 
     /**
@@ -30,10 +39,10 @@ class ImageController extends Controller
             'name' => $request->file('Image')->getClientOriginalName(),
             'type' => $request->file('Image')->extension(),
             'size' => $request->file('Image')->getClientSize(),
-            'idDefect' => "20"
+            'idDefect' => $request->idDefect
         ]);
 
-        $request->file('Image')->move(__DIR__ . '/../../../images_upload/', $file->id . '.' . $file->type);
+        $request->file('Image')->move(__DIR__ . '/../../../../../client/src/assets/images_upload', $file->id . '.' . $file->type);
 
         return response()->json($file);
     }

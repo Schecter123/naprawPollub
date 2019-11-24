@@ -25,7 +25,6 @@ export class UserService {
   }
 
   getUserById(userId: number){
-    console.log(userId);
     return this.http.get<User>(environment.rootURL + '/users/'+ userId);
   }
 

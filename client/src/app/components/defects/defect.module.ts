@@ -59,7 +59,7 @@ const routes = [
     DefectListComponent, 
     DefectItemComponent, 
     DefectFilterComponent,
-    DefectDetailsComponent
+    DefectDetailsComponent,
   ]
 })
 export class DefectModule { }

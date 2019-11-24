@@ -10,6 +10,8 @@ import { map } from 'rxjs/operators';
 export class DefectService {
 
   list: Defect[];
+  defect: Defect;
+  
   constructor(private http: HttpClient) { }
 
   getDefects(){
@@ -34,7 +36,6 @@ export class DefectService {
   }
 
   deleteDefect(defect:Defect){
-    console.log(defect.id);
     return this.http.delete<Defect>(environment.rootURL + '/defects/'+defect.id);
   }
 }

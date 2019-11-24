@@ -22,4 +22,14 @@ class RoomManager
         $room->save();
 
     }
+
+    public function update(RoomClass $roomClass, $id)
+    {
+        $room = Room::find($id);
+        $room->idPlace = $roomClass->getIdPlace();
+        $room->name = $roomClass->getName();
+
+        $room->save();
+
+    }
 }

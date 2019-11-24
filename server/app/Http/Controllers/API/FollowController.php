@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 
 use App\Dto\FollowFactory;
 use App\Dto\FollowManager;
+use App\Follow;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
@@ -23,8 +24,15 @@ class FollowController extends Controller
 
     public function getFollowByIdUser($idUser)
     {
-        $particularFollow = DB::table('follows')->select('id', 'idPlace')->where('idUser', $idUser)->first();
+        $particularFollow = DB::table('follows')->select('id', 'idPlace')->where('idUser', $idUser)->get();
         return response()->json($particularFollow);
+    }
+
+    public function getNoFollowPlacesByIdUser($idUser)
+    {
+
+        $allNoFollowPlacesForUser = DB::select(DB::raw("SELECT places.id, places.name FROM places WHERE places.id NOT IN(SELECT follows.idPlace FROM follows WHERE follows.idUser = $idUser)"));
+        return response()->json($allNoFollowPlacesForUser);
     }
 
     /**

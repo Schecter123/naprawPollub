@@ -24,4 +24,8 @@ export class PlaceService {
   getBuildingAdministatorPlaces(idUser){
     return this.http.get(environment.rootURL + '/places').pipe(map ((places:Place[]) => places.filter((place:Place) => place.idUser == idUser )));
   }
+
+  getPlacesByPlaceId(idPlace){
+    return this.http.get(environment.rootURL + '/places').pipe(map ((places:Place[]) => places.filter((place:Place) => place.id == idPlace )));
+  }
 }

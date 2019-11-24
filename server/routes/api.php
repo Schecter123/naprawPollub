@@ -22,6 +22,7 @@ Route::group(['prefix' => 'v1', 'namespace' => 'API'], function () {
     Route::get('/users/{user}/login', 'UserController@getUserByLogin');
     Route::get('/users/{defect}/defect', 'UserController@getUserByDefect');
     Route::put('/users/{user}/password/update', 'UserController@updatePassword');
+    Route::put('/users/{user}/type/update', 'UserController@updateType');
 
     Route::apiResource('rooms', 'RoomController');
 
@@ -31,20 +32,25 @@ Route::group(['prefix' => 'v1', 'namespace' => 'API'], function () {
 
     Route::apiResource('follows', 'FollowController');
     Route::get('/follows/{follow}/user', 'FollowController@getFollowByIdUser');
+    Route::get('/follows/{follow}/user/no', 'FollowController@getNoFollowPlacesByIdUser');
 
     Route::apiResource('defects', 'DefectController');
     Route::get('/defects/{defect}/room', 'DefectController@getParticularRoom');
     Route::get('/defects/{defect}/place', 'DefectController@getParticularPlace');
+    Route::get('/defects/{defect}/login', 'DefectController@getDefectByLogin');
+    Route::get('/defects/{defect}/admin', 'DefectController@getDefectForBuildingAdministrator');
 
     Route::apiResource('comments', 'CommentController');
     Route::get('/comments/{comment}/user', 'CommentController@getCommentByIdUser');
     Route::get('/comments/{comment}/defect', 'CommentController@getFollowByIdDefect');
+    Route::get('/comments/{comment}/login', 'CommentController@getCommentByLogin');
 
     Route::apiResource('markers', 'MarkerController');
     Route::get('/all/markers', 'MarkerController@getAll');
     Route::get('/markers/{marker}/count', 'MarkerController@getDefectCount');
 
     Route::apiResource('images', 'ImageController');
+    Route::get('/images/{images}/defect', 'ImageController@getImageByIdDefect');
 });
 
 Route::group([

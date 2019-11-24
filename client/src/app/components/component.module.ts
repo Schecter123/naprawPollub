@@ -27,8 +27,7 @@ const Components = [
   MapComponent,
   MapMarkerComponent,
   AddDefectComponent,
-  NotFoundComponent,
-  
+  NotFoundComponent
 ];
 
 

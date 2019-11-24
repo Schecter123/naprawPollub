@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { DefectService } from 'src/app/shared/services/defect.service';
 import { MarkerService } from 'src/app/shared/services/marker.service';
 import { ActivatedRoute } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 
 @Component({
@@ -12,8 +13,8 @@ import { ActivatedRoute } from '@angular/router';
 export class DefectListComponent implements OnInit, OnDestroy {
 
   defects;
-  subscriptionMarker;
-  subscriptionDefect;
+  subscriptionMarker: Subscription;
+  subscriptionDefect: Subscription;
 
   constructor(private defectService: DefectService, private activatedRoute: ActivatedRoute, private markerService: MarkerService) { }
 
@@ -24,7 +25,6 @@ export class DefectListComponent implements OnInit, OnDestroy {
         (response) => {this.defects = response},
         (err) => {console.log('Error result: ' + err)}
       );
-      
       this.markerService.markerID = 0;
     } else{
       this.subscriptionDefect = this.activatedRoute.data.subscribe(data => this.defects = data.defects);

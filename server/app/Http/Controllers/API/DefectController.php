@@ -38,6 +38,20 @@ class DefectController extends Controller
         return response()->json($particularPlace);
     }
 
+    public function getDefectByLogin($login)
+    {
+        $particularDefect = DB::select(DB::raw("SELECT defects.id,defects.defectType,defects.idPlace,defects.idUser,defects.idRoom,defects.idMarker,defects.defectState,defects.description,defects.date
+        FROM defects WHERE defects.idUser IN(SELECT users.id FROM users WHERE users.login = '$login')"));
+        return response()->json($particularDefect);
+    }
+
+    public function getDefectForBuildingAdministrator($id)
+    {
+        $particularDefect = DB::select(DB::raw("SELECT DISTINCT defects.id,defects.defectType,defects.idPlace,defects.idUser,defects.idRoom,defects.idMarker,defects.defectState,defects.description,defects.date
+        FROM defects,places WHERE defects.idUser = $id AND places.idUser = $id"));
+        return response()->json($particularDefect);
+    }
+
     /**
      * Store a newly created resource in storage.
      *

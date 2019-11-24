@@ -48,7 +48,6 @@ export class MapComponent implements OnInit, OnDestroy {
         //umiejscowienie markera
         this.latOfMarkedDefect = position.coords.latitude;
         this.lngOfMarkedDefect = position.coords.longitude;
-        console.log(this.latOfMarkedDefect, this.lngOfMarkedDefect);
       });
     }
   }
@@ -57,7 +56,6 @@ export class MapComponent implements OnInit, OnDestroy {
     if(this.userIsAddingDefect){   
     this.latOfMarkedDefect = lat;
     this.lngOfMarkedDefect = lng;
-    console.log(this.latOfMarkedDefect,  this.lngOfMarkedDefect);
     this.markerService.markerLatitudeAndLongitude = [this.latOfMarkedDefect, this.lngOfMarkedDefect];
     }
   }

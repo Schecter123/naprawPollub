@@ -1,1 +1,19 @@
-<p>comment-item works!</p>
+<hr>
+    <div class="comment-header">
+        <div class="login">{{user?.login}}</div>
+        <div class="date">{{ comment?.date | date:'dd-MM-yyyy'}}</div>
+        <div class="btn-section" *ngIf="user?.login === userLogin">
+            <button type="button" class="btn btn-link btn-sm example-icon" (click)="editable=true">
+                <i class="fas fa-pencil-alt"></i>
+            </button>
+            <button type="button" class="btn btn-link btn-sm example-icon" (click)="deleteComment()">
+                <i class="fas fa-trash"></i>
+            </button>
+        </div>
+    </div>
+    <div class="content-box">
+        <div class="comment-contnet" *ngIf="!editable"> {{ comment?.content }} </div>
+        <textarea type="text" [(ngModel)]="commentContent" *ngIf="editable"></textarea>
+        <button class="btn btn-success" style="margin-right:10px" *ngIf="editable" (click)="makeChanges()">Zatwierdz zmiany</button>
+        <button class="btn btn-default" *ngIf="editable" (click)="cancelChanges()">Anuluj</button>
+    </div>

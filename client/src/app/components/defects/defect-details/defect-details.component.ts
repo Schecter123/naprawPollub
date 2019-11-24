@@ -1,8 +1,15 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { DefectService } from 'src/app/shared/services/defect.service';
-import { DefectType, DefectState } from 'src/app/shared/models/defect.model';
+import { DefectType, DefectState, Defect } from 'src/app/shared/models/defect.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from 'src/app/shared/services/user.service';
+import { UploadImageService } from 'src/app/shared/services/upload-image.service';
+import { Place } from 'src/app/shared/models/place.model';
+import { Room } from 'src/app/shared/models/room.model';
+import { User } from 'src/app/shared/models/user.model';
+import { Image } from 'src/app/shared/models/image.model';
+import { Subscription } from 'rxjs';
+
 @Component({
   selector: 'app-defect-details',
   templateUrl: './defect-details.component.html',
@@ -10,34 +17,46 @@ import { UserService } from 'src/app/shared/services/user.service';
 })
 export class DefectDetailsComponent implements OnInit, OnDestroy {
 
-  defect;
-  place;
-  room;
-  user;
+  defect: Defect;
+  place: Place;
+  room: Room;
+  user: User;
+  image: Image;
+  imageSource: string;
   editable = false;
-  defectDescription;
+  defectDescription: string;
   loggedUser;
 
   //subskrybcje
-  defectSubscriber;
-  placeSubscriber;
-  roomSubscriber;
-  userSubscriber;
-  subscription;
+  defectSubscriber: Subscription;
+  placeSubscriber: Subscription;
+  roomSubscriber: Subscription;
+  userSubscriber: Subscription;
+  subscriptionImage: Subscription;
+  subscription: Subscription;
+  
   //enum
   DefectType = DefectType;
   DefectState = DefectState;
 
-  constructor(private defectService: DefectService, private activatedRoute: ActivatedRoute, private router: Router, private userService: UserService) { }
+  constructor(private defectService: DefectService, private activatedRoute: ActivatedRoute, private router: Router, private userService: UserService, private uploadImageService: UploadImageService) { }
 
   ngOnInit() {
-    this.defectSubscriber= this.activatedRoute.data.subscribe(data => this.defect = data.defect);
+    this.defectSubscriber= this.activatedRoute.data.subscribe(data => {
+      this.defect = data.defect
+      this.defectService.defect = this.defect;
+    });
     this.placeSubscriber = this.activatedRoute.data.subscribe(data => this.place = data.place);
     this.roomSubscriber = this.activatedRoute.data.subscribe(data => this.room = data.room);
-    this.userSubscriber = this.activatedRoute.data.subscribe(data => {
-      this.user = data.user[0];
-    });
+    this.userSubscriber = this.activatedRoute.data.subscribe(data => { this.user = data.user[0]; });
     this.loggedUser = localStorage.getItem("loggedUser");
+    this.subscriptionImage = this.uploadImageService.getFileByDefectId(this.defect.id).subscribe(
+      (data) => { 
+            this.image = data[0]
+            if(this.image)
+              this.imageSource = '/assets/images_upload/' + this.image.id + '.' + this.image.type;
+      }
+    )
   }
 
   ngOnDestroy(){
@@ -45,12 +64,13 @@ export class DefectDetailsComponent implements OnInit, OnDestroy {
     this.placeSubscriber.unsubscribe();
     this.roomSubscriber.unsubscribe();
     this.userSubscriber.unsubscribe();
+    this.subscriptionImage.unsubscribe();
   }
 
   makeChanges(){
     this.defect.description = this.defectDescription;
     this.defectService.updateDefect(this.defect).subscribe( 
-      () => {console.log('done')},
+      () => {},
       err => {console.log(err)}
     );
     this.editable = false;
@@ -68,8 +88,7 @@ export class DefectDetailsComponent implements OnInit, OnDestroy {
       },
         err => {console.log(err)}
       );
-    
-   }
+    }
    }
 
 

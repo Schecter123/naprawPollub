@@ -23,13 +23,19 @@ class CommentController extends Controller
 
     public function getCommentByIdUser($idUser)
     {
-        $particularComment = DB::table('comments')->select('id', 'idDefect', 'content', 'date')->where('idUser', $idUser)->first();
+        $particularComment = DB::table('comments')->select('id', 'idDefect', 'content', 'date')->where('idUser', $idUser)->get();
         return response()->json($particularComment);
     }
 
     public function getFollowByIdDefect($idDefect)
     {
-        $particularComment = DB::table('comments')->select('id', 'content', 'idUser', 'date')->where('idDefect', $idDefect)->first();
+        $particularComment = DB::table('comments')->select('id', 'idDefect', 'content', 'idUser', 'date')->where('idDefect', $idDefect)->get();
+        return response()->json($particularComment);
+    }
+    public function getCommentByLogin($login)
+    {
+        $particularComment = DB::select(DB::raw("SELECT comments.id,comments.idDefect,comments.idUser,comments.content,comments.date
+        FROM comments WHERE comments.idUser IN(SELECT users.id FROM users WHERE users.login = '$login')"));
         return response()->json($particularComment);
     }
 

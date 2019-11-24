@@ -1,0 +1,18 @@
+<div class="follow">
+  <p>Obserwacje: </p>
+  <ul class="list-group">
+    <app-follow-item *ngFor="let follow of follows" [follow]="follow" [user]="user"></app-follow-item> 
+  </ul>
+  <hr>
+  <form #addFollows="ngForm" (ngSubmit)="addFollowButtonClick()">
+    <div class="form-group">
+      <label for="place">
+        <p>Wybierz miejsca, które chcesz obserwować: </p>
+      </label>
+      <select multiple class="form-control" name="place" [(ngModel)]="selectedPlaces" required>
+        <option *ngFor="let place of unfollowPlaces" value="{{place?.id}}">{{place?.name}}</option>
+      </select>
+    </div>
+    <button type="submit" class="btn btn-success" [disabled]="(!addFollows.form.valid)">Dodaj obserwacje</button>
+  </form>
+</div>

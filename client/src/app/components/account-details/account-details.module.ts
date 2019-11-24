@@ -6,6 +6,8 @@ import { AccountDetailsResolverService } from './account-details-resolver.servic
 import { AccountAdministationComponent } from './account-administation/account-administation.component';
 import { AccountChangePasswordComponent } from './account-change-password/account-change-password.component';
 import { FormsModule } from '@angular/forms';
+import { AccountFollowsComponent } from './account-follows/account-follows.component';
+import { FollowItemComponent } from './account-follows/follow-item.component';
 
 const routes = [
   {
@@ -20,10 +22,11 @@ const routes = [
 
 
 @NgModule({
-  declarations: [AccountDetailsComponent, AccountAdministationComponent, AccountChangePasswordComponent],
+  declarations: [AccountDetailsComponent, AccountAdministationComponent, AccountChangePasswordComponent, AccountFollowsComponent, FollowItemComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
+    FormsModule,
     FormsModule
   ]
 })

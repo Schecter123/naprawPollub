@@ -11,6 +11,8 @@ import { Place } from 'src/app/shared/models/place.model';
 import { Marker } from 'src/app/shared/models/marker.model';
 import { UserService } from 'src/app/shared/services/user.service';
 import { UploadImageService } from 'src/app/shared/services/upload-image.service';
+import { Subscription } from 'rxjs';
+import { User } from 'src/app/shared/models/user.model';
 
 
 @Component({
@@ -20,26 +22,30 @@ import { UploadImageService } from 'src/app/shared/services/upload-image.service
 })
 export class AddDefectComponent implements OnInit, OnDestroy {
 
-  subscriberPlaces;
-  subscriberRooms;
-  subscriberDefects;
-  subscriberMarker;
+  subscriberPlaces: Subscription;
+  subscriberRooms: Subscription;
+  subscriberDefects: Subscription;
+  subscriberMarker: Subscription;
+  subscriberUser: Subscription;
 
   places;
   rooms;
-  specifiedRooms = [];
   defects;
   markers;
-  selectedFile: File = null;
+  
   DefectType = DefectType;
   DefectState = DefectState;
   
+  selectedFile: File = null;
   place: Place;
+  user: User;
+  marker: Marker;
+
   type: string;
   text: string;
   room: number = -1; //domyślna wartość pokoju na "Wybierz salę"
-  user;
-  marker: Marker;
+  
+  specifiedRooms = [];
   imageURL= "";
   defectID;
 
@@ -59,19 +65,11 @@ export class AddDefectComponent implements OnInit, OnDestroy {
     private userService: UserService) { }
 
   ngOnInit() {
-    this.subscriberPlaces = this.placeService.getPlaces().subscribe( places => {
-      this.places = places;
-    });
-    this.subscriberRooms = this.roomService.getRooms().subscribe( rooms => {
-      this.rooms = rooms;
-    });
-    this.subscriberDefects = this.defectService.getDefects().subscribe( defects => {
-      this.defects = defects;
-    });
-    this.subscriberMarker = this.markerService.getAllMarkers().subscribe( markers => {
-      this.markers = markers;
-    });
-    this.userService.getUser(localStorage.getItem("loggedUser")).subscribe( user => this.user = user);
+    this.subscriberPlaces = this.placeService.getPlaces().subscribe( places => { this.places = places; });
+    this.subscriberRooms = this.roomService.getRooms().subscribe( rooms => { this.rooms = rooms; });
+    this.subscriberDefects = this.defectService.getDefects().subscribe( defects => { this.defects = defects; });
+    this.subscriberMarker = this.markerService.getAllMarkers().subscribe( markers => { this.markers = markers; });
+    this.subscriberUser = this.userService.getUser(localStorage.getItem("loggedUser")).subscribe( user => this.user = user);
   }
 
   ngOnDestroy(){
@@ -79,6 +77,7 @@ export class AddDefectComponent implements OnInit, OnDestroy {
     this.subscriberRooms.unsubscribe();
     this.subscriberDefects.unsubscribe();
     this.subscriberMarker.unsubscribe();
+    this.subscriberUser.unsubscribe();
   }
   
   onChange(selectedPlace){
@@ -99,6 +98,11 @@ export class AddDefectComponent implements OnInit, OnDestroy {
 
   onFileSelected(selectedFile){
     this.selectedFile = <File>selectedFile.target.files[0];
+    const reader = new FileReader(); //podgląd zdjęcia
+    reader.onload = (event:any) => {
+      this.imageURL = event.target.result;
+    }
+    reader.readAsDataURL(this.selectedFile);
   }
 
   chceckIfUserSelectedARoom(){ //Jeżeli użytkownik nie wybrał sali formularz nie może przejść dalej
@@ -149,7 +153,7 @@ export class AddDefectComponent implements OnInit, OnDestroy {
         (data) => {
           this.defectID = data[0].lastIdDefect;
           this.uploadImageService.postFile(this.selectedFile, this.defectID).subscribe(
-            (data) => {console.log(data)},
+            (data) => {},
             (error) => {console.log(error)}
           );
           this.toastrService.success('Dodano usterkę!');

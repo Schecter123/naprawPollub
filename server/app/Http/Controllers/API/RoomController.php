@@ -33,7 +33,7 @@ class RoomController extends Controller
         $newRoom = RoomFactory::create($request->all());
         $result = new RoomManager();
         $result->add($newRoom);
-        $lastIdRoom = DB::select(DB::raw("SELECT MAX(id) AS lastIdRoom FROM rooms"));
+        $lastIdRoom = DB::select(DB::raw("SELECT MAX(id) AS lastIdRoom, idPlace, name FROM rooms"));
         return response()->json($lastIdRoom);
     }
 

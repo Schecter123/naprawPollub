@@ -12,7 +12,15 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link navbar-brand" routerLink="/zarzadzanie-uzytkownik" routerLinkActive="active"
-                    *ngIf="isManageVisible && authService.isLoggedIn()">Zarządzanie</a>
+                    *ngIf="isManageVisibleStandard && authService.isLoggedIn()">Zarządzanie</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link navbar-brand" routerLink="/zarzadzanie-zarzadca-budynku" routerLinkActive="active"
+                    *ngIf="isManageVisiblePlaceAdmin && authService.isLoggedIn()">Zarządzanie</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link navbar-brand" routerLink="/zarzadzanie-administator" routerLinkActive="active"
+                    *ngIf="isManageVisiblePageAdmin && authService.isLoggedIn()">Zarządzanie</a>
             </li>
         </ul>
     </div>
@@ -25,7 +33,12 @@
             <a class="dropdown-item" routerLink="/strona-glowna">Strona główna</a>
             <a class="dropdown-item" routerLink="/usterki">Usterki</a>
             <a class="dropdown-item" routerLink="/pytania">Pytania</a>
-            <a class="dropdown-item" routerLink="/zarzadzanie-uzytkownik" *ngIf="isManageVisible && authService.isLoggedIn()">Zarządzanie</a>
+            <a class="dropdown-item" routerLink="/zarzadzanie-uzytkownik"
+                *ngIf="isManageVisibleStandard && authService.isLoggedIn()">Zarządzanie</a>
+            <a class="dropdown-item" routerLink="/zarzadzanie-zarzadca-budynku"
+                *ngIf="isManageVisiblePlaceAdmin && authService.isLoggedIn()">Zarządzanie</a>
+            <a class="dropdown-item" routerLink="/zarzadzanie-administator"
+                *ngIf="isManageVisiblePageAdmin && authService.isLoggedIn()">Zarządzanie</a>
         </div>
     </div>
     <div class="nav" *ngIf="!authService.isLoggedIn()">

@@ -1,0 +1,27 @@
+<div class="container">
+<h1 mat-dialog-title>Zmień stan usterki o wybranim ID: {{data.defect.id}}</h1>
+<div mat-dialog-content>
+  <p>Obecny stan usterki to:
+  <ng-container [ngSwitch]="DefectState[data.defect.defectState]">
+        <ng-container *ngSwitchCase="DefectState.ForRepair">Do naprawy</ng-container>
+        <ng-container *ngSwitchCase="DefectState.Repaired" >Naprawiona</ng-container>
+        <ng-container *ngSwitchCase="DefectState.RepairInProgress">Trwają prace</ng-container>
+        <ng-container *ngSwitchCase="DefectState.WontBeRepaired">Nie będzie naprawiana</ng-container>
+        <ng-container *ngSwitchDefault>Nieznany typ</ng-container>
+    </ng-container></p>
+  <mat-form-field>
+        <mat-label>Typ usterki</mat-label>
+        <select matNativeControl required name="state" [(ngModel)]="state">
+                <option value="-1"> -- Wybierz stan -- </option>
+                <option value="{{ DefectState[DefectState.ForRepair] }}">Do naprawy</option>
+                <option value="{{ DefectState[DefectState.Repaired] }}">Naprawiona</option>
+                <option value="{{ DefectState[DefectState.RepairInProgress] }}">Trwają prace</option>
+                <option value="{{ DefectState[DefectState.WontBeRepaired] }}">Nie będzie naprawiana</option>
+        </select>
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Anuluj</button>
+  <button mat-button [mat-dialog-close]="state" cdkFocusInitial>Zmieniam stan</button>
+</div>
+</div>

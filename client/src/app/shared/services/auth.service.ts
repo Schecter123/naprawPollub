@@ -43,6 +43,8 @@ export class AuthService {
     localStorage.removeItem("access_token");
     localStorage.removeItem("expires_at");
     localStorage.removeItem("loggedUser");
+    localStorage.removeItem('userType');
+    localStorage.removeItem('loggedUserId');
   }
 
   public isLoggedIn() {

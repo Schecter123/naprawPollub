@@ -13,7 +13,10 @@ export class NavigationComponent implements OnInit, OnDestroy {
   UserType = UserType;
   userType;
   loggedUser;
-  isManageVisible: boolean;
+  isManageVisibleStandard: boolean;
+  isManageVisiblePlaceAdmin: boolean;
+  isManageVisiblePageAdmin: boolean;
+
   constructor(private authService: AuthService, private router: Router) {
 
   }
@@ -43,9 +46,17 @@ export class NavigationComponent implements OnInit, OnDestroy {
 
   checkUserType() {
     if (this.userType === UserType[UserType.Standard]) {
-      this.isManageVisible = true;
-    } else {
-      this.isManageVisible = false;
+      this.isManageVisibleStandard = true;
+      this.isManageVisiblePlaceAdmin = false;
+      this.isManageVisiblePageAdmin = false;
+    } else if (this.userType === UserType[UserType.PlaceAdministrator]){
+      this.isManageVisiblePlaceAdmin = true;
+      this.isManageVisibleStandard = false;
+      this.isManageVisiblePageAdmin = false;
+    } else if (this.userType === UserType[UserType.PageAdministrator]){
+      this.isManageVisiblePageAdmin = true;
+      this.isManageVisiblePlaceAdmin = false;
+      this.isManageVisibleStandard = false;
     }
   }
 

@@ -32,11 +32,20 @@ class CommentController extends Controller
         $particularComment = DB::table('comments')->select('id', 'idDefect', 'content', 'idUser', 'date')->where('idDefect', $idDefect)->get();
         return response()->json($particularComment);
     }
+
     public function getCommentByLogin($login)
     {
         $particularComment = DB::select(DB::raw("SELECT comments.id,comments.idDefect,comments.idUser,comments.content,comments.date
         FROM comments WHERE comments.idUser IN(SELECT users.id FROM users WHERE users.login = '$login')"));
         return response()->json($particularComment);
+    }
+
+    public function getCommentsForBuildingAdministrator($id)
+    {
+        $particularComments = DB::select(DB::raw("SELECT DISTINCT comments.id,comments.idUser,comments.idDefect,comments.content,comments.date
+        FROM comments,defects WHERE comments.idUser = 2 OR comments.idDefect IN
+        ( SELECT DISTINCT defects.id FROM defects,places WHERE defects.idUser = $id OR defects.idPlace IN (SELECT places.id FROM places WHERE places.idUser = $id))"));
+        return response()->json($particularComments);
     }
 
     /**

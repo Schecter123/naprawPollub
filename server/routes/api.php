@@ -44,6 +44,8 @@ Route::group(['prefix' => 'v1', 'namespace' => 'API'], function () {
     Route::get('/comments/{comment}/user', 'CommentController@getCommentByIdUser');
     Route::get('/comments/{comment}/defect', 'CommentController@getFollowByIdDefect');
     Route::get('/comments/{comment}/login', 'CommentController@getCommentByLogin');
+    Route::get('/comments/{comment}/admin', 'CommentController@getCommentsForBuildingAdministrator');
+
 
     Route::apiResource('markers', 'MarkerController');
     Route::get('/all/markers', 'MarkerController@getAll');

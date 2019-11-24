@@ -17,5 +17,5 @@ export interface UserLogin{
 export enum UserType{
     Standard,
     PlaceAdministrator,
-    PageAdministator
+    PageAdministrator
 }

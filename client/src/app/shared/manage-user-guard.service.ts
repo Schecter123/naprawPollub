@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, Router } from '@angular/router';
-import { AuthService } from './services/auth.service';
 import { UserType } from './models/user.model';
 
 @Injectable({
@@ -17,8 +16,6 @@ export class ManageUserGuard implements CanActivate{
     if (localStorage.getItem('userType') === UserType[UserType.Standard]) {
       return true;
     } else {
-      console.log(localStorage.getItem('userType'))
-      console.log(UserType[UserType.Standard])
       return false;
     }
   }

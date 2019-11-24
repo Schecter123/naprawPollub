@@ -18,6 +18,9 @@ import { AuthInterceptor } from 'src/app/components/login/AuthInterceptor';
 import { AuthGuard } from './shared/auth-guard.service';
 import { UploadImageService } from './shared/services/upload-image.service';
 import { ManageUserGuard } from './shared/manage-user-guard.service';
+import { ManagePlaceAdminGuard } from './shared/manage-place-admin-guard.service';
+import { ManagePageAdminGuard } from './shared/manage-page-admin-guard.service';
+import { MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -42,7 +45,10 @@ import { ManageUserGuard } from './shared/manage-user-guard.service';
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
     AuthGuard,
     ManageUserGuard,
-    UploadImageService
+    ManagePlaceAdminGuard,
+    ManagePageAdminGuard,
+    UploadImageService,
+    {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: false}}
   ],
   bootstrap: [AppComponent]
 })

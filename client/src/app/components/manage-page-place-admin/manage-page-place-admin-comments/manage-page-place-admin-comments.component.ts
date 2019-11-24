@@ -15,7 +15,7 @@ export class ManagePagePlaceAdminCommentsComponent implements OnInit {
   commentSubscribtion: Subscription;
   defectSubscribtion: Subscription;
 
-  userLogin: string;
+  userId: number;
   comments: Comment[];
   defects: Defect[];
   check: number;
@@ -28,10 +28,9 @@ export class ManagePagePlaceAdminCommentsComponent implements OnInit {
     this.check = 0;
     this.showButton = false;
 
-    this.userLogin = localStorage.getItem('loggedUser');
-    this.commentSubscribtion = this.commentService.getCommentsByUserLogin(this.userLogin).subscribe((data: Comment[])=>{this.comments = data})
+    this.userId = parseInt(localStorage.getItem('loggedUserId'));
+    this.commentSubscribtion = this.commentService.getCommentsForPlaceAdmin(this.userId).subscribe((data: Comment[])=>{this.comments = data})
     this.defectSubscribtion = this.defectService.getDefects().subscribe((data:Defect[]) => { this.defects = data})
-    
   }
 
   loadDefectItemPage(defectID){

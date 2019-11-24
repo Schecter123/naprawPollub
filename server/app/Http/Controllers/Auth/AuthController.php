@@ -32,7 +32,7 @@ class AuthController extends Controller
 
         $lastIdUser = DB::select(DB::raw("SELECT MAX(id) AS lastIdUser FROM users"));
 
-        return response()->json($lastIdUser);
+        return response()->json(['lastUserId' => $lastIdUser]);
     }
 
     public function login(Request $request)

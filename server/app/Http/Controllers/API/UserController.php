@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\User;
+use App\Place;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
@@ -74,15 +75,21 @@ WHERE defects.id = $idDefect AND defects.idUser = users.id"));
         $user = User::find($id);
         $hash = $user->password;
         $oldPassword = $request->input('oldPassword');
-        if (password_verify($oldPassword,$hash))
-        {
+        if (password_verify($oldPassword, $hash)) {
             $user->password = bcrypt($request->input('newPassword'));
             $user->save();
-        }
-        else
-        {
+        } else {
             return response()->json("nieprawidłowe hasło");
         }
+    }
+
+    public function updateType(Request $request, $login)
+    {
+        DB::table('users')->where('login', $login)->update(['type' => "PlaceAdministrator"]);
+        $user = DB::table('users')->where('login', $login)->first();
+        DB::table('places')->where('id', $request->input('idPlace'))->update(['idUser' => $user->id]);
+
+
     }
 
     /**

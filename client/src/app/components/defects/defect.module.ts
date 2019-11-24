@@ -36,6 +36,16 @@ const routes = [
       room: RoomResolverService,
       user: UserResolverService
     }
+  },
+  {
+    path: 'komentarz/:id', 
+    component: DefectDetailsComponent,
+    resolve: {
+      defect: DefectResolverService,
+      place: PlaceResolverService,
+      room: RoomResolverService,
+      user: UserResolverService
+    }
   }
 ]
 

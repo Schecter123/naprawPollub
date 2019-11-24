@@ -1,5 +1,5 @@
 <div class="container">
-<form #addRoomForm="ngForm" (ngSubmit)="adRoomButtonClick()">
+<form #addRoomForm="ngForm" (ngSubmit)="addRoomButtonClick()">
     <div class="form-group">
         <label class="control-label" for="place">Wybierz miejsce do którego chcesz dodaj pokój: </label>
             <select class="form-control" name="place" [(ngModel)]="place" required #placeModel="ngModel"
@@ -11,8 +11,8 @@
             </div>
     </div>
     <div class="form-group">
-        <label class="control-label" for="addRoom">Wpisz numer lub nazwę pomieszczenia:</label>
-        <input type="text" class="form-control col-sm-4" name="addRoom" id="addRoom" aria-describedby="helpAddRoom" [(ngModel)]="addRoom" required #addRoomModel="ngModel">
+        <label class="control-label" for="room">Wpisz numer lub nazwę pomieszczenia:</label>
+        <input type="text" class="form-control col-sm-4" name="room" id="room" aria-describedby="helpAddRoom" [(ngModel)]="room" required #addRoomModel="ngModel">
         <div class="help-block" *ngIf="addRoomModel.invalid && addRoomModel.touched">
             Pole jest wymagane
         </div>

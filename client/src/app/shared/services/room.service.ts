@@ -19,4 +19,8 @@ export class RoomService {
   getParticularDefectRoom(idDefect){
     return this.http.get<Room>(environment.rootURL + '/defects/'+idDefect+'/room');
   }
+
+  addRoom(room){
+    return this.http.post(environment.rootURL + '/rooms/', room);
+  }
 }

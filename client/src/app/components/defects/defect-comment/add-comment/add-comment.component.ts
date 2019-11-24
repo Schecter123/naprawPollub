@@ -36,9 +36,9 @@ export class AddCommentComponent implements OnInit {
       date: formatDate(new Date(), 'yyyy-MM-dd HH:mm:ss', 'en'),
     }).subscribe(
       () => { 
-      //   this.router.navigateByUrl('/usterki', { skipLocationChange: true }).then(() => {
-      //   this.router.navigate([`/usterki/${this.defect.id}`]);
-      // });  
+        this.router.navigateByUrl(`/usterki/komentarz/${this.defect.id}`, { skipLocationChange: true }).then(() => {
+        this.router.navigate([`/usterki/${this.defect.id}`]);
+      });  
     },
       error => { }
     );

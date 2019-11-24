@@ -100,12 +100,13 @@ export class ManagePageAdminDefectsComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-     // this.changedState = result;
-      defect.defectState = result;
-      this.defectService.updateDefect(defect).subscribe(
-        ()=> this.toastrService.success('Pomyślnie zmieniono stan usterki'),
-        () => this.toastrService.error('Coś poszło nie tak :(')
-      )
+      if(result !== undefined){
+        defect.defectState = result;
+        this.defectService.updateDefect(defect).subscribe(
+          ()=> this.toastrService.success('Pomyślnie zmieniono stan usterki'),
+          () => this.toastrService.error('Coś poszło nie tak :(')
+          )
+      }
     });
   }
 

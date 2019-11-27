@@ -63,7 +63,7 @@ export class RegisterComponent implements OnInit {
     }).subscribe(
       (result) => {
         this.messageService.success('Zostałeś zarejestrowany!');
-        this.addFollows(result[0].lastIdUser);
+        this.addFollows(result);
         this.router.navigate(['/usterki/']);
 
       },
@@ -71,7 +71,8 @@ export class RegisterComponent implements OnInit {
     );
   }
 
-  addFollows(idUsr) {
+  addFollows(result) {
+    var idUsr = result.lastUserId[0].lastIdUser;
     for (let item of this.selectedPlaces) {
       for (let place of this.places) {
         if (item == place.name) {

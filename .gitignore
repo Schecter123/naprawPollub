@@ -11,3 +11,7 @@ server/app/Http/Kernel.php
 client/package-lock.json
 client/package.json
 client/package-lock.json
+*.json
+client/package-lock.json
+client/package.json
+server/composer.lock

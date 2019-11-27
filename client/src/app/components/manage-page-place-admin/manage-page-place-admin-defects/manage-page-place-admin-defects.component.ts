@@ -7,6 +7,11 @@ import { RoomService } from 'src/app/shared/services/room.service';
 import { PlaceService } from 'src/app/shared/services/place.service';
 import { DefectService } from 'src/app/shared/services/defect.service';
 import { Router } from '@angular/router';
+import { UserService } from 'src/app/shared/services/user.service';
+import { User } from 'src/app/shared/models/user.model';
+import { ChangeDefectStateComponent } from '../../manage-page-admin/manage-page-admin-defects/change-defect-state/change-defect-state.component';
+import { MatDialog } from '@angular/material/dialog';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-manage-page-place-admin-defects',
@@ -24,20 +29,23 @@ export class ManagePagePlaceAdminDefectsComponent implements OnInit {
   places: Place[];
   rooms: Room[];
   defects: Defect[];
+  users: User[];
   userId: number;
   showButton: boolean;
   check: number;
+  wait: boolean;
 
   listOfDefectsToDelete: Defect[] = [];
 
   placesSubscription: Subscription;
   roomsSubscription: Subscription;
   defectsSubscription: Subscription;
+  usersSubscription: Subscription;
 
   DefectType = DefectType;
   DefectState = DefectState;
 
-  constructor(private roomService: RoomService, private placeService: PlaceService, private defectService: DefectService, private router: Router) { }
+  constructor(private roomService: RoomService, private placeService: PlaceService, private defectService: DefectService,  private userService: UserService, private router: Router, private dialog: MatDialog, private toastrService: ToastrService) { }
 
   ngOnInit() {
     this.check = 0;
@@ -46,11 +54,13 @@ export class ManagePagePlaceAdminDefectsComponent implements OnInit {
     this.place = -1;
     this.state = -1;
     this.type = -1;
-    
+    this.wait = false;
     this.userId = parseInt(localStorage.getItem('loggedUserId'));
     this.placesSubscription = this.placeService.getPlaces().subscribe( (data: Place[]) => this.places = data)
     this.roomsSubscription = this.roomService.getRooms().subscribe( (data:Room[]) => this.rooms = data)
     this.defectsSubscription = this.defectService.getDefectsForPlaceAdmin(this.userId).subscribe( (data:Defect[]) => this.defects = data)
+    this.usersSubscription = this.userService.getUsers().subscribe( (data:User[]) => this.users = data)
+    setTimeout(()=> {this.wait = true}, 2000);
   }
 
   ngOnDestroy(){
@@ -87,4 +97,22 @@ export class ManagePagePlaceAdminDefectsComponent implements OnInit {
     }
   }
 
+  openDialog(defect){
+    const dialogRef = this.dialog.open(ChangeDefectStateComponent, {
+      width: '30vw',
+      data: {defect: defect}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+     
+      if(result !== undefined){
+        defect.defectState = result;
+        this.defectService.updateDefect(defect).subscribe(
+          ()=> this.toastrService.success('Pomyślnie zmieniono stan usterki'),
+          () => this.toastrService.error('Coś poszło nie tak :(')
+          )
+      }
+      
+    });
+  }
 }

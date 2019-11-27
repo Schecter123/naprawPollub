@@ -12,7 +12,6 @@
   <mat-form-field>
         <mat-label>Typ usterki</mat-label>
         <select matNativeControl required name="state" [(ngModel)]="state">
-                <option value="-1"> -- Wybierz stan -- </option>
                 <option value="{{ DefectState[DefectState.ForRepair] }}">Do naprawy</option>
                 <option value="{{ DefectState[DefectState.Repaired] }}">Naprawiona</option>
                 <option value="{{ DefectState[DefectState.RepairInProgress] }}">Trwają prace</option>
@@ -21,7 +20,7 @@
   </mat-form-field>
 </div>
 <div mat-dialog-actions>
-  <button mat-button (click)="onNoClick()">Anuluj</button>
+  <button mat-button (click)="onAnulujClick()">Anuluj</button>
   <button mat-button [mat-dialog-close]="state" cdkFocusInitial>Zmieniam stan</button>
 </div>
 </div>

@@ -11,6 +11,7 @@ import { UserService } from 'src/app/shared/services/user.service';
 import { User } from 'src/app/shared/models/user.model';
 import {MatDialog} from '@angular/material/dialog';
 import { ChangeDefectStateComponent } from './change-defect-state/change-defect-state.component';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-manage-page-admin-defects',
@@ -42,7 +43,7 @@ export class ManagePageAdminDefectsComponent implements OnInit {
   DefectType = DefectType;
   DefectState = DefectState;
 
-  constructor(private roomService: RoomService, private placeService: PlaceService, private defectService: DefectService, private userService: UserService,private router: Router, private dialog: MatDialog) { }
+  constructor(private roomService: RoomService, private placeService: PlaceService, private defectService: DefectService, private userService: UserService,private router: Router, private dialog: MatDialog, private toastrService: ToastrService) { }
 
   ngOnInit() {
     this.check = 0;
@@ -99,9 +100,13 @@ export class ManagePageAdminDefectsComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-     // this.changedState = result;
-      defect.defectState = result;
-      this.defectService.updateDefect(defect).subscribe(()=> {console.log(defect, "ok!")})
+      if(result !== undefined){
+        defect.defectState = result;
+        this.defectService.updateDefect(defect).subscribe(
+          ()=> this.toastrService.success('Pomyślnie zmieniono stan usterki'),
+          () => this.toastrService.error('Coś poszło nie tak :(')
+          )
+      }
     });
   }
 

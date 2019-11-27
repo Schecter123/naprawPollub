@@ -16,6 +16,13 @@ import { AddDefectComponent } from './add-defect/add-defect.component';
 import { AgmJsMarkerClustererModule } from '@agm/js-marker-clusterer';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { DropdownButtonComponent } from './navigation/dropdown-button.component';
+import { MatSelectModule } from '@angular/material/select';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDialogModule } from '@angular/material/dialog';
+import { ChangeDefectStateComponent } from './manage-page-admin/manage-page-admin-defects/change-defect-state/change-defect-state.component';
+
 
 const Components = [
   NavigationComponent, 
@@ -35,6 +42,7 @@ const Components = [
   declarations: [
     Components,
     DropdownButtonComponent,
+    ChangeDefectStateComponent
   ],
   imports: [
     CommonModule, 
@@ -44,11 +52,17 @@ const Components = [
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyAhTdbYebLKRDLZ4BMcI8MuHvagrn113Co'
     }),
-    AgmJsMarkerClustererModule
+    AgmJsMarkerClustererModule,
+    MatDialogModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule
   ],
   exports: [
     Components,
     FormsModule
-  ]
+  ],
+  entryComponents: [ChangeDefectStateComponent]
 })
 export class ComponentModule { }

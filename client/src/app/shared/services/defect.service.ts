@@ -35,7 +35,6 @@ export class DefectService {
   }
 
   createDefect(defect:Defect){
-    console.log(defect);
     return this.http.post(environment.rootURL + '/defects/', defect);
   }
 

@@ -21,12 +21,13 @@ export class ChangeDefectStateComponent implements OnInit {
     public dialogRef: MatDialogRef<ChangeDefectStateComponent>,
     @Inject(MAT_DIALOG_DATA) private data: DialogData) {}
 
-  onNoClick(): void {
+  
+    onAnulujClick(): void {
     this.dialogRef.close();
   }
 
   ngOnInit() {
-    this.state = -1;
+    this.state = DefectState[DefectState[this.data.defect.defectState]]
   }
 
 }

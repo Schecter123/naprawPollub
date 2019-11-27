@@ -33,4 +33,9 @@ export class CommentService {
   deleteComment(comment: Comment){
     return this.http.delete<Comment>(environment.rootURL + '/comments/'+comment.id);
   }
+
+  getCommentsForPlaceAdmin(idUser: number){
+    return this.http.get<Comment[]>(environment.rootURL + '/comments/' + idUser + '/admin');
+  }
+
 }

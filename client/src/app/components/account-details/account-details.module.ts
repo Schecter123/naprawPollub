@@ -16,6 +16,13 @@ const routes = [
     resolve: {
       user: AccountDetailsResolverService
     },
+  },
+  {
+    path: 'obserwacje/:login', 
+    component: AccountDetailsComponent,
+    resolve: {
+      user: AccountDetailsResolverService
+    },
   }
  
 ]

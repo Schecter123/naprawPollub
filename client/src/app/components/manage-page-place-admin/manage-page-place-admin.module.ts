@@ -8,6 +8,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { FormsModule } from '@angular/forms';
 import { ManagePagePlaceAdminAddRoomComponent } from './manage-page-place-admin-add-room/manage-page-place-admin-add-room.component';
 
+
 const routes = [
   {path: '', component: ManagePagePlaceAdminComponent},
   {path: 'usterki', component: ManagePagePlaceAdminDefectsComponent},
@@ -21,7 +22,7 @@ const routes = [
     CommonModule,
     RouterModule.forChild(routes),
     MatTabsModule,
-    FormsModule
+    FormsModule,
   ]
 })
 export class ManagePagePlaceAdminModule { }

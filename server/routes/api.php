@@ -25,6 +25,7 @@ Route::group(['prefix' => 'v1', 'namespace' => 'API'], function () {
     Route::put('/users/{user}/type/update', 'UserController@updateType');
 
     Route::apiResource('rooms', 'RoomController');
+    Route::get('/rooms/{room}/place', 'RoomController@getRoomsByIdPlace');
 
     Route::apiResource('ratings', 'RatingController');
 

@@ -42,8 +42,12 @@ ORDER BY markers.id"));
         GROUP BY markers.id, markers.latitude, markers.longitude, markers.idPlace, markers.info"));
 
         return response()->json($defectCount);
+    }
 
-
+    public function getMarkersByIdPlace($id)
+    {
+        $particularMarker = DB::table('markers')->select('id')->where('idPlace', $id)->get();
+        return response()->json($particularMarker);
     }
 
     /**

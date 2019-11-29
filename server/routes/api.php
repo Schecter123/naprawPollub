@@ -25,6 +25,7 @@ Route::group(['prefix' => 'v1', 'namespace' => 'API'], function () {
     Route::put('/users/{user}/type/update', 'UserController@updateType');
 
     Route::apiResource('rooms', 'RoomController');
+    Route::get('/rooms/{room}/place', 'RoomController@getRoomsByIdPlace');
 
     Route::apiResource('ratings', 'RatingController');
 
@@ -39,6 +40,8 @@ Route::group(['prefix' => 'v1', 'namespace' => 'API'], function () {
     Route::get('/defects/{defect}/place', 'DefectController@getParticularPlace');
     Route::get('/defects/{defect}/login', 'DefectController@getDefectByLogin');
     Route::get('/defects/{defect}/admin', 'DefectController@getDefectForBuildingAdministrator');
+    Route::get('/defects/{defect}/follow', 'DefectController@getDefectByFollwedPlace');
+
 
     Route::apiResource('comments', 'CommentController');
     Route::get('/comments/{comment}/user', 'CommentController@getCommentByIdUser');
@@ -50,6 +53,7 @@ Route::group(['prefix' => 'v1', 'namespace' => 'API'], function () {
     Route::apiResource('markers', 'MarkerController');
     Route::get('/all/markers', 'MarkerController@getAll');
     Route::get('/markers/{marker}/count', 'MarkerController@getDefectCount');
+    Route::get('/markers/{marker}/place', 'MarkerController@getMarkersByIdPlace');
 
     Route::apiResource('images', 'ImageController');
     Route::get('/images/{images}/defect', 'ImageController@getImageByIdDefect');

@@ -45,6 +45,14 @@ class DefectController extends Controller
         return response()->json($particularDefect);
     }
 
+    public function getDefectByFollwedPlace($id)
+    {
+        $particularDefect = DB::select(DB::raw("SELECT DISTINCT defects.id,defects.defectType,defects.idPlace,defects.idUser,defects.idRoom,defects.idMarker,defects.defectState,defects.description,defects.date, defects.photoURL
+        FROM defects WHERE defects.idPlace IN
+        (SELECT follows.idPlace FROM follows WHERE follows.idUser = $id)"));
+        return response()->json($particularDefect);
+    }
+
     public function getDefectForBuildingAdministrator($id)
     {
         $particularDefect = DB::select(DB::raw("SELECT DISTINCT defects.id,defects.defectType,defects.idPlace,defects.idUser,defects.idRoom,defects.idMarker,defects.defectState,defects.description,defects.date, defects.photoURL

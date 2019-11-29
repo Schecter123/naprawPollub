@@ -22,6 +22,12 @@ class RoomController extends Controller
         return response()->json($rooms);
     }
 
+    public function getRoomsByIdPlace($id)
+    {
+        $particularRooms = DB::table('rooms')->select('id', 'name')->where('id', $id)->get();
+        return response()->json($particularRooms);
+    }
+
     /**
      * Store a newly created resource in storage.
      *

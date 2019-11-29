@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy, Input, Output} from '@angular/core';
 import { DefectService } from 'src/app/shared/services/defect.service';
 import { MarkerService } from 'src/app/shared/services/marker.service';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -13,7 +14,7 @@ export class MapComponent implements OnInit, OnDestroy {
   defectsCount;
   markers;
   subscriberMarkers;
-
+  bounds = [51.235869, 22.548999]
   //Zmienne potrzebne do mapy (lat i lng - środek kampusu Politechniki Lubelskiej)
   lat = 51.235869;
   lng = 22.548999;
@@ -23,8 +24,9 @@ export class MapComponent implements OnInit, OnDestroy {
   @Input() userIsAddingDefect;
   latOfMarkedDefect;
   lngOfMarkedDefect;
+  circleColor;
 
-  constructor(private defectService: DefectService, private markerService: MarkerService) { }
+  constructor(private defectService: DefectService, private markerService: MarkerService, private toastrService: ToastrService) { }
 
   ngOnInit() {  
     this.subscriberMarkers = this.markerService.getMarkers().subscribe(response => {
@@ -33,6 +35,8 @@ export class MapComponent implements OnInit, OnDestroy {
 
     if(this.userIsAddingDefect)
       this.getUserLocation();
+
+    this.circleColor = 'transparent';
   }
  
   ngOnDestroy(){
@@ -51,12 +55,23 @@ export class MapComponent implements OnInit, OnDestroy {
       });
     }
   }
+
+  checkIfMarkerIsInTheRightPlace(){
+    if((this.latOfMarkedDefect < 51.237663 && this.latOfMarkedDefect > 51.232802) && (this.lngOfMarkedDefect > 22.545072 && this.lngOfMarkedDefect < 22.553778))return true;
+    else return false
+    }
     
   markerDragEnd(lat,lng){
     if(this.userIsAddingDefect){   
     this.latOfMarkedDefect = lat;
     this.lngOfMarkedDefect = lng;
-    this.markerService.markerLatitudeAndLongitude = [this.latOfMarkedDefect, this.lngOfMarkedDefect];
+    if(!this.checkIfMarkerIsInTheRightPlace()){
+        this.toastrService.error("Marker nie znajduje się na terenie kampusu!"); 
+      }
+      else { 
+        this.markerService.markerLatitudeAndLongitude = [this.latOfMarkedDefect, this.lngOfMarkedDefect];
+      }
+    
     }
   }
 

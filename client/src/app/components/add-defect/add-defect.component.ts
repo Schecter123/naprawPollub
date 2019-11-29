@@ -120,10 +120,18 @@ export class AddDefectComponent implements OnInit, OnDestroy {
       this.addMarker(this.place.id, this.text);
   }
 
+  checkIfMarkerIsInTheRightPlace(){
+    if((this.markerLatitude < 51.237663 && this.markerLatitude > 51.232802) && (this.markerLongitude > 22.545072 && this.markerLongitude < 22.553778))return true;
+    else return false
+  }
 
   addMarker(place, description){
     this.markerLatitude = this.markerService.markerLatitudeAndLongitude[0];
     this.markerLongitude = this.markerService.markerLatitudeAndLongitude[1];
+    if(!this.checkIfMarkerIsInTheRightPlace()){
+      this.toastrService.error("Marker nie znajduje się na terenie kampusu!"); 
+      return;
+    }
     this.markerService.createMarker({
       latitude: this.markerLatitude,
       longitude: this.markerLongitude,

@@ -28,4 +28,8 @@ export class PlaceService {
   getPlacesByPlaceId(idPlace){
     return this.http.get(environment.rootURL + '/places').pipe(map ((places:Place[]) => places.filter((place:Place) => place.id == idPlace )));
   }
+
+  getPlacesWithoutAdmin(){
+    return this.http.get(environment.rootURL + '/places').pipe(map ((places:Place[]) => places.filter((place:Place) => place.idUser == null )));
+  }
 }

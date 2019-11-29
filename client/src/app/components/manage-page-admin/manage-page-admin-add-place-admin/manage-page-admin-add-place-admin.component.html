@@ -1,0 +1,25 @@
+<div class="container">
+    <form #addPlaceAdminForm="ngForm" (ngSubmit)="changeType()">
+        <div class="form-group">
+            <label class="control-label" for="user">Wybierz login użytkownika, którego chcesz zmienić na zarządcę: </label>
+                <select class="form-control" name="user" [(ngModel)]="user" required #userModel="ngModel"
+                    (ngModelChange)="onChangeUser($event)">
+                    <option *ngFor="let user of users" [ngValue]="user">{{user?.login}}</option>
+                </select>
+                <div class="help-block" *ngIf="userModel.invalid && userModel.touched">
+                    Pole jest wymagane
+                </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="place">Wybierz miejsce: </label>
+                <select class="form-control" name="place" [(ngModel)]="place" required #placeModel="ngModel"
+                    (ngModelChange)="onChangePlace($event)">
+                    <option *ngFor="let place of places" [ngValue]="place">{{place?.name}}</option>
+                </select>
+                <div class="help-block" *ngIf="placeModel.invalid && placeModel.touched">
+                    Pole jest wymagane
+                </div>
+        </div>
+        <button type="submit" class="btn btn-success" [disabled]="(!addPlaceAdminForm.form.valid)">Zmień typ użytkownika</button>
+    </form>
+</div>

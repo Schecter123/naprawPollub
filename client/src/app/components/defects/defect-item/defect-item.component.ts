@@ -38,4 +38,12 @@ export class DefectItemComponent implements OnInit, OnDestroy {
     this.subscriptionRoom.unsubscribe();
     this.subscriptionPlace.unsubscribe();
   }
+
+  addPoint(point){
+    console.log(point)
+  }
+
+  substractPoint(point){
+    console.log(point)
+  }
 }

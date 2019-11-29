@@ -35,4 +35,8 @@ export class UserService {
   changePasssword(data: ChangePassword, userId: number){
     return this.http.put(environment.rootURL + '/users/' + userId + '/password/update', data);
   }
+
+  changeUserType(user, data){
+    return this.http.put(environment.rootURL + '/users/' + user + '/type/update', data);
+  }
 }

@@ -1,5 +1,6 @@
-import { Component, OnInit, Input, OnDestroy } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy, ViewChild } from '@angular/core';
 import { MarkerService } from 'src/app/shared/services/marker.service';
+import { AgmCircle } from '@agm/core';
 
 @Component({
   selector: 'app-map-marker',
@@ -13,6 +14,7 @@ export class MapMarkerComponent implements OnInit, OnDestroy {
   defectsCount;
   iconUrl;
   color = "green";
+  
   constructor(private markerService: MarkerService) { }
 
   ngOnInit() {
@@ -21,6 +23,7 @@ export class MapMarkerComponent implements OnInit, OnDestroy {
       this.iconUrl = `https://raw.githubusercontent.com/Concept211/Google-Maps-Markers/master/images/marker_${this.color}${this.defectsCount[0].numberOfMarkers}.png`;
       //this.defectsCount = this.defectsCount[0].numberOfMarkers.toString(); - wersja z wyświetlaniem label w html (bez potzreby pobierania url)
     });
+    
   }
 
   ngOnDestroy(){

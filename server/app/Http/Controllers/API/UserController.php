@@ -89,6 +89,10 @@ WHERE defects.id = $idDefect AND defects.idUser = users.id"));
         $user = DB::table('users')->where('login', $login)->first();
         DB::table('places')->where('id', $request->input('idPlace'))->update(['idUser' => $user->id]);
 
+        DB::table('follows')->insert(
+            ['idPlace' => $request->input('idPlace'), 'idUser' => $user->id]
+        );
+
 
     }
 

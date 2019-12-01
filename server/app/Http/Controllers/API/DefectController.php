@@ -45,7 +45,7 @@ class DefectController extends Controller
         return response()->json($particularDefect);
     }
 
-    public function getDefectByFollwedPlace($id)
+    public function getDefectByFollowedPlace($id)
     {
         $particularDefect = DB::select(DB::raw("SELECT DISTINCT defects.id,defects.defectType,defects.idPlace,defects.idUser,defects.idRoom,defects.idMarker,defects.defectState,defects.description,defects.date, defects.photoURL
         FROM defects WHERE defects.idPlace IN
@@ -55,9 +55,9 @@ class DefectController extends Controller
 
     public function getDefectForBuildingAdministrator($id)
     {
-        $particularDefect = DB::select(DB::raw("SELECT DISTINCT defects.id,defects.defectType,defects.idPlace,defects.idUser,defects.idRoom,defects.idMarker,defects.defectState,defects.description,defects.date, defects.photoURL
-        FROM defects,places WHERE defects.idUser = $id OR defects.idPlace IN
-        (SELECT places.id FROM places WHERE places.idUser = $id)"));
+        $particularDefect = DB::select(DB::raw("SELECT defects.id,defects.defectType,defects.idPlace,defects.idUser,defects.idRoom,defects.idMarker,defects.defectState,defects.description,defects.date, defects.photoURL
+        FROM defects WHERE defects.idUser = $id OR defects.idPlace IN
+        (SELECT follows.id FROM follows WHERE follows.idUser = $id)"));
         return response()->json($particularDefect);
     }
 

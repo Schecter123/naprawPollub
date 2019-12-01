@@ -5,6 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { FollowService } from 'src/app/shared/services/follow.service';
+import { Defect } from 'src/app/shared/models/defect.model';
 
 
 @Component({
@@ -18,6 +19,8 @@ export class DefectListComponent implements OnInit, OnDestroy {
   userId;
   subscriptionMarker: Subscription;
   subscriptionDefect: Subscription;
+  subscriptionDefectFollow: Subscription;
+  
 
   constructor(private defectService: DefectService, private activatedRoute: ActivatedRoute, private markerService: MarkerService, private authService: AuthService, private followService: FollowService) { }
 
@@ -29,8 +32,9 @@ export class DefectListComponent implements OnInit, OnDestroy {
         (err) => {console.log('Error result: ' + err)}
       );
       this.markerService.markerID = 0;
-    // } else if (this.authService.isLoggedIn()) {
-    //   this.userId = parseInt(localStorage.getItem('loggedUserId'));
+    } else if (this.authService.isLoggedIn()) {
+      console.log(parseInt(localStorage.getItem('loggedUserId')))
+      this.subscriptionDefectFollow = this.defectService.getDefectsForPlaceAdmin(parseInt(localStorage.getItem('loggedUserId'))).subscribe((data:Defect[]) => {this.defects = data; console.log(data)});
     } else{
       this.subscriptionDefect = this.activatedRoute.data.subscribe(data => this.defects = data.defects);
     }

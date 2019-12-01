@@ -87,7 +87,7 @@ export class ManagePageAdminDefectsComponent implements OnInit {
     for(let item of this.listOfDefectsToDelete){
       this.defectService.deleteDefect(item).subscribe(() => {
         this.router.navigateByUrl('/pytania', { skipLocationChange: true }).then(() => {
-          this.router.navigate(['/zarzadzanie-uzytkownik']); 
+          this.router.navigate(['/zarzadzanie-administator']); 
         })
       })
     }

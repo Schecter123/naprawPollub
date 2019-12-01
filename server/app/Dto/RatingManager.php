@@ -23,4 +23,14 @@ class RatingManager
         $rating->save();
     }
 
+    public function update(RatingClass $ratingClass, $id)
+    {
+        $rating = Rating::find($id);
+        $rating->value = $ratingClass->getValue();
+        $rating->idUser = $ratingClass->getIdUser();
+        $rating->idDefect = $ratingClass->getIdDefect();
+
+        $rating->save();
+    }
+
 }

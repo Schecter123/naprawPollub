@@ -28,6 +28,8 @@ Route::group(['prefix' => 'v1', 'namespace' => 'API'], function () {
     Route::get('/rooms/{room}/place', 'RoomController@getRoomsByIdPlace');
 
     Route::apiResource('ratings', 'RatingController');
+    Route::get('/ratings/{rating}/defect', 'RatingController@getSumForDefect');
+    Route::get('/ratings/{rating}/user', 'RatingController@getRatingsForUser');
 
     Route::apiResource('places', 'PlaceController');
 

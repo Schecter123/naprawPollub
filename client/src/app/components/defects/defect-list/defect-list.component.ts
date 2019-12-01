@@ -33,7 +33,8 @@ export class DefectListComponent implements OnInit, OnDestroy {
       );
       this.markerService.markerID = 0;
     } else if (this.authService.isLoggedIn()) {
-      this.subscriptionDefectFollow = this.defectService.getDefectsForPlaceAdmin(parseInt(localStorage.getItem('loggedUserId'))).subscribe((data:Defect[]) => this.defects = data);
+      console.log(parseInt(localStorage.getItem('loggedUserId')))
+      this.subscriptionDefectFollow = this.defectService.getDefectsForPlaceAdmin(parseInt(localStorage.getItem('loggedUserId'))).subscribe((data:Defect[]) => {this.defects = data; console.log(data)});
     } else{
       this.subscriptionDefect = this.activatedRoute.data.subscribe(data => this.defects = data.defects);
     }

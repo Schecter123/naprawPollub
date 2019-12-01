@@ -28,6 +28,8 @@ Route::group(['prefix' => 'v1', 'namespace' => 'API'], function () {
     Route::get('/rooms/{room}/place', 'RoomController@getRoomsByIdPlace');
 
     Route::apiResource('ratings', 'RatingController');
+    Route::get('/ratings/{rating}/defect', 'RatingController@getSumForDefect');
+    Route::get('/ratings/{rating}/user', 'RatingController@getRatingsForUser');
 
     Route::apiResource('places', 'PlaceController');
 
@@ -40,7 +42,7 @@ Route::group(['prefix' => 'v1', 'namespace' => 'API'], function () {
     Route::get('/defects/{defect}/place', 'DefectController@getParticularPlace');
     Route::get('/defects/{defect}/login', 'DefectController@getDefectByLogin');
     Route::get('/defects/{defect}/admin', 'DefectController@getDefectForBuildingAdministrator');
-    Route::get('/defects/{defect}/follow', 'DefectController@getDefectByFollwedPlace');
+    Route::get('/defects/{defect}/follow', 'DefectController@getDefectByFollowedPlace');
 
 
     Route::apiResource('comments', 'CommentController');

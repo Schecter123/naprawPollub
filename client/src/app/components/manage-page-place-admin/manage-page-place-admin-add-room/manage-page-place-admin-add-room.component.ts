@@ -31,12 +31,13 @@ export class ManagePagePlaceAdminAddRoomComponent implements OnInit {
   }
 
   addRoomButtonClick(){
+    console.log('hej');
     this.roomService.addRoom({
       idPlace: this.choosenPlace.id,
       name: this.room
     }).subscribe( 
-      () => this.toastrService.success('Dodano pokój!'),
-      () => (this.toastrService.error('Coś poszło nie tak :('))
+      // (data) => this.toastrService.success('Dodano pokój!'),
+      // (error) => this.toastrService.error('Coś poszło nie tak :(')
     )
     
   }

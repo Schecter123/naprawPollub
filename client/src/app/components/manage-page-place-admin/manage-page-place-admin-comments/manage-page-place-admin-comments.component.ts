@@ -54,7 +54,7 @@ export class ManagePagePlaceAdminCommentsComponent implements OnInit {
     for(let item of this.listOfCommentsToDelete){
       this.commentService.deleteComment(item).subscribe(() => {
         this.router.navigateByUrl('/pytania', { skipLocationChange: true }).then(() => {
-          this.router.navigate(['/zarzadzanie-uzytkownik']); 
+          this.router.navigate(['/zarzadzanie-zarzadca-budynku']); 
         })
       })
     }

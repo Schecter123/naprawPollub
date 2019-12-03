@@ -46,7 +46,7 @@ ORDER BY markers.id"));
 
     public function getMarkersByIdPlace($id)
     {
-        $particularMarker = DB::table('markers')->select('id')->where('idPlace', $id)->get();
+        $particularMarker = DB::table('markers')->where('idPlace', $id)->get();
         return response()->json($particularMarker);
     }
 
@@ -71,7 +71,8 @@ ORDER BY markers.id"));
      */
     public function show($id)
     {
-        //
+        $particularMarker = DB::table('markers')->where('idPlace', $id)->get();
+        return response()->json($particularMarker);
     }
 
     /**

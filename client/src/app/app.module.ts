@@ -21,6 +21,7 @@ import { ManageUserGuard } from './shared/manage-user-guard.service';
 import { ManagePlaceAdminGuard } from './shared/manage-place-admin-guard.service';
 import { ManagePageAdminGuard } from './shared/manage-page-admin-guard.service';
 import { MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material/dialog';
+import { RatingService } from './shared/services/rating.service';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import { MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material/dialog';
     ManagePlaceAdminGuard,
     ManagePageAdminGuard,
     UploadImageService,
-    {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: false}}
+    {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: false}},
+    RatingService
   ],
   bootstrap: [AppComponent]
 })

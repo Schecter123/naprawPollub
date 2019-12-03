@@ -1,6 +1,7 @@
 export interface Rating {
-    id: number;
-    idUser: number;
+    id?: number;
     value: number;
+    idUser: number;
+    idDefect: number;
   }
   

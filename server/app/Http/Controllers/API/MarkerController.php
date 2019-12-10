@@ -50,6 +50,12 @@ ORDER BY markers.id"));
         return response()->json($particularMarker);
     }
 
+    public function getLastIdMarker()
+    {
+        $lastIdMarker = DB::select(DB::raw("SELECT MAX(id) AS lastIdMarker FROM markers"));
+        return response()->json($lastIdMarker);
+    }
+
     /**
      * Store a newly created resource in storage.
      */

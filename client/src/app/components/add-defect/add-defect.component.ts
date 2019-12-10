@@ -114,6 +114,10 @@ export class AddDefectComponent implements OnInit, OnDestroy {
 
   addDefectButtonClick(){
     this.chceckIfUserSelectedARoom();
+    if(!this.checkIfMarkerIsInTheRightPlace()){
+      this.toastrService.error("Usterka nie może być dodana, ponieważ marker nie znajduje się na terenie kampusu"); 
+      return;
+    }
     if(this.place.id!=17) //Id miejsca, do którego nie pojawia się mapa
       this.addDefect(this.place.id, this.room, this.marker.id, this.text)
     else

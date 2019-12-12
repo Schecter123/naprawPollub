@@ -24,7 +24,7 @@ class RoomController extends Controller
 
     public function getRoomsByIdPlace($id)
     {
-        $particularRooms = DB::table('rooms')->select('id', 'name')->where('id', $id)->get();
+        $particularRooms = DB::table('rooms')->select('id', 'name')->where('idPlace', $id)->get();
         return response()->json($particularRooms);
     }
 

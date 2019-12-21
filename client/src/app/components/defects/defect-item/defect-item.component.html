@@ -10,7 +10,7 @@
                 </div>
                 <div class="defect-room headerItem">
                     Strefa/sala:
-                    <span class="headerDetail" *ngIf="room; else withoutRoom">
+                    <span class="headerDetail" *ngIf="defect.idRoom !== null; else withoutRoom">
                         {{rooms[defect.idRoom-1]?.name}}
                     </span>
                     <ng-template class="headerDetail" #withoutRoom >brak</ng-template>

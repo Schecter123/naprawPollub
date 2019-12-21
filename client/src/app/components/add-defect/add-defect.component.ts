@@ -114,10 +114,6 @@ export class AddDefectComponent implements OnInit, OnDestroy {
 
   addDefectButtonClick(){
     this.chceckIfUserSelectedARoom();
-    if(!this.checkIfMarkerIsInTheRightPlace()){
-      this.toastrService.error("Usterka nie może być dodana, ponieważ marker nie znajduje się na terenie kampusu"); 
-      return;
-    }
     if(this.place.id!=17) //Id miejsca, do którego nie pojawia się mapa
       this.addDefect(this.place.id, this.room, this.marker.id, this.text)
     else
@@ -125,6 +121,7 @@ export class AddDefectComponent implements OnInit, OnDestroy {
   }
 
   checkIfMarkerIsInTheRightPlace(){
+    console.log(this.markerLatitude)
     if((this.markerLatitude < 51.237663 && this.markerLatitude > 51.232802) && (this.markerLongitude > 22.545072 && this.markerLongitude < 22.553778))return true;
     else return false
   }

@@ -56,22 +56,16 @@ export class MapComponent implements OnInit, OnDestroy {
     }
   }
 
-  checkIfMarkerIsInTheRightPlace(){
-    if((this.latOfMarkedDefect < 51.237663 && this.latOfMarkedDefect > 51.232802) && (this.lngOfMarkedDefect > 22.545072 && this.lngOfMarkedDefect < 22.553778))return true;
-    else return false
-    }
+  // checkIfMarkerIsInTheRightPlace(){
+  //   if((this.latOfMarkedDefect < 51.237663 && this.latOfMarkedDefect > 51.232802) && (this.lngOfMarkedDefect > 22.545072 && this.lngOfMarkedDefect < 22.553778))return true;
+  //   else return false
+  //   }
     
   markerDragEnd(lat,lng){
     if(this.userIsAddingDefect){   
     this.latOfMarkedDefect = lat;
     this.lngOfMarkedDefect = lng;
-    if(!this.checkIfMarkerIsInTheRightPlace()){
-        this.toastrService.error("Marker nie znajduje się na terenie kampusu!"); 
-      }
-      else { 
-        this.markerService.markerLatitudeAndLongitude = [this.latOfMarkedDefect, this.lngOfMarkedDefect];
-      }
-    
+    this.markerService.markerLatitudeAndLongitude = [this.latOfMarkedDefect, this.lngOfMarkedDefect];
     }
   }
 
